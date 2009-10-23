@@ -1,0 +1,15 @@
+#summary Java link program to SDK Flex Compiler
+
+MBCompiler is a small Java console program that receives commands from MiniBuilder and hand them over to Flex SDK. It can also run some native system commands.
+
+In order to be able to compile ActionScript projects with MiniBuilder, you need to have the MBCompiler console running.
+
+Add your content here.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
