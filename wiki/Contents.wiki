@@ -2,4 +2,4 @@
 
  * [AboutMiniBuilder About]
  * [MBCompiler MBCompiler]
-   * [AVM2ProjectStater AVM2 project stater]
+ * [AVM2ProjectStater AVM2 project stater]
