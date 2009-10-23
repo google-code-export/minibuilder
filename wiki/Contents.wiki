@@ -1,4 +1,4 @@
 #summary Help Contents
 
-* [About AboutMiniBuilder text]
-* [MBCompiler MBCompiler aa]
+* [AboutMiniBuilder About]
+* [MBCompiler MBCompiler]
