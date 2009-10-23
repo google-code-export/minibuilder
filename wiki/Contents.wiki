@@ -1,4 +1,5 @@
 #summary Help Contents
 
-* [AboutMiniBuilder About]
-* [MBCompiler MBCompiler]
+ * [AboutMiniBuilder About]
+ * [MBCompiler MBCompiler]
+   * [AVM2ProjectStater AVM2 project stater]
