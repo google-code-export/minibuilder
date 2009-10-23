@@ -1,3 +1,4 @@
 #summary Help Contents
 
-<wiki:toc max_depth="3" />
+* [About AboutMiniBuilder text]
+* [MBCompiler MBCompiler aa]
