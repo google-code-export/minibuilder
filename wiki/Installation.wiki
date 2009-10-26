@@ -19,4 +19,4 @@ You can download Java JRE from http://java.sun.com/javase/downloads/index.jsp#jr
 
 You can download Flex SDK from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+3
 
-<wiki:video url="http://www.youtube.com/watch?v=bjEc2eT_rCE" />
+<wiki:video url="http://www.youtube.com/watch?v=bjEc2eT_rCE" width="600" />
