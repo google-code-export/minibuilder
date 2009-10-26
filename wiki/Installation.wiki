@@ -18,6 +18,3 @@ On Linux, you will need root (or sudo) access.
 You can download Java JRE from http://java.sun.com/javase/downloads/index.jsp#jre
 
 You can download Flex SDK from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+3
-
-
-<wiki:video url="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=furlongpdolong-1214197343293793-9&stripped_title=php-data-objects"/>
