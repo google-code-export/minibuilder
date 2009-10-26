@@ -1,0 +1,17 @@
+#summary One-sentence summary of this page.
+
+== Installation ==
+
+
+
+
+== System Requirements ==
+
+Operating System: Windows, Linux
+
+Software dependency:
+
+* Adobe AIR Runtime
+* Java runtime, minimum version 1.6
+* Flex SDK minimum version 3.0, recommended 3.4.
+With Flex SDK version 4, the projects of type Server and AVM will not compile correctly.
