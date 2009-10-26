@@ -1,13 +1,10 @@
-#summary One-sentence summary of this page.
+#summary About Flash MiniBuilder
 
-= Introduction =
+Author: Victor Dramba
+http://www.victordramba.com
 
-Add your content here.
+License: desktop version of Flash MiniBuilder is licensed under GPL
+<a href="http://www.fsf.org/licensing/licenses/gpl.html"><img src="http://www.gnu.org/graphics/gplv3-127x51.png" border="0"/></a>
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+The java program MBCompiler, distributed together with desktop version of Flash MiniBuilder, that is compiled against Flex SDK is licensed under MPL:
+http://www.mozilla.org/MPL/MPL-1.1.html
