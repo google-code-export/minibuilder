@@ -3,4 +3,5 @@
  * [AboutMiniBuilder]
  * [Installation]
  * [MBCompiler]
- * [AVM2ProjectStater]
+ * [AVMProject]
+  * [AVM2ProjectStater]
