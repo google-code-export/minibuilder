@@ -2,7 +2,7 @@
 
 !ActionScript project that targets Flash Player.
 
-Select "Add Flex Support" when you create this type of project if you want your project to start with a MXML file. Currently, !MiniBuilder does not support mxml. You can edit mxml with the embedded simple text editor.
+Select "Add Flex Support" when you create this type of project if you want your project to start with a MXML file. Currently, !MiniBuilder has no support for mxml. You can edit mxml with the embedded simple text editor.
 
 Select "Add AsWing Support" to add libraries and startup classes for an AsWing application.
 
