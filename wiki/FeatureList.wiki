@@ -1,13 +1,57 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+MiniBuilder is addictive!
+Once you get a grasp on it, it's hard to switch back to other editors.
 
-Add your content here.
+*** Works on Linux and Windows
+*** It's Free and Open Source
+*** Although not the fastest thing on Earth, you'll be surprised that
+code completion is _always_ there in time when you need it.
+
+**** AS3 Code Highlight and Code Completion:
+- parses code _as you type_ and recognizes your code structure
+- parses SWC and SWF libraries and adds typeinfo for code completion
+
+- Special code completion helpers:
+regexp constants, string constants, cast expressions are hinted (examples)
+
+- code highlight is context sensitive, it is based on the same grammar engine as the completion.
+
+**** Organizing
+You can place your projects wherever you want on your disk and you are free to move the project
+folder without breaking anything
+Easy to create a shortcut to start a particular project
+
+*** Multidocument interface:
+Can open more than one project in independent windows
+
+*** Multi-file/Multi-editor interface:
+can open different files of different types at once in tabs
+Existing editors: directory editor, actionscript editor, text editor, image viewer
+The directory editor features a much desired function: open in system file explorer
+
+*** Project-wide search:
+Quickly and interractively find a file or directory in the project by typing a fragment of the local path
+
+*** Text search:
+- Quick search: select and find next/previous occurence
+Find-in-files, regexp text search.
+
+*** Jump to line number
+
+*** Flex SDK Compiler integration. Friendly display of errors and warnings, one-click open file and goto error line
+also, the errors are hinted as tooltips on the left editor bar
+
+Smart Source Code Editor
+very fast, supports up to several thousand lines of code
+all standard key and mouse shortcuts:
+- smart Home: press again to toggle beginning or column 0
+- ctrl+shift+left: select word left, etc
 
 
-= Details =
+*** Keyboard shortcuts
+*** Configurable toolbar
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+
+*** Add license block to all code files
+*** add package/class/function
