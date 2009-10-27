@@ -1,2 +1,1 @@
-#summary project type mod-actionscript
-
+#summary mod-actionscript project type
