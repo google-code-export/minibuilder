@@ -24,7 +24,7 @@ On Linux, you will need root (or sudo) access.
  # Install Adobe AIR
  # Install Java JRE
  # Download Flex SDK and place it somewhere on the disk.
- # Run AirMiniBuilder.air file
+ # Run !AirMiniBuilder.air file
  # Start !AirMiniBuilder 
  # You will see the Setup pane
   * enter Flex SDK path (the directory that contains the "frameworks" directory)
