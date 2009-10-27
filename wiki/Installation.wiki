@@ -32,7 +32,7 @@ On Linux, you will need root (or sudo) access.
   * run the shortcut
   * click "Check again" button
   * if MBCompiler is running, the red box disappears.
- # You can start using MiniBuilder.
+ # You can start using !MiniBuilder.
 
 Note that you need to have MBCompiler running every time you work with !MiniBuilder.
 
