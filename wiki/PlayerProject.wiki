@@ -1,13 +1,9 @@
-#summary One-sentence summary of this page.
+#summary Flash Player project type
 
-= Introduction =
+ActionScript project that targets Flash Player.
 
-Add your content here.
+Select "Add Flex Support" when you create this type of project if you want your project to start with a MXML file. Currently, !MiniBuilder does not support mxml. You can edit mxml with the embedded simple text editor.
 
+Select "Add AsWing Support" to add libraries and startup classes for an AsWing application.
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+If you add both, you will have a Flex based application and AsWing libraries available.
