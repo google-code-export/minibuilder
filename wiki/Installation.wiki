@@ -13,10 +13,12 @@ Software dependency:
 
 On Linux, you will need root (or sudo) access.
 
+
+Sun Java JRE http://java.sun.com/javase/downloads/index.jsp#jre<br/>
+Flex SDK from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+3
+
 == Installation ==
 
-You can download Java JRE from http://java.sun.com/javase/downloads/index.jsp#jre
 
-You can download Flex SDK from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+3
 
 <wiki:video url="http://www.youtube.com/watch?v=bjEc2eT_rCE" width="700" height="580"/>
