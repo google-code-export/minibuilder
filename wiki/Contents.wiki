@@ -3,5 +3,7 @@
  * [AboutMiniBuilder]
  * [Installation]
  * [MBCompiler]
- * [AVMProject]
-  * [AVM2ProjectStater]
+ * Project Types
+  * [AVMProject]
+   * [AVM2ProjectStater]
+  * [ModASProject]
