@@ -1,6 +1,6 @@
 #summary Flash Player project type
 
-ActionScript project that targets Flash Player.
+!ActionScript project that targets Flash Player.
 
 Select "Add Flex Support" when you create this type of project if you want your project to start with a MXML file. Currently, !MiniBuilder does not support mxml. You can edit mxml with the embedded simple text editor.
 
