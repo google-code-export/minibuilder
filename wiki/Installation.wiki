@@ -31,7 +31,7 @@ On Linux, you will need root (or sudo) access.
   * create a louncher on Linux or a shortcut on Windows for the MBCompiler start script. You will see the start script location down in the setup pane
   * run the shortcut
   * click "Check again" button
-  * if !MBCompiler is running, the red box disappears.
+  * if MBCompiler is running, the red box disappears.
 
 
 <wiki:video url="http://www.youtube.com/watch?v=bjEc2eT_rCE" width="700" height="580"/>
