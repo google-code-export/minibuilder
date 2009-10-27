@@ -4,6 +4,7 @@
  * [Installation]
  * [MBCompiler]
  * Project Types
+  * [PlayerProject]
   * [AVMProject]
    * [AVM2ProjectStater]
   * [ModASProject]
