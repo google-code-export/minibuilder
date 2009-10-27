@@ -14,8 +14,8 @@ Software dependency:
 On Linux, you will need root (or sudo) access.
 
 
-Sun Java JRE http://java.sun.com/javase/downloads/index.jsp#jre<br/>
-Flex SDK from http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+3
+||Sun Java JRE||http://java.sun.com/javase/downloads/index.jsp#jre||
+||Flex SDK||http://opensource.adobe.com/wiki/display/flexsdk/Download+Flex+3||
 
 == Installation ==
 
