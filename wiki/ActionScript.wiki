@@ -1,0 +1,5 @@
+#summary Language description
+
+ActionScript is a scripting language based on ECMAScript. ActionScript is used primarily for the development of websites and software using the Adobe Flash Player platform (in the form of SWF files embedded into Web pages), but is also used in some database applications (such as Alpha Five), and in basic robotics, as with the Make Controller Kit. Originally developed by Macromedia, the language is now owned by Adobe (which acquired Macromedia in 2005). ActionScript was initially designed for controlling simple 2D vector animations made in Adobe Flash (formerly Macromedia Flash). Later versions added functionality allowing for the creation of Web-based games and rich Internet applications with streaming media (such as video and audio).
+
+Source: http://en.wikipedia.org/wiki/ActionScript
