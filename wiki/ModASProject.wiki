@@ -2,6 +2,7 @@
 
 
 Mod Actionscript allows you to write active web pages in !ActionScript 3.
+It id build on Tamarin VM and runs as a fastcgi module under Apache HTTP Server.
 
 For more informations check http://code.google.com/p/mod-actionscript/
 
