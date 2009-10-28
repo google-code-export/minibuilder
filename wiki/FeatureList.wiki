@@ -60,7 +60,7 @@ Friendly display of errors and warnings, one-click open file and goto error line
 The errors are hinted as tooltips on the left editor bar.
 
 Fast Source Code !TextArea
-Very fast, supports up to thousands of lines of code
+Very fast, supports up to *thousands of lines* of code
 All standard key and mouse shortcuts:
  * smart Home: press again to toggle beginning or column 0
  * ctrl+shift+left: select word left
