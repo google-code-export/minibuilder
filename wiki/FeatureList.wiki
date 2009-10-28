@@ -55,6 +55,7 @@ Quick search: select and find next/previous occurrence without opening any windo
 Regexp text search with !ActionScript !RegExp engine.
 
 === Jump to line number ===
+Press Ctrl+G or Ctrl+L and enter line number.
 
 === Flex SDK integration ===
 
