@@ -50,11 +50,12 @@ Quickly and interractively find a file or directory in the project by typing any
 *Text search*
 Quick search: select and find next/previous occurrence without opening any window. Just doubleclick a word and press F3 to find next.
 
-Regexp text search with ActionScript RegExp engine.
+Regexp text search with !ActionScript !RegExp engine.
 
 *Jump to line number*
 
 *Flex SDK Compiler integration*
+
 Friendly display of errors and warnings, one-click open file and goto error line
 The errors are hinted as tooltips on the left editor bar.
 
