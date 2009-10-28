@@ -56,7 +56,7 @@ Regexp text search with !ActionScript !RegExp engine.
 
 === Jump to line number ===
 
-=== Flex SDK Compiler integration ===
+=== Flex SDK integration ===
 
 Friendly display of errors and warnings, one-click open file and goto error line.
 The errors are hinted as tooltips on the left editor bar.
