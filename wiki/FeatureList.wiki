@@ -16,11 +16,12 @@ code completion is there _in time_ when you need it.
  * Special code completion helpers:
   * regexp literals `/myregexp/.test(str)`
   * string literals `"str1,str2,str3".split(',')`
-  * cast expressions `(value as MyClass).myClassMethod()`
+  * cast expressions `(value as MyClass).myClassMethod()` and `MyClass(value).myClassMethod()`
 
 Code highlight is context sensitive, it is based on the same grammar engine as the completion.
 
-**** Organizing
+=== Organizing ===
+
 You can place your projects wherever you want on your disk and you are free to move the project
 folder without breaking anything
 Easy to create a shortcut to start a particular project
