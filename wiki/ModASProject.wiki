@@ -1,1 +1,8 @@
 #summary mod-actionscript project type
+
+
+Mod Actionscript allows you to write active web pages in !ActionScript 3.
+
+For more informations check http://code.google.com/p/mod-actionscript/
+
+Download !ActionScript sources here http://minibuilder.googlecode.com/files/ModAS-AS-Sources.zip
