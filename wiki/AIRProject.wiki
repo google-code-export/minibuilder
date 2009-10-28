@@ -21,3 +21,5 @@ Hint: In the application xml, look for
     <visible>false</visible>
 }}}
 You can set the visibility of the initial window.
+
+For more informations on developing AIR applications, check http://livedocs.adobe.com/flex/3/html/help.html?content=CommandLineTools_4.html
