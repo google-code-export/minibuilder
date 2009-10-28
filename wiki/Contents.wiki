@@ -1,8 +1,9 @@
 #summary Help Contents
 
  * [AboutMiniBuilder]
+ * [FeatureList Features]
  * [Installation]
- * [MBCompiler]
+  * [MBCompiler]
  * Project Types
   * [PlayerProject Flash Player]
   * [AIRProject AIR]
