@@ -14,3 +14,7 @@ Download !ActionScript sources
 http://mod-actionscript.googlecode.com/files/ModAS-AS-Sources.zip
 
 They contain help info for ModAS Classes
+
+Watch it in action(script)!
+
+<wiki:video url="http://www.youtube.com/watch?v=NnbRjOmKlD0" width="600" height="500"/>
