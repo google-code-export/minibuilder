@@ -1,0 +1,1 @@
+#summary Adobe AIR project type
