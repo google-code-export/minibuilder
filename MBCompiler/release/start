@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#FLEX_SDK="/home/victor/downloads/Flex/flex_sdk_4.0.0.7219_mpl"
+FLEX_SDK="/home/victor/downloads/Flex/flex_sdk_3.3.0.4852_mpl"
+
+HOME=`dirname $0`
+cd $HOME
+AH="-Dapplication.home=$FLEX_SDK"
+JA="-Xmx384m -Dsun.io.useCanonCaches=false"
+JNI="-Djava.library.path=."
+
+#CP=$(echo $FLEX_SDK/lib/*.jar|sed 's/ /:/g')
+CP="$HOME/MBCompiler.jar:$HOME/jnotify-0.91.jar:$FLEX_SDK/lib/*"
+
+
+java $JA $JNI $AH -classpath $CP ro.minibuilder.MBCompiler
+
