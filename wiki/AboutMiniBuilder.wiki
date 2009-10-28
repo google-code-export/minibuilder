@@ -8,6 +8,8 @@ http://www.victordramba.com
 
 Flash *!MiniBuilder* is not only free but also open-source. Feel free to use or modify it under the terms of its license. Your contribution to the project, be it bug report, patch, feature request or simply a link on your website will help other people, just like open source software helps you.
 
+!MiniBuilder uses AsWing component framework.
+
 == License ==
 These license terms refers to desktop version of Flash *!MiniBuilder*.
 
