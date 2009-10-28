@@ -10,7 +10,7 @@ You can also pass arguments to the AIR application like this:
 `adl myapp.xml -- arg1 arg2`
 
 
-For your convenience, create a shell script or a batch file with the form:
+For your convenience, create a shell script or a batch file of the form:
 
 `path/to/adl path/to/application.xml -- arg1 arg2`
 
