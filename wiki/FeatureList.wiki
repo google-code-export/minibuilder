@@ -70,9 +70,11 @@ All standard key and mouse shortcuts:
 
 
 *Keyboard shortcuts*
-In a future version, keyboard shortcuts will be configurable.
+
+Lots of the most used functions are available from keyboard. In a future version, keyboard shortcuts will be configurable.
 
 *Customisable toolbar*
+
 Add and remove buttons on the toolbar. All functions are available.
 
 == Other features ==
