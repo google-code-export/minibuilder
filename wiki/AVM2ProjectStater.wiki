@@ -1,7 +1,7 @@
 #summary AVM project starter code
 
 
-Add this code inside the package block to ensure application start
+Add this code inside the package block in each class to ensure application start
 
 `Starter.init()`
 
