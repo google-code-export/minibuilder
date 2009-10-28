@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="51f974e0-8cdb-4f40-bfba-34fe34bf72bf" projectUUID="51f974e0-8cdb-4f40-bfba-34fe34bf72bf" sdkVersion="4.0.0" uuid="ff412a86-f97b-449b-b8a9-53db18e87479" version="3">
+  <projects/>
+  <src>
+    <linked isMain="false" location="${DOCUMENTS}/ScriptArea/src" path="${DOCUMENTS}/ScriptArea/src" position="0" uuid="ff412a86-f97b-449b-b8a9-53db18e87479"/>
+    <linked isMain="false" location="java" path="java" position="1" uuid="ff412a86-f97b-449b-b8a9-53db18e87479"/>
+  </src>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="ff412a86-f97b-449b-b8a9-53db18e87479"/>
+    <linked location="C:/Users/victor/workspaces/minibuilder/AirMiniBuilder/libs" path="/libs" position="1" uuid="ff412a86-f97b-449b-b8a9-53db18e87479"/>
+  </swc>
+  <misc/>
+  <theme/>
+</fxpProperties>
