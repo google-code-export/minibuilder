@@ -1,4 +1,4 @@
-#summary AsWing project
+#summary AsWing project support
 
 Java Swing similar !ActionScript 3 framework
 
