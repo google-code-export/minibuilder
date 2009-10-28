@@ -66,6 +66,8 @@ Press Ctrl+G or Ctrl+L and enter line number.
 
 === Flex SDK integration ===
 
+Incremental compilation.
+
 Friendly display of errors and warnings, one-click open file and goto error line.
 The errors are hinted as tooltips on the left editor bar.
 
