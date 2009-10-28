@@ -59,8 +59,9 @@ Regexp text search with !ActionScript !RegExp engine.
 Friendly display of errors and warnings, one-click open file and goto error line.
 The errors are hinted as tooltips on the left editor bar.
 
-Fast Source Code !TextArea
-Very fast, supports up to *thousands of lines* of code.
+*Custom Fast Source Code !TextArea*
+
+Supports up to *thousands of lines* of code without becoming unresponsive.
 
 All standard key and mouse shortcuts:
  * smart Home: press again to toggle beginning or column 0
