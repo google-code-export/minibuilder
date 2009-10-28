@@ -56,7 +56,7 @@ Regexp text search with !ActionScript !RegExp engine.
 
 *Flex SDK Compiler integration*
 
-Friendly display of errors and warnings, one-click open file and goto error line
+Friendly display of errors and warnings, one-click open file and goto error line.
 The errors are hinted as tooltips on the left editor bar.
 
 Fast Source Code !TextArea
