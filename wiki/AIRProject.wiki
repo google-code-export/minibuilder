@@ -1,6 +1,6 @@
 #summary Adobe AIR project type
 
-You need to have AIR SDK on your computer in order to build and run AIR applications.
+You need to have AIR SDK on your computer in order to develop AIR applications.
 !MiniBuilder does not provide integration with adl, the debugger AIR runtime.
 
 Running an AIR application with adl is easy. Just call adl executable providing the path of AIR application xml as first argument.
