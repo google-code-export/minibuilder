@@ -15,6 +15,8 @@ Flash *!MiniBuilder* is licensed under GPL
 
 <a href="http://www.fsf.org/licensing/licenses/gpl.html"><img src="http://www.gnu.org/graphics/gplv3-127x51.png" border="0"/></a>
 
+
+
 The java program [MBCompiler], distributed together with desktop version of Flash *!MiniBuilder*, that is compiled against Flex SDK is licensed under MPL:
 
 http://www.mozilla.org/MPL/MPL-1.1.html
