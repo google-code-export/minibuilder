@@ -27,7 +27,7 @@ Code highlight is context sensitive, it is based on the same grammar engine as t
 You can place your projects wherever you want on your disk and you are free to move the project
 folder without breaking anything.
 
-Easy to create a shortcut to start a particular project. On Windows, the ".actionScriptProperties" file is associated with MiniBuilder.
+Easy to create a shortcut to start a particular project. On Windows, the ".actionScriptProperties" file is associated with !MiniBuilder.
 
 == Interface ==
 
