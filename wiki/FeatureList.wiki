@@ -1,21 +1,24 @@
-#summary One-sentence summary of this page.
+#summary Program description and feature list
 
-MiniBuilder is addictive!
-Once you get a grasp on it, it's hard to switch back to other editors.
+ * It's lightweight (smaller than 3MB download)
+ * Works on Linux and Windows
+ * It's Free and Open Source
+ * May be not the fastest thing on Earth but you'll be surprised that
+code completion is there _in time_ when you need it.
 
-*** Works on Linux and Windows
-*** It's Free and Open Source
-*** Although not the fastest thing on Earth, you'll be surprised that
-code completion is _always_ there in time when you need it.
+== Features ==
 
-**** AS3 Code Highlight and Code Completion:
-- parses code _as you type_ and recognizes your code structure
-- parses SWC and SWF libraries and adds typeinfo for code completion
+=== AS3 Code Highlight and Code Completion ===
+ * parses code _as you type_ and recognizes your code structure
+ * parses SWC and SWF libraries and adds typeinfo for code completion
 
-- Special code completion helpers:
-regexp constants, string constants, cast expressions are hinted (examples)
 
-- code highlight is context sensitive, it is based on the same grammar engine as the completion.
+ * Special code completion helpers:
+  - regexp literals `/myregexp/.test(str)`
+  - string literals `"str1,str2,str3".split(',')`
+  - cast expressions `(value as MyClass).myClassMethod()`
+
+Code highlight is context sensitive, it is based on the same grammar engine as the completion.
 
 **** Organizing
 You can place your projects wherever you want on your disk and you are free to move the project
