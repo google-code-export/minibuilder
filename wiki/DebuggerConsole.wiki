@@ -17,6 +17,6 @@ Debugger.setParent(this, false);
 }}}
 In javascript, call swfinstance.debug() to toggle the console.
 
-The console features simple commands, fuction calls in your applications, and a simple code completion.
+The console features simple commands, fuction calls in your applications, and some very simple code completion.
 
 http://minibuilder.googlecode.com/svn/wiki/mb-debugger-console-screenshot.jpg
