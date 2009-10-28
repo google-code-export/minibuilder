@@ -1,5 +1,4 @@
-
-To use the debugger console, you need DebuggerConsole.swc library to be available to your project.
+To use the debugger console, you need !DebuggerConsole.swc library to be available to your project.
 !Minibuilder adds this by default.
 
 To enable it, use the following code:
@@ -12,8 +11,7 @@ Debugger.setParent(this, true);
 debug('started in ' + this);
 }}}
 
-If you want to be able to trigger the console from javascript,
- use this call:
+If you want to be able to trigger the console from javascript, use this call:
 {{{
 Debugger.setParent(this, false);
 }}}
