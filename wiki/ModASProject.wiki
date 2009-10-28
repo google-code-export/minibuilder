@@ -11,3 +11,5 @@ Download !ActionScript sources
  * examples
 
 http://mod-actionscript.googlecode.com/files/ModAS-AS-Sources.zip
+
+They contain help info for ModAS Classes
