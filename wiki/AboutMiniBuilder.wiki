@@ -11,7 +11,7 @@ Flash *!MiniBuilder* is not only free but also open-source. Feel free to use or 
 == License ==
 These license terms refers to desktop version of Flash !MiniBuilder.
 
-Flash *!MiniBuilder* is licensed under GPL
+Flash *!MiniBuilder* is licensed under GPL. [http://www.fsf.org/licensing/licenses/gpl.html Read License]
 
 <a href="http://www.fsf.org/licensing/licenses/gpl.html"><img src="http://www.gnu.org/graphics/gplv3-127x51.png" border="0"/></a>
 
