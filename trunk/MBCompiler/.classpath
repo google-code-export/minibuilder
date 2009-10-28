@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/victor/Program Files/MBCompiler/jnotify-0.91.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/adt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/afe.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/aglj32.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/asc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/asdoc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/batik_ja.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/batik-all-flex.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/compc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/copylocale.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/digest.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/DMV-source.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/fcsh.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/fdb.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/flex-compiler-oem.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/flex-fontkit.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/flex-messaging-common.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/fxgutils.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/license.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_da.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_de.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_es.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_fi.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_fr.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_it.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_ja.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_ko.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_nb.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_nl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_pt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_ru.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_sv.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_zh_cn.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/mxmlc_zh_tw.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/optimizer.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/rideau.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/saxon9.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/swfutils.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/velocity-dep-1.4-flex.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/xercesImpl_ja.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/xercesPatch.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Adobe/Flash Builder Plug-in Beta/sdks/4.0.0/lib/xmlParserAPIs.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
