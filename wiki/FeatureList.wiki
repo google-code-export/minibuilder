@@ -8,7 +8,7 @@ Flash *!MiniBuilder*, desktop version
  * It's Free and Open Source
  * May be not the fastest thing on Earth but you'll be surprised that code completion is there _in time_ when you need it.
 
-== Features ==
+= Features =
 
 === AS3 Code Highlight and Code Completion ===
  * parses code _as you type_ and recognizes your code structure
@@ -29,7 +29,7 @@ folder without breaking anything.
 
 Easy to create a shortcut to start a particular project. On Windows, the ".actionScriptProperties" file is associated with !MiniBuilder.
 
-== Interface ==
+=== Interface ===
 
 *Multidocument interface*
 Each project opens in a separate window.
@@ -46,22 +46,22 @@ Existing editors:
 
 The directory editor features a much desired function: open in system file explorer.
 
-*Project-wide search*
+=== Project-wide search ===
 Quickly and interractively find a file or directory in the project by typing any fragment of the local path.
 
-*Text search*
+=== Text search ===
 Quick search: select and find next/previous occurrence without opening any window. Just doubleclick a word and press F3 to find next.
 
 Regexp text search with !ActionScript !RegExp engine.
 
-*Jump to line number*
+=== Jump to line number ===
 
-*Flex SDK Compiler integration*
+=== Flex SDK Compiler integration ===
 
 Friendly display of errors and warnings, one-click open file and goto error line.
 The errors are hinted as tooltips on the left editor bar.
 
-*Custom Fast Source Code !TextArea*
+=== Custom Fast Source Code !TextArea ===
 
 Supports up to *thousands of lines* of code without becoming unresponsive.
 
@@ -71,14 +71,14 @@ All standard key and mouse shortcuts:
  * etc
 
 
-*Keyboard shortcuts*
+=== Keyboard shortcuts ===
 
 Lots of the most used functions are available from keyboard. In a future version, keyboard shortcuts will be configurable.
 
-*Customisable toolbar*
+=== Customisable toolbar ===
 
 Add and remove buttons on the toolbar. All functions are available.
 
-== Other features ==
+=== Other features ===
 
  * Add license block to all code files
