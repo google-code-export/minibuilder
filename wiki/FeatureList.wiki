@@ -23,39 +23,55 @@ Code highlight is context sensitive, it is based on the same grammar engine as t
 === Organizing ===
 
 You can place your projects wherever you want on your disk and you are free to move the project
-folder without breaking anything
-Easy to create a shortcut to start a particular project
+folder without breaking anything.
 
-*** Multidocument interface:
-Can open more than one project in independent windows
+Easy to create a shortcut to start a particular project. On Windows, the ".actionScriptProperties" file is associated with MiniBuilder.
 
-*** Multi-file/Multi-editor interface:
-can open different files of different types at once in tabs
-Existing editors: directory editor, actionscript editor, text editor, image viewer
-The directory editor features a much desired function: open in system file explorer
+== Interface ==
 
-*** Project-wide search:
-Quickly and interractively find a file or directory in the project by typing a fragment of the local path
+*Multidocument interface*
+Each project opens in a separate window.
 
-*** Text search:
-- Quick search: select and find next/previous occurence
-Find-in-files, regexp text search.
+*Multi-file/Multi-editor interface*
 
-*** Jump to line number
+Can open different files of different types at once in tabs.
 
-*** Flex SDK Compiler integration. Friendly display of errors and warnings, one-click open file and goto error line
-also, the errors are hinted as tooltips on the left editor bar
+Existing editors: 
+ * directory editor
+ * actionscript editor
+ * text editor
+ * image viewer
 
-Smart Source Code Editor
-very fast, supports up to several thousand lines of code
-all standard key and mouse shortcuts:
-- smart Home: press again to toggle beginning or column 0
-- ctrl+shift+left: select word left, etc
+The directory editor features a much desired function: open in system file explorer.
+
+*Project-wide search*
+Quickly and interractively find a file or directory in the project by typing any fragment of the local path.
+
+*Text search*
+Quick search: select and find next/previous occurrence without opening any window. Just doubleclick a word and press F3 to find next.
+
+Regexp text search with ActionScript RegExp engine.
+
+*Jump to line number*
+
+*Flex SDK Compiler integration*
+Friendly display of errors and warnings, one-click open file and goto error line
+The errors are hinted as tooltips on the left editor bar.
+
+Fast Source Code !TextArea
+Very fast, supports up to thousands of lines of code
+All standard key and mouse shortcuts:
+ * smart Home: press again to toggle beginning or column 0
+ * ctrl+shift+left: select word left
+ * etc
 
 
-*** Keyboard shortcuts
-*** Configurable toolbar
+*Keyboard shortcuts*
+In a future version, keyboard shortcuts will be configurable.
 
+*Customisable toolbar*
+Add and remove buttons on the toolbar. All functions are available.
 
-*** Add license block to all code files
-*** add package/class/function
+== Other features ==
+
+ * Add license block to all code files
