@@ -4,7 +4,8 @@
  * [Installation]
  * [MBCompiler]
  * Project Types
-  * [PlayerProject]
-  * [AVMProject]
-   * [AVM2ProjectStater]
-  * [ModASProject]
+  * [PlayerProject Flash Player]
+  * [AIRProject AIR]
+  * [AVMProject Tamarin AVM]
+   * [AVM2ProjectStater Starter code]
+  * [ModASProject Server-side AS3]
