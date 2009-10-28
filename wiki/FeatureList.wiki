@@ -8,7 +8,14 @@ Flash *!MiniBuilder*, desktop version
  * It's Free and Open Source
  * May be not the fastest thing on Earth but you'll be surprised that code completion is there _in time_ when you need it.
 
-= Features =
+= Project Types =
+
+ * [PlayerProject Flash Player]
+ * [AIRProject AIR Runtime]
+ * [AVMProject AVM2 Tamarin shell]
+ * [ModASProject Server-side AS3 (experimental)]
+
+= General Features =
 
 === AS3 Code Highlight and Code Completion ===
  * parses code _as you type_ and recognizes your code structure
