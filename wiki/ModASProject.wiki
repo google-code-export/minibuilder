@@ -10,4 +10,4 @@ Download !ActionScript sources
  * library
  * examples
 
-http://minibuilder.googlecode.com/files/ModAS-AS-Sources.zip
+http://mod-actionscript.googlecode.com/files/ModAS-AS-Sources.zip
