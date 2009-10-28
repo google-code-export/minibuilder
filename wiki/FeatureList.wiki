@@ -6,8 +6,7 @@ Flash *!MiniBuilder*, desktop version
  * It's lightweight (smaller than 3MB download)
  * Works on Linux and Windows
  * It's Free and Open Source
- * May be not the fastest thing on Earth but you'll be surprised that
-code completion is there _in time_ when you need it.
+ * May be not the fastest thing on Earth but you'll be surprised that code completion is there _in time_ when you need it.
 
 == Features ==
 
