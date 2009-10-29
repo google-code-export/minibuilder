@@ -10,4 +10,4 @@ The program is made so if you start it twice, the old instance will be stopped a
 
 When you restart the compiler, all incremental compilations will be reset. You can use this to quickly force a clean compilation.
 
-If you have trouble setting up *!MiniBuilder* or *!MBCompiler* check [Installation] page.
+If you have trouble setting up *!MiniBuilder* or *MBCompiler* check [Installation] page.
