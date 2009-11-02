@@ -11,6 +11,7 @@ Flash *!MiniBuilder* is not only free but also open-source. Feel free to use or 
 !MiniBuilder uses AsWing component framework.<br/>
 !MiniBuilder uses some code from [http://www.mozilla.org/projects/tamarin/ Tamarin].
 
+
 == License ==
 These license terms refers to desktop version of Flash *!MiniBuilder*.
 
@@ -21,5 +22,7 @@ Flash *!MiniBuilder* is licensed under GPL version 3. [http://www.fsf.org/licens
 ----
 
 The java program [MBCompiler], distributed together with desktop version of Flash !MiniBuilder is licensed under Mozilla Public License:
+
+MBCompiler uses [http://jnotify.sourceforge.net/ JNotify] by Omry Yadan
 
 http://www.mozilla.org/MPL/MPL-1.1.html
