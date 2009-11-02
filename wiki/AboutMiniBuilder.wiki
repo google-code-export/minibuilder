@@ -23,6 +23,6 @@ Flash *!MiniBuilder* is licensed under GPL version 3. [http://www.fsf.org/licens
 
 The java program [MBCompiler], distributed together with desktop version of Flash !MiniBuilder is licensed under Mozilla Public License:
 
-MBCompiler uses [http://jnotify.sourceforge.net/ JNotify] by Omry Yadan
-
 http://www.mozilla.org/MPL/MPL-1.1.html
+
+MBCompiler uses [http://jnotify.sourceforge.net/ JNotify] by Omry Yadan
