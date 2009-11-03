@@ -1,0 +1,46 @@
+TASKS
+
+
+[bug] project compatibility C:\Users\victor\workspace\ScriptArea
+[bug] hints for class instance vars (?) (only without this. and CTRL+SPACE)
+[bug] toplevel vars not recognized (cpu in cabanova)
+[bug] private class variables not hinted without this.
+[bug] some static vars not listed (?)
+
+
+- refactor AS3Editor and AssistMenu
+- add 'implements' and 'is' as triggers
+
+-> Delayed
+- configurable keyboard shortcuts
+- mark unsaved files
+- url projects
+- multilevel hints
+
+[done] image viewer
+[done] dir editor
+[done] compiler speedup
+[done] lookup file/class
+[done] goto line [ctrl+l]
+[done] refresh tree
+[done] key shortcuts
+[done] search/replace, regex, case insensitive
+[done] add class
+[done] close changed file: prompt to save
+[done] show fullpath in titlebar
+[done] load globals from SDK for code assist
+[done] avm project -> create projector
+[done] flex project test
+[done] swf lib parser: rest parameters!
+[done] reset error markers
+[done] first file open: mainApp file
+[done] server project
+
+
+[done] menu gets clipped on the bottom
+[done] default parameter values in method info from swf
+[done] rest params in method info in swf
+
+
+
+

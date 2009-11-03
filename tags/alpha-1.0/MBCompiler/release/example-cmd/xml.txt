@@ -1,0 +1,6 @@
+<command
+	name="compile"
+	clean="1"
+	mainApplication="C:\Users\victor\Temp\Test.as"
+	/>
+<!--	configFile="C:\Program Files\Adobe\Flash Builder Plug-in Beta\sdks\3.4.0\frameworks\flex-config.xml"-->
