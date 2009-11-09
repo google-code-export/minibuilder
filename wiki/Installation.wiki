@@ -2,7 +2,7 @@
 
 == System and Software Requirements ==
 
-Operating System: Windows, Linux\\\
+Operating System: Windows, Linux<br/>
 Update: version 1.0-alpha-2 also works on mac and win64 [http://minibuilder.googlecode.com/svn/trunk/AirMiniBuilder/release/AirMiniBuilder.air preview]
 
 Software dependency:
