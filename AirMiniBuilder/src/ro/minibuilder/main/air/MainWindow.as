@@ -158,6 +158,7 @@ package ro.minibuilder.main.air
 			{
 				if (nw.stage.getChildAt(0).hasOwnProperty('windowID') && nw.stage.getChildAt(0)['windowID'] == path)
 				{
+					NativeApplication.nativeApplication.menu = nw.menu;
 					nw.activate();
 					return;
 				}
@@ -176,6 +177,10 @@ package ro.minibuilder.main.air
 				for each(var win:NativeWindow in NativeApplication.nativeApplication.openedWindows)
 					if (win.visible) return;
 					NativeApplication.nativeApplication.exit();
+			});
+			win.addEventListener(Event.ACTIVATE, function(e:Event):void {
+				if (win.menu)
+					NativeApplication.nativeApplication.menu = win.menu;
 			});
 			
 			var context:LoaderContext = new LoaderContext(false, new ApplicationDomain);
@@ -248,6 +253,7 @@ package ro.minibuilder.main.air
 				}
 			}
 			pwin.stage.nativeWindow.menu = menu;
+			NativeApplication.nativeApplication.menu = menu;
 			
 			pwin.stage.nativeWindow.addEventListener(Event.CLOSING, pwin.onClosing);
 			pwin.addEventListener('requestClose', function(e:Event):void {
