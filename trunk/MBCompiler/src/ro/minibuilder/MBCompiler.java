@@ -4,10 +4,10 @@ import flex2.tools.oem.Application;
 import flex2.tools.oem.Configuration;
 
 import java.io.*;
+import java.util.Date;
 import java.util.HashMap;
 
-import net.contentobjects.jnotify.JNotify;
-import net.contentobjects.jnotify.JNotifyListener;
+import net.contentobjects.jnotify.JNotifyAdapter;
 
 
 //java/MyAppCompiler.java
@@ -24,10 +24,7 @@ public class MBCompiler
     	if (args.length > 0 && args[0].equals("-nv"))
     		verbose = false;
     	
-    	msgDir = new File(System.getProperty("user.home") + File.separator + ".mbcompiler/msg");
-    	
-    	final File presenceFile = new File(msgDir.getPath() + File.separator + "mbclive");
-    	presenceFile.createNewFile();
+    	msgDir = new File(System.getProperty("user.home") + File.separator + ".mbcompiler" + File.separator + "msg");
     	
     	if (!msgDir.isDirectory() && !msgDir.mkdirs())
     	{
@@ -50,35 +47,31 @@ public class MBCompiler
 					f.delete();
 		}
 
+		//notify other instances to stop
+    	File cmdStop = new File(msgDir.getPath() + File.separator + "command-newinst-"+(new Date().getTime()));
+    	cmdStop.createNewFile();
+		
     	
     	System.out.println("MiniBuilder Compilation server started.");
     	if (verbose) System.out.println("Verbose");
     	System.out.println("Listening to " + msgDir);
     	
     	try {
-			JNotify.addWatch(msgDir.getCanonicalPath(), JNotify.FILE_CREATED|JNotify.FILE_DELETED, false, new JNotifyListener()
+			JNotify.addWatch(msgDir.getCanonicalPath(), JNotify.FILE_CREATED|JNotify.FILE_DELETED, false, new JNotifyAdapter()
 			{
-				public void fileRenamed(int wd, String rootPath, String oldName, String newName) {}
-				public void fileModified(int wd, String rootPath, String name) {}
-				public void fileDeleted(int wd, String rootPath, String name) 
-				{
-					if ("mbclive".equals(name))
-						System.exit(0);
-				}
-
 				public void fileCreated(int wd, String rootPath, String name)
 				{
-					if (name.equals("stop"))
-					{
-						try { Thread.sleep(50); } catch (InterruptedException e) {}
-						System.out.println("Server stopped gracefully");
-						new File(msgDir + File.separator + name).delete();
-						System.exit(0);
-					}
-					
 					if (name.startsWith("command-"))
 					{
 						File file = new File(msgDir + File.separator + name);
+						
+						if (name.startsWith("command-newinst"))
+						{
+							//try { Thread.sleep(50); } catch (InterruptedException e) {}
+							System.out.println("Server stopped gracefully");
+							System.exit(0);
+						}
+						
 						if (cmdFile == null)
 							cmdFile = file;
 						else
