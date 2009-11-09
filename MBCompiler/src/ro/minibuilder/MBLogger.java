@@ -62,15 +62,14 @@ public class MBLogger implements Logger, ProgressMeter
 		}
     }
     
-	@Override
 	public void end() {
 	}
-	@Override
+	
 	public void percentDone(int percent) {
 		status = String.valueOf(percent);
 		writeDelayed();
 	}
-	@Override
+	
 	public void start() {
 	}
 	
