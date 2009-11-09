@@ -14,7 +14,7 @@ Software dependency:
 On Linux, you will need root (or sudo) access.
 
 On Linux 64-bit, replace libjnotify.so with [http://minibuilder.googlecode.com/files/libjnotify64.so libjnotify64.so]
-Thanks to Dimitri Scheftelowitsch for building it. Also, hope it works on your system, Dimitri built it on an openSUSE.
+Thanks to Dimitri Scheftelowitsch for building it.
 
 
 ||Adobe AIR||http://get.adobe.com/air/||
