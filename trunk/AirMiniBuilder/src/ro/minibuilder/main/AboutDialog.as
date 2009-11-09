@@ -45,13 +45,13 @@ package ro.minibuilder.main
 			
 			pane.newRow();
 			pane.addLabel('Version:');
-			pane.addLabel('alpha-1.0');
+			pane.addLabel('1.0-alpha-2');
 			
 			pane.newRow();
-			pane.addCell(null);
+			pane.addLabel('License and details:');
 			
 			var btn1:JLabelButton;
-			pane.addCell(btn1 = new JLabelButton('details'), TablePane.ALIGN_LEFT);
+			pane.addCell(btn1 = new JLabelButton('open link'), TablePane.ALIGN_LEFT);
 			btn1.addActionListener(function(e:Event):void {
 				navigateToURL(new URLRequest('http://code.google.com/p/minibuilder/wiki/AboutMiniBuilder'));
 			});

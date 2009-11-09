@@ -1,6 +1,9 @@
 @ECHO OFF
 
-CD %HOMEDRIVE%%HOMEPATH%\.mbcompiler
+java -jar VerTest.jar
+IF ERRORLEVEL 1 GOTO END
+
+CD %USERPROFILE%\.mbcompiler
 IF NOT EXIST sdkpath GOTO NOSETUP
 FOR /F "delims=," %%A IN (sdkpath) DO SET FLEX_SDK=%%A
 
@@ -9,8 +12,6 @@ ECHO %FLEX_SDK%
 
 REM SET FLEX_SDK=C:\Program Files\Adobe\Flash Builder Plug-in Beta\sdks\3.4.0
 
-REM Notify others to stop
-ERASE %HOMEDRIVE%%HOMEPATH%\.mbcompiler\msg\mbclive
 
 SET HOME=%~dp0
 SET AH=-Dapplication.home=%FLEX_SDK%

@@ -1,14 +1,13 @@
 #!/bin/sh
 
+set -e
+
+java -jar VerTest.jar
+
 INFOFILE=~/.mbcompiler/sdkpath
 
 if [ -r $INFOFILE ] 
 then
-	if [ -e ~/.mbcompiler/msg/mbclive ]
-	then
-		rm ~/.mbcompiler/msg/mbclive
-	fi
-
 	FLEX_SDK=`less $INFOFILE`
 	echo "SDK: $FLEX_SDK"
 

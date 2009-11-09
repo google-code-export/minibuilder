@@ -410,7 +410,7 @@ package ro.minibuilder.main
 				if ((crtEditor as ITextEditor).search(src, back))
 					lastSerchResult = (crtEditor as ITextEditor).selection;
 				else
-					new Alert('Can\'t find '+src+'!');
+					OptionPane.showMessageDialog('Alert', 'Can\'t find '+src+'!');
 			}
 			else
 				searchReplace();
