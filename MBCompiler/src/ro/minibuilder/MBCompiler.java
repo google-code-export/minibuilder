@@ -124,7 +124,9 @@ public class MBCompiler
     	else if (doName.equals("compile"))
     		doCompile(xml, file.getName());
     	else if (doName.equals("ping"))
-    		new File(xml.string("log")).delete();
+    		;//do nothing
+    	else
+    		throw new RuntimeException("Unknown command: " + doName);
     }
     
     static private void doExec(XML xml)
