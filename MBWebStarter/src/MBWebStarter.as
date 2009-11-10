@@ -8,9 +8,6 @@ package
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormat;
 	
 	public class MBWebStarter extends Sprite
 	{
@@ -60,7 +57,8 @@ package
 		
 		private function onClickInstall(e:MouseEvent):void
 		{
-			air.installApplication('http://minibuilder.googlecode.com/files/AirMiniBuilder.air', '1.5'
+			var url:String = loaderInfo.parameters.airURL;
+			air.installApplication(url, '1.5'
 				/*, [loaderInfo.parameters.zipurl]*/);
 		}
 		
