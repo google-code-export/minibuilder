@@ -3,8 +3,8 @@
 
 == Flash !MiniBuilder ==
 
-Author: Victor Dramba
-http://www.victordramba.com
+Author: Victor Dramba http://www.victordramba.com
+Follow on twitter: http://twitter.com/minibuilder
 
 Latest version: 1.0-alpha-2
 
