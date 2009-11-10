@@ -55,8 +55,7 @@ package ro.minibuilder.data.fileBased
 		
 		public function pingCompiler(onReady:Function):void
 		{
-			var file:File = File.createTempFile();
-			doCmd(<command name="ping" log={file.nativePath}/>);
+			var file:File = doCmd(<command name="ping"/>);
 			
 			var count:int = 3;
 			var tid:int = setInterval(function():void {
@@ -82,9 +81,11 @@ package ro.minibuilder.data.fileBased
 			doCmd(xml);
 		}
 		
-		private function doCmd(cmd:XML, onReady:Function=null):void
+		private function doCmd(cmd:XML, onReady:Function=null):File
 		{
-			writeFile(MBC_DIR.resolvePath('msg/command-' + (new Date().getTime()) + '.xml'), cmd.toXMLString(), onReady);
+			var cmdFile:File = MBC_DIR.resolvePath('msg/command-' + (new Date().getTime()) + '.xml');
+			writeFile(cmdFile, cmd.toXMLString(), onReady);
+			return cmdFile;
 		}
 		
 		public static function get sdkPath():String
