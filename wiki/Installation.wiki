@@ -13,7 +13,7 @@ Software dependency:
  * Flex SDK minimum version 3.0, *Recommended version: 3.4*. With Flex SDK version 4, the projects of type Server and AVM will not compile correctly. Also, you might opt for the open source version, MPL, it's much smaller and chances are you don't need the extra features in the free version.
  * On Linux you will need Nautilus in order to be able to use "Open native file browser" command.
 
-On Linux, you will need root (or sudo) access.
+On Linux, you will need root (or sudo) access to `chmod +x start` - the compiler start script. But run "start" as your user, _not as root_.
 
 On Linux 64-bit, replace libjnotify.so with [http://minibuilder.googlecode.com/files/libjnotify64.so libjnotify64.so]
 Thanks to Dimitri Scheftelowitsch for building it.
