@@ -2,6 +2,8 @@
 
 == System and Software Requirements ==
 
+Latest version: 1.0-alpha-2
+
 Operating System: Windows, Linux, Mac OS X<br/>
 
 Software dependency:
