@@ -10,9 +10,9 @@ How to add a swc library in a !MiniBuilder project:
 Using !MiniBuilder, you can target the following runtimes:
 
   * [PlayerProject Flash Player]
-  * [AIRProject AIR]
-  * [AVMProject Tamarin AVM]
-  * [ModASProject Server-side AS3]
+  * [AIRProject AIR] - desktop AIR application
+  * [AVMProject Tamarin AVM] - simple console executable with NO dependency on flash
+  * [ModASProject Server-side AS3] - server-side actionscript (!)
 
 == Compatibility ==
 
