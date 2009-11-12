@@ -4,4 +4,4 @@
 *Important notice*<br/>
 How to add a swc library in a !MiniBuilder project:
   # add the swc to lib (for static linking) or to lib-extern (for dynamic linking)
-  # <span style="color:red">close and reopen the project window</span>. Due to a bug, the refresh command will not load new libraries.
+  # <font color="red">close and reopen the project window</font>. Due to a bug, the refresh command will not load new libraries.
