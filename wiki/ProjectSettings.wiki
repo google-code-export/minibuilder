@@ -1,15 +1,21 @@
 #summary Project settings
 
-
 *Important notice*<br/>
 How to add a swc library in a !MiniBuilder project:
   # add the swc to lib (for static linking) or to lib-extern (for dynamic linking)
   # <font color="red">close and reopen the project window</font>. Due to a bug, the refresh command will not load new libraries.
 
 
+== Targets ==
 Using !MiniBuilder, you can target the following runtimes:
 
   * [PlayerProject Flash Player]
   * [AIRProject AIR]
   * [AVMProject Tamarin AVM]
   * [ModASProject Server-side AS3]
+
+== Compatibility ==
+
+!MiniBuilder does not introduce a new project format. Instead, we opted for a subset of the formats that Adobe Flash Builder uses. Therefore, projects created with !MiniBuilder can be directly imported as Eclipse projects and some Flex Builder projects can be directly open with !MiniBuilder.
+
+One of the current limitations is that you can't create a swc (library) project type.
