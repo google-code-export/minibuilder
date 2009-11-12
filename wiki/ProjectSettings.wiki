@@ -1,7 +1,7 @@
 #summary Project settings
 
 
-*Important notice*
+*Important notice*<br/>
 How to add a swc library in a MiniBuilder project:
   # add the swc to lib (for static linking) or to lib-extern (for dynamic linking)
   # close and reopen the project window. Due to a bug, the refresh command will not load new libraries.
