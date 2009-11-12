@@ -4,7 +4,7 @@
  * [FeatureList Features]
  * [Installation]
   * [MBCompiler]
- * Project Types
+ * [ProjectSettings Project Types]
   * [PlayerProject Flash Player]
   * [AIRProject AIR]
   * [AVMProject Tamarin AVM]
