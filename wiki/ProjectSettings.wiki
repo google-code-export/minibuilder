@@ -5,3 +5,11 @@
 How to add a swc library in a !MiniBuilder project:
   # add the swc to lib (for static linking) or to lib-extern (for dynamic linking)
   # <font color="red">close and reopen the project window</font>. Due to a bug, the refresh command will not load new libraries.
+
+
+Using !MiniBuilder, you can target the following runtimes:
+
+  * [PlayerProject Flash Player]
+  * [AIRProject AIR]
+  * [AVMProject Tamarin AVM]
+  * [ModASProject Server-side AS3]
