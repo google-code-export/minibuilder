@@ -1,6 +1,8 @@
 #summary About Flash MiniBuilder
 #labels license
 
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
 == Flash !MiniBuilder ==
 
 Author: Victor Dramba http://www.victordramba.com<br/>
