@@ -1,6 +1,6 @@
 #summary Your help is needed!
 
-Don't ask, you can help. That's for sure. Start by posting at least a comment on any wiki page. What do you think, what do you like or what went wrong with !MiniBuilder. If you fill just a bit more confident, fill in an [http://code.google.com/p/minibuilder/issues/entry issue].
+Don't ask, you can help. That's for sure. Start by posting at least a comment on any wiki page. What do you think, what do you like or what went wrong with !MiniBuilder. If you feel a bit more confident, fill in an [http://code.google.com/p/minibuilder/issues/entry issue].
 
 Skill is not always the most precious asset, creativity, desire to help other people or just to share your work will sometimes be more productive.
 
