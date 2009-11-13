@@ -1,5 +1,7 @@
 #summary Installation and System Requirements
 
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
 == System and Software Requirements ==
 
 Latest version: 1.0-alpha-2
