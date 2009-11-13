@@ -1,5 +1,7 @@
 #summary Tamarin AVM2 project type
 
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
 This kind of project targets AVM2, the !ActionScript 3 virtual machine that is available as open-source form Mozilla:
 
 https://developer.mozilla.org/en/Tamarin
