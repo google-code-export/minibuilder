@@ -1,5 +1,6 @@
 #summary Program description and feature list
 
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
 
 Flash *!MiniBuilder*, desktop version
 
