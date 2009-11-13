@@ -1,5 +1,7 @@
 #summary Adobe AIR project type
 
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
 You need to have AIR SDK on your computer in order to develop AIR applications.
 !MiniBuilder does not provide integration with adl, the debugger AIR runtime.
 
