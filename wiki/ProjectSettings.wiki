@@ -1,5 +1,7 @@
 #summary Project settings
 
+||[Contribute Contribute] to !MiniBuilder||
+
 *Important notice*<br/>
 How to add a swc library in a !MiniBuilder project:
   # add the swc to `lib` (for static linking) or to `lib-extern` (for dynamic linking) directory
