@@ -1,5 +1,7 @@
 #summary AVM project starter code
 
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
 
 Add this code inside the package block in each class to ensure application start:
 
