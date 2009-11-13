@@ -1,3 +1,6 @@
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
+
 To use the debugger console, you need !DebuggerConsole.swc library to be available to your project.
 !Minibuilder adds this by default.
 
@@ -19,4 +22,4 @@ In javascript, call swfinstance.debug() to toggle the console.
 
 The console features simple commands, fuction calls in your applications, and some very simple code completion.
 
-http://minibuilder.googlecode.com/svn/wiki/mb-debugger-console-screenshot.jpg
+http://www.victordramba.com/?p=51
