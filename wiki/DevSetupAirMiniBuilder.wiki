@@ -2,7 +2,7 @@
 
 =Linux=
 
-===Setup MiniBuilder on Flex (Flash) Builder===
+===Setup !MiniBuilder on Flex (Flash) Builder===
 
 
   # Make sure you have SVN in your Eclipse/Flex http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA
@@ -21,7 +21,7 @@ chmod +x adl
 ./adl /home/user/workspace-mb/AirMiniBuilder/bin-debug/AirMiniBuilder-app.xml
 }}}
 
-==Setup for MiniBuider:==
+==Setup for !MiniBuider:==
 
   # install minibuilder
   # get a new air sdk from http://www.adobe.com/products/air/tools/sdk/ and extract it on your drive
