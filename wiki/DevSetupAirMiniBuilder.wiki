@@ -25,6 +25,7 @@ chmod +x adl
 
   # install minibuilder
   # get a new air sdk from http://www.adobe.com/products/air/tools/sdk/ and extract it on your drive
+  # get svn and minibuilder sources
 {{{
 apt-get install subversion
 svn co http://minibuilder.googlecode.com/svn/trunk/
