@@ -1,0 +1,44 @@
+#summary MiniBuilder development setup: workspace, projects
+
+=Linux=
+
+===Setup MiniBuilder on Flex (Flash) Builder===
+
+
+  # Make sure you have SVN in your Eclipse/Flex http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA
+  # Create a new workspace File->Switch Workspace->Other (eg /home/user/workspace-mb)
+  # File->New->Other -> SVN -> Checkout project from SVN, new repo: http://minibuilder.googlecode.com/svn/trunk/
+  # List contents of trunk, select AirMiniBuilder and click Finish
+  # Similarly, get the project ScriptArea
+  # set sdk 3.4 or higher to both projects (download a sdk if needed)
+  # you might need to manualy edit .actionScriptProperties. set htmlPlayerVersion="10.0.0" in compiler node
+  # Clean compile AirMiniBuilder.
+  # download and extract a new air sdk from http://www.adobe.com/products/air/tools/sdk/ eg in /home/user/downloads/Flex/AdobeAIRSDK
+  # Flex alpha has issues with running apps for air 1.5, but you can run the app in debug mode (a mode that shows exception popups) using adl:
+{{{
+cd /home/user/downloads/Flex/AdobeAIRSDK/bin/
+chmod +x adl
+./adl /home/user/workspace-mb/AirMiniBuilder/bin-debug/AirMiniBuilder-app.xml
+}}}
+
+==Setup for MiniBuider:==
+
+  # install minibuilder
+  # get a new air sdk from http://www.adobe.com/products/air/tools/sdk/ and extract it on your drive
+{{{
+apt-get install subversion
+svn co http://minibuilder.googlecode.com/svn/trunk/
+mv trunk workspace-mb
+}}}
+  # open installed minibuilder and open project AirMiniBuilder from workspace-mb
+  # make desired changes to the source
+  # compile
+  # run airminibuilder in debug mode using adl from the new air sdk
+{{{
+cd AdobeAIRSDK/bin/
+chmod +x adl
+./adl /path/to/AirMiniBuilder/bin-debug/AirMiniBuilder-app.xml
+}}}
+
+Use debugger console to see the inside story ;)
+http://www.victordramba.com/?p=51
