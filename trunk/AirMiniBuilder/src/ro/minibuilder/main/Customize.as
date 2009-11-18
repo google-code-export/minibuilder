@@ -16,7 +16,7 @@ package ro.minibuilder.main
 	import ro.mbaswing.FButton;
 	import ro.mbaswing.TablePane;
 	
-	public class Customize extends JFrame
+	public class Customize extends Frame
 	{
 		private var addBtn:JButton;
 		private var removeBtn:JButton;
@@ -68,9 +68,7 @@ package ro.minibuilder.main
 				dispose();
 			});
 			
-			setSizeWH(450, 400);
-			
-			AsWingUtils.centerLocate(this);
+			setSizeAndCenter(450, 400);
 			
 			var buttons:Array = load();
 			lst2.setListData(buttons);

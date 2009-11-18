@@ -19,7 +19,7 @@ package ro.minibuilder.main
 	import ro.minibuilder.data.Constants;
 	import ro.minibuilder.data.IProjectPlug;
 	
-	public class AddLicense extends JFrame
+	public class AddLicense extends Frame
 	{
 		private var cancelBtn:JButton;
 		private var okBtn:JButton;
@@ -89,8 +89,7 @@ package ro.minibuilder.main
 			pane.setBorder(new EmptyBorder(null, new Insets(10, 10, 10, 10)));
 			setContentPane(pane);
 			
-			setSizeWH(550, 400);
-			AsWingUtils.centerLocate(this);
+			setSizeAndCenter(550, 400);
 			
 			cancelBtn.addActionListener(function():void {
 				dispose();

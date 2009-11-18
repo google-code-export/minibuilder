@@ -32,15 +32,14 @@ package ro.minibuilder.main
 	import org.aswing.border.EmptyBorder;
 	import org.aswing.geom.IntDimension;
 	
-	public class ProgressPopup extends JFrame
+	public class ProgressPopup extends Frame
 	{
 		private var bar:JProgressBar;
 		private var lbl:JLabel;
 		
 		public function ProgressPopup(title:String)
 		{
-			super();
-			setTitle(title);
+			super(null, title, true);
 			//setLayout(new BorderLayout());
 			var pane:Container = getContentPane();
 			pane.setBorder(new EmptyBorder(null, new Insets(10, 10, 10, 10)));

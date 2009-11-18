@@ -61,6 +61,13 @@ package ro.minibuilder.asparser
 			dbList.push(typeDB);
 		}
 		
+		static public function removeDB(name:String):void
+		{
+			//TODO remove it from the list!
+			//quick one :D
+			setDB(name, new TypeDB);
+		}
+		
 		
 		public var dbName:String = 'unnamed';
 		
@@ -124,6 +131,7 @@ package ro.minibuilder.asparser
 			return a;
 		}
 		
+		
 		public function listAllTypes():Vector.<Field>
 		{
 			var a:Vector.<Field> = parentDB ? parentDB.listAllTypes() : new Vector.<Field>;
@@ -144,6 +152,16 @@ package ro.minibuilder.asparser
 			var pack:HashMap;
 			for each (pack in data.toArray())
 				a = a.concat(Vector.<Field>(pack.toArray()));
+			return a;
+		}
+		
+		public function listDeps():Vector.<String>
+		{
+			var a:Vector.<String> = new Vector.<String>;
+			var pack:String;
+			for each (pack in data.getKeys())
+				for each (var field:Field in data.getValue(pack).toArray())
+					a.push((pack=='-' ? '' : pack+':') + field.name);
 			return a;
 		}
 		

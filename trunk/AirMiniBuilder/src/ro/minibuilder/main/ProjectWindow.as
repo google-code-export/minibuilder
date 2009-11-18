@@ -41,8 +41,8 @@ package ro.minibuilder.main
 	
 	import ro.mbaswing.AsWingApplication;
 	import ro.mbaswing.OptionPane;
-	import ro.minibuilder.asparser.Controller;
 	import ro.minibuilder.asparser.TypeDB;
+	import ro.minibuilder.data.BatchLoader;
 	import ro.minibuilder.data.CompilerMessage;
 	import ro.minibuilder.data.IProjectPlug;
 	import ro.minibuilder.data.ProjectConfig;
@@ -55,13 +55,25 @@ package ro.minibuilder.main
 	import ro.minibuilder.main.editor.ITextEditor;
 	import ro.minibuilder.main.editor.ScriptAreaComponent;
 	import ro.minibuilder.swcparser.SWCParser;
-	import ro.minibuilder.swcparser.SWFParser;
 
 	public class ProjectWindow extends AsWingApplication
 	{
 		public var project:IProjectPlug;
 		private var panel:AppPanel;
 		public var crtEditor:IEditor;
+		private var batchLoader:BatchLoader;
+		
+		//ignore tree change event
+		private var treeNoEvent:Boolean;
+		private var config:ProjectConfig;
+		
+		
+		private var t0:Number;
+		//private var fileList:Vector.<String>;
+		private var progressPopup:ProgressPopup;
+		
+		private var lastSerchResult:String;
+		private var searchPattern:*;
 		
 		override protected function drawBackground():void
 		{
@@ -103,6 +115,9 @@ package ro.minibuilder.main
 				openFile(panel.messages.selectedMessage.path, panel.messages.selectedMessage.line);
 			});
 			
+			panel.tree.filter = /^\./;
+			batchLoader = new BatchLoader(project);
+			
 			project.open(projectPath, init1);
 			CompilerMessage.pathPrefix = project.path;
 		}
@@ -135,7 +150,6 @@ package ro.minibuilder.main
 			stage.nativeWindow.title = 'MiniBuilder - ' + (crtEditor ? (project.path + crtEditor.filePath) : '');
 		}
 		
-		private var treeNoEvent:Boolean;
 		
 		public function compile(onReady:Function=null):void
 		{
@@ -276,43 +290,53 @@ package ro.minibuilder.main
 		
 		private function init1():void
 		{
-			panel.tree.filter = /^\./;
-			fileList = project.listFiles();
-			panel.tree.loadPlainList(fileList);
-			
-			fileIndex = 0;
 			t0 = new Date().getTime();
 			progressPopup = new ProgressPopup('Opening project...');
-			progressPopup.setModal(true);
 			progressPopup.show();
 			
 			config = new ProjectConfig;
-			project.readTextFile('.actionScriptProperties', function(str:String):void {
-				config.load(XML(str));
-				
-				//add playerglobals & stuff
-				//we need to do thid better! it should be based on the project compile configuration
-				//TODO change this to remove dependency on AIR
-				//currently, project can only read files inside the project, relative path
-				if (config.target == ProjectConfig.TARGET_PLAYER)
+			project.readTextFile('.actionScriptProperties', init2);
+		}
+		
+		private function init2(str:String):void
+		{
+			config.load(XML(str));
+			
+			//add playerglobals & stuff
+			//we need to do thid better! it should be based on the project compile configuration
+			//TODO change this to remove dependency on AIR
+			//currently, project can only read files inside the project, relative path
+			if (config.target == ProjectConfig.TARGET_PLAYER)
+			{
+				addSDKLib('frameworks/libs/player/10/playerglobal.swc');
+				addSDKLib('frameworks/libs/utilities.swc');
+				if (config.useFlex)
+					addSDKLib('frameworks/libs/framework.swc');
+				else
+					addSDKLib('frameworks/libs/flex.swc');
+			}
+			if (config.target == ProjectConfig.TARGET_AIR)
+			{
+				addSDKLib('frameworks/libs/air/airglobal.swc');
+			}
+			
+			var fileList:Vector.<String> = project.listFiles();
+			panel.tree.loadPlainList(fileList);
+			
+			batchLoader.load(fileList, function(progress:Number, fileName:String):void {
+				if (progress == 1)
 				{
-					addSDKLib('frameworks/libs/player/10/playerglobal.swc');
-					addSDKLib('frameworks/libs/utilities.swc');
-					if (config.useFlex)
-						addSDKLib('frameworks/libs/framework.swc');
-					else
-						addSDKLib('frameworks/libs/flex.swc');
+					init3();
+					progressPopup.closeReleased();
 				}
-				if (config.target == ProjectConfig.TARGET_AIR)
-				{
-					addSDKLib('frameworks/libs/air/airglobal.swc');
-				}
-					
-				
-				addNextFile();
+				else
+					progressPopup.update(progress*100, fileName);
 			});
 		}
 		
+		
+		// We need to extend a bit the IProjectPlug to be able to load libraries from outside the project
+		// for the online version, this will be a common repository
 		private function addSDKLib(path:String):void
 		{
 			debug('SDK LIB: '+path);
@@ -324,52 +348,8 @@ package ro.minibuilder.main
 			TypeDB.setDB(path, SWCParser.parse(ba));
 		}
 		
-		private var config:ProjectConfig;
 		
-		
-		private var t0:Number;
-		private var fileIndex:int;
-		private var fileList:Vector.<String>;
-		private var progressPopup:ProgressPopup;
-			
-		private function addNextFile():void
-		{
-			if (fileIndex == fileList.length)
-			{
-				init2();
-				progressPopup.closeReleased();
-				return;
-			}
-			var fileName:String = fileList[fileIndex++];
-			//debug(fileName);
-			progressPopup.update(fileIndex/fileList.length*100, fileName);
-			
-			if (/\.as$/.test(fileName))
-			{
-				project.readTextFile(fileName, function (source:String):void
-				{
-					Controller.addSourceFile(source, fileName, addNextFile);
-				});
-			}
-			else if (!fileName.indexOf('bin')==0 && /\.sw[fc]$/.test(fileName) && /^\\?libs?/.test(fileName))
-			{
-				debug('LIB ' + fileName);
-				project.readBinFile(fileName, function (data:ByteArray):void
-				{
-					if (/swf$/.test(fileName))
-						TypeDB.setDB(fileName, SWFParser.parse(data));
-					else
-						TypeDB.setDB(fileName, SWCParser.parse(data));
-					addNextFile();
-				});
-			}
-			
-			else
-				addNextFile();
-		}
-		
-		
-		private function init2():void
+		private function init3():void
 		{
 			debug('duration: '+(new Date().getTime() - t0)/1000);
 			for (var i:int=0; i<project.listFiles().length; i++)
@@ -383,9 +363,6 @@ package ro.minibuilder.main
 			}
 		}
 		
-		
-		private var lastSerchResult:String;
-		private var searchPattern:*;
 		
 		private function getSearch():*
 		{
@@ -446,8 +423,44 @@ package ro.minibuilder.main
 		
 		public function refreshProject():void
 		{
+			var oldList:Vector.<String> = project.listFiles();
+			
+			progressPopup = new ProgressPopup('Refreshing project...');
+			progressPopup.show();
+			
+			
 			project.open(project.path, function():void {
-				panel.tree.loadPlainList(project.listFiles());
+				var newList:Vector.<String> = project.listFiles();
+				panel.tree.loadPlainList(newList);
+				var fileName:String;
+				var diffNew:Vector.<String> = new Vector.<String>;
+				
+				//TODO
+				//check if the file has changed, check file modified time (and size ?)
+				
+				//add new ones
+				for each (fileName in newList)
+				{
+					if (oldList.indexOf(fileName) == -1)
+						diffNew.push(fileName);
+				}
+				
+				//remove missing ones
+				for each (fileName in oldList)
+				{
+					if (newList.indexOf(fileName) == -1 && 
+							/\.(sw[cf]|as)$/i.test(fileName) &&
+							!project.isDirectory(fileName))
+						TypeDB.removeDB(fileName);
+				}
+				
+				batchLoader.load(diffNew, function(progress:Number, name:String):void {
+					if (progress == 1)
+						progressPopup.closeReleased();
+					else
+						progressPopup.update(progress * 100, name);
+				});
+				
 			});
 		}
 		
