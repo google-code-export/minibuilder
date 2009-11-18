@@ -21,6 +21,13 @@ chmod +x adl
 ./adl /home/user/workspace-mb/AirMiniBuilder/bin-debug/AirMiniBuilder-app.xml
 }}}
 
+*Note:*<br/>
+If you get the error `initial content not found`
+Check the file bin-debug/AirMiniBuilder-app.xml and edit the text in node `<content>`
+`<content>AirMiniBuilder.swf</content>`
+For more info on AIR application xml file check: [http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7ff1.html Application Descriptor]
+For more info on using adl check: [http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7fd7.html#WS5b3ccc516d4fbf351e63e3d118666ade46-7f63 using AIR Debug Launcher]
+
 ==Setup for !MiniBuider:==
 
   # install minibuilder
@@ -43,23 +50,3 @@ chmod +x adl
 
 Use debugger console to see the inside story ;)
 http://www.victordramba.com/?p=51
-
-===Troubleshooting for "Setup for MiniBuider"===
-
-*Fixing error: * `initial content not found`
-
-`$ ./adl /path/to/AirMiniBuilder/bin-debug/AirMiniBuilder-app.xml`
-
-If you are trying *Setup for MiniBuider* and the above command causes error: `initial content not found` , one reason might be an incorrect value of the `<content/>` node of file *bin-debug/AirMiniBuilder-app.xml*
-
-Example: Default value might be:
-
-`<content>[This value will be overwritten by Flex Builder in the output app.xml]</content>`
-
-It might be required to set it to the path of the swf, which in this case is:
-
-`<content>AirMiniBuilder.swf</content>`
-
-*Note:*  This change might be required only if you are trying "Setup for MiniBuider". If you are no longer using "Setup for MiniBuilder", remember to revert the `</content>` node back to the original value that was in your file.
-
-_Original post: <a href="http://www.jetbrains.net/devnet/thread/282013" target="new">http://www.jetbrains.net/devnet/thread/282013</a>_
