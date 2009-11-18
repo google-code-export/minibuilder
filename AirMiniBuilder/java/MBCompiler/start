@@ -2,6 +2,9 @@
 
 set -e
 
+MBHOME=`dirname $0`
+cd $MBHOME
+
 java -jar VerTest.jar
 
 INFOFILE=~/.mbcompiler/sdkpath
@@ -11,8 +14,6 @@ then
 	FLEX_SDK=`less $INFOFILE`
 	echo "SDK: $FLEX_SDK"
 
-	MBHOME=`dirname $0`
-	cd $MBHOME
 	AH="-Dapplication.home=$FLEX_SDK"
 	JA="-Xmx384m -Dsun.io.useCanonCaches=false"
 	JNI="-Djava.library.path=."
