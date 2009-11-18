@@ -146,15 +146,6 @@ package ro.minibuilder.asparser
 			status = 'Processing ...';
 		}
 		
-		public static function addSourceFile(source:String, fileName:String, onComplete:Function):void
-		{
-			source = source.replace(/(\n|\r\n)/g, '\r');
-			var parser:Parser = new Parser;
-			parser.load(source, fileName);
-			while(parser.runSlice());
-			setTimeout(onComplete, 1);
-		}
-		
 		public function getMemberList(index:int):Vector.<String>
 		{
 			return parser.newResolver().getMemberList(fld.text, index);

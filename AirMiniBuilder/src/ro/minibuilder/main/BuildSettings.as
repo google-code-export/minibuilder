@@ -18,7 +18,7 @@ package ro.minibuilder.main
 	import ro.mbaswing.TablePane;
 	import ro.minibuilder.data.IProjectPlug;
 	
-	public class BuildSettings extends JFrame
+	public class BuildSettings extends Frame
 	{
 		
 		private var cbList:Vector.<JCheckBox>;
@@ -68,8 +68,7 @@ package ro.minibuilder.main
 			var cancelBtn:JButton;
 			pane.addCell(TablePane.hBox(5, okBtn=new FButton('OK'), cancelBtn=new FButton('Cancel')), TablePane.ALIGN_RIGHT, 2);
 			
-			setSizeWH(500, 350);
-			AsWingUtils.centerLocate(this);
+			setSizeAndCenter(500, 350);
 			
 			load();
 			okBtn.addActionListener(function(e:Event):void {

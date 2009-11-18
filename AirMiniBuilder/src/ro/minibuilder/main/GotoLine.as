@@ -34,7 +34,7 @@ package ro.minibuilder.main
 	import org.aswing.JTextField;
 	import org.aswing.border.EmptyBorder;
 	
-	public class GotoLine extends JFrame
+	public class GotoLine extends Frame
 	{
 		private var txt:JTextField;
 		public function GotoLine()

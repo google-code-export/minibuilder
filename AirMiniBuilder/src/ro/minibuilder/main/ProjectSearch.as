@@ -35,7 +35,7 @@ package ro.minibuilder.main
 	import org.aswing.JTextField;
 	import org.aswing.border.EmptyBorder;
 	
-	public class ProjectSearch extends JFrame
+	public class ProjectSearch extends Frame
 	{
 		private var list:JList;
 		private static var history:Array = [];
@@ -98,9 +98,7 @@ package ro.minibuilder.main
 			list.setBackground(new ASColor(0xffffff));
 			pane.append(new JScrollPane(list), BorderLayout.CENTER);
 			
-			setSizeWH(400, 350);
-			
-			AsWingUtils.centerLocate(this);
+			setSizeAndCenter(400, 350);
 		}
 		
 		public function get value():String

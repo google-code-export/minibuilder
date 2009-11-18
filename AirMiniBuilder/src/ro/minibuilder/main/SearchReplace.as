@@ -37,7 +37,7 @@ package ro.minibuilder.main
 	import org.aswing.border.EmptyBorder;
 	import org.aswing.ext.Form;
 	
-	public class SearchReplace extends JFrame
+	public class SearchReplace extends Frame
 	{
 		private var replTxt:JTextField;
 		private var srcTxt:JTextField;

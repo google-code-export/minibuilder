@@ -71,6 +71,7 @@ package ro.minibuilder.swcparser
 	
 	import flash.utils.ByteArray;
 	
+	import ro.minibuilder.asparser.Field;
 	import ro.minibuilder.asparser.TypeDB;
 	import ro.minibuilder.swcparser.abc.Abc;
 
@@ -119,11 +120,11 @@ package ro.minibuilder.swcparser
 		            break
 		        case 70|87<<8|83<<16|10<<24: // SWC10
 		        case 70|87<<8|83<<16|9<<24: // SWC9
-		        case 70|87<<8|83<<16|8<<24: // SWC8
+		        /*case 70|87<<8|83<<16|8<<24: // SWC8
 		        case 70|87<<8|83<<16|7<<24: // SWC7
 		        case 70|87<<8|83<<16|6<<24: // SWC6
 		        case 70|87<<8|83<<16|5<<24: // SWC5
-		        case 70|87<<8|83<<16|4<<24: // SWC4
+		        case 70|87<<8|83<<16|4<<24: // SWC4*/
 		            swf.position = 8 // skip header and length
 					parseSWF(swf, typeDB);
 						
@@ -137,6 +138,43 @@ package ro.minibuilder.swcparser
 		    
 		    return typeDB;
 		}
+		
+		/*public static function getDependency(data:ByteArray):XML
+		{
+			data.endian = "littleEndian";
+
+			if (data[0] == 67)//it's compressed
+			{
+				var udata:ByteArray = new ByteArray;
+				udata.endian = "littleEndian";
+				data.position = 8;
+				data.readBytes(udata,0,data.length-data.position);
+				udata.uncompress();
+				udata.position = 0;
+				data = udata;
+			}
+			else
+				data.position = 8;
+			
+			var lib:XML = <library path="library.swf"/>;
+			
+			var swf:Swf = new Swf(data);
+			
+			for (var i:int = 0; i<swf.abcs.length; i++)
+			{
+				var script:XML = <script name={swf.scripts[i]}/>;
+				
+				var db:TypeDB = new TypeDB;
+				new Abc(swf.abcs[i], db).dump();
+				
+				for each (var item:String in db.listDeps())
+					script.appendChild(<def id={item}/>);
+					
+				lib.appendChild(script);
+			}
+			
+			return lib;
+		}*/
 		
 		private static function parseSWF(data:ByteArray, typeDB:TypeDB):void
 		{
@@ -169,6 +207,7 @@ class Swf
     private var data:ByteArray;
 	
 	public var abcs:Vector.<ByteArray>;
+	public var scripts:Vector.<String>;
 
     function Swf(data:ByteArray)
     {
@@ -178,6 +217,7 @@ class Swf
         debug("frame count "+data.readUnsignedShort())
 		
 		abcs = new Vector.<ByteArray>;
+		scripts = new Vector.<String>;
         decodeTags()
     }
 
@@ -204,13 +244,17 @@ class Swf
             case 82://stagDoABC2:
                 var pos1:int = data.position
                 data.readInt()
-                Abc.log("\n//abc name "+readString())
+				var scriptName:String = readString();
+                Abc.log("\n//abc name "+scriptName)
                 length -= (data.position-pos1)
                 // fall through
             case 72://stagDoABC:
                 var data2:ByteArray = new ByteArray
                 data2.endian = "littleEndian"
                 data.readBytes(data2,0,length)
+				
+				//for now, i assume all libs are compiled with doABC2
+				scripts.push(scriptName);
 				abcs.push(data2);
                 //new Abc(data2, typeDB).dump()
                 //debug("")

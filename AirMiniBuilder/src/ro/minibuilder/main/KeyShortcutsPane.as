@@ -11,7 +11,7 @@ package ro.minibuilder.main
 	import ro.minibuilder.data.Constants;
 	import ro.victordramba.util.StringEx;
 
-	public class KeyShortcutsPane extends JFrame
+	public class KeyShortcutsPane extends Frame
 	{
 		public function KeyShortcutsPane()
 		{
@@ -50,9 +50,8 @@ package ro.minibuilder.main
 				dispose();
 			});
 			
-			setSizeWH(550, 350);
 			pane.setBorder(new EmptyBorder(null, new Insets(10, 10, 10, 10)));
-			AsWingUtils.centerLocate(this);
+			setSizeAndCenter(550, 350);
 		}
 	}
 }

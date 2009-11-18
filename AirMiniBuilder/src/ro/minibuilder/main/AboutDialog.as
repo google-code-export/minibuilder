@@ -28,14 +28,13 @@ package ro.minibuilder.main
 	import org.aswing.AsWingUtils;
 	import org.aswing.Insets;
 	import org.aswing.JButton;
-	import org.aswing.JFrame;
 	import org.aswing.JLabelButton;
 	import org.aswing.border.EmptyBorder;
 	
 	import ro.mbaswing.FButton;
 	import ro.mbaswing.TablePane;
 
-	public class AboutDialog extends JFrame
+	public class AboutDialog extends Frame
 	{
 		public function AboutDialog()
 		{
@@ -72,12 +71,7 @@ package ro.minibuilder.main
 			
 			setContentPane(pane);
 			
-			setSizeWH(400, 200);
-			
-			AsWingUtils.centerLocate(this);
-			
-			
-			filters = [new DropShadowFilter(2, 45, 0, .3, 6, 6)];	
+			setSizeAndCenter(400, 200);
 		}
 	}
 }

@@ -30,6 +30,7 @@ package ro.minibuilder.asparser
 {
 	import flash.text.*;
 	import flash.utils.ByteArray;
+	import flash.utils.setTimeout;
 	
 	import ro.minibuilder.main.editor.ScriptAreaComponent;
 	import ro.victordramba.thread.IThread;
@@ -55,6 +56,15 @@ package ro.minibuilder.asparser
 			formats.setValue(Token.REGEXP, 	new TextFormat(null, null, 0xa3a020, false, false));
 			formats.setValue(Token.STRING, 	new TextFormat(null, null, 0xB30000, false, false));
 			formats.setValue('topType', 	new TextFormat(null, null, 0x981056, false, false));
+		}
+		
+		public static function addSourceFile(source:String, fileName:String, onComplete:Function):void
+		{
+			source = source.replace(/(\n|\r\n)/g, '\r');
+			var parser:Parser = new Parser;
+			parser.load(source, fileName);
+			while(parser.runSlice());
+			setTimeout(onComplete, 1);
 		}
 		
 		
