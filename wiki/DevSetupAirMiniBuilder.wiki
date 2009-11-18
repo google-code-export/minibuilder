@@ -22,11 +22,14 @@ chmod +x adl
 }}}
 
 *Note:*<br/>
-If you get the error `initial content not found`
-Check the file bin-debug/AirMiniBuilder-app.xml and edit the text in node `<content>`
-`<content>AirMiniBuilder.swf</content>`
+If you get the error `initial content not found`, check the file `bin-debug/AirMiniBuilder-app.xml` and edit the text in node `<content>`
+{{{
+<content>AirMiniBuilder.swf</content>
+}}}
+
 For more info on AIR application xml file check: [http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7ff1.html Application Descriptor]
-For more info on using adl check: [http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7fd7.html#WS5b3ccc516d4fbf351e63e3d118666ade46-7f63 using AIR Debug Launcher]
+
+For more info on using adl check: [http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7fd7.html#WS5b3ccc516d4fbf351e63e3d118666ade46-7f63 Using AIR Debug Launcher]
 
 ==Setup for !MiniBuider:==
 
