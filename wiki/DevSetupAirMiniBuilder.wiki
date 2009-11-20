@@ -2,7 +2,7 @@
 
 =Linux=
 
-===Setup !MiniBuilder on Flex (Flash) Builder===
+===Build !MiniBuilder with Flex (Flash) Builder===
 
 
   # Make sure you have SVN in your Eclipse/Flex http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA
@@ -31,7 +31,7 @@ For more info on AIR application xml file check: [http://help.adobe.com/en_US/AI
 
 For more info on using adl check: [http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7fd7.html#WS5b3ccc516d4fbf351e63e3d118666ade46-7f63 Using AIR Debug Launcher]
 
-==Setup for !MiniBuider:==
+==Build !MiniBuilder with !MiniBuider:==
 
   # install minibuilder
   # get a new air sdk from http://www.adobe.com/products/air/tools/sdk/ and extract it on your drive
