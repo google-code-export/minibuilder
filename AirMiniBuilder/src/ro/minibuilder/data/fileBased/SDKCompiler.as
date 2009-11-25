@@ -130,6 +130,8 @@ package ro.minibuilder.data.fileBased
 				config.compiler['library-path'].appendChild(<path-element>{frameworkLibs}</path-element>);
 				config.compiler['library-path'].appendChild(<path-element>{frameworkLibs}/../locale/en_US</path-element>);
 			}
+			else
+				config.compiler['library-path'].appendChild(<path-element>{frameworkLibs}/flex.swc</path-element>);
 			
 			//TARGET
 			if (project.config.target == ProjectConfig.TARGET_AIR)

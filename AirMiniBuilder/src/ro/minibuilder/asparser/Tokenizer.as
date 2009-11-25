@@ -49,7 +49,7 @@ package ro.minibuilder.asparser
 			'with', 'dynamic', 'final', 'internal', 'native', 'override', 'private', 'protected',
 			'public', 'static', 'extends', 'implements', 'new',
 			'interface', 'namespace', 'default xml namespace', 'import',
-			'include', 'use', 'use namespace', 'false', 'null', 'this', 'true', 'undefined'];
+			'include', 'use', 'delete', 'use namespace', 'false', 'null', 'this', 'true', 'undefined'];
 
 		private static const keywords2A:Array = [
 			'const', 'package', 'var', 'function', 'get', 'set', 'class'];
@@ -58,7 +58,7 @@ package ro.minibuilder.asparser
 			'+', '--', '/', '\\', '++', '%', '*', '-', '+=', '/=', '%=', '*=', '-=', '=', '&', '<<',
 			'~', '|', '>>', '>>>', '^', '&=', '<<=', '|=', '>>=', '>>>=', '^=', '==', '>',
 			'>=', '!=', /*'<', special, can start an E4X*/ '<=', '===', '!==', '&&', '&&=', '!', '||', '||=', '[', ']',
-			'as', ',', '?', 'delete', '.', 'instanceof', '::', 'new', '{', '}',
+			'as', ',', '?', '.', 'instanceof', '::', 'new', '{', '}',
 			'(', ')', 'typeof', ';', ':', '...', '..', '#', '`'/*just to unlock*/];
 
 		private static const keywords:HashMap = new HashMap;
