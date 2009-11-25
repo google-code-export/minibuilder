@@ -123,7 +123,7 @@ package ro.minibuilder.data
 		public static const classTpl:String = 
 			'package <package>\n' +
 			'{\n' +
-			'	class <name>\n' +
+			'	public class <name>\n' +
 			'	{\n' +
 			'		public function <name>()\n' +
 			'		{\n' +

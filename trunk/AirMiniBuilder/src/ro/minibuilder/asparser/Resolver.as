@@ -169,6 +169,10 @@ package ro.minibuilder.asparser
 		
 		private function resolve(text:String, pos:int, isFnDetails:Boolean):Field
 		{
+			var t0:Token = tokenizer.tokenByPos(pos);
+			if (t0.type == Token.COMMENT)
+				return null;			
+			
 			var bp:BackwardsParser = new BackwardsParser;
 			if (!bp.parse(text, pos)) return null;
 			

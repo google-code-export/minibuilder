@@ -87,6 +87,18 @@ package ro.minibuilder.main.air
 			windowID = 'main';
 			
 			stage.nativeWindow.addEventListener(Event.CLOSING, onClosing);
+			
+			
+			root.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, function(e:NativeDragEvent):void {
+				NativeDragManager.acceptDragDrop(root as MainWindow);
+			});
+			
+			root.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, function(e:NativeDragEvent):void {
+				NativeDragManager.dropAction = NativeDragActions.COPY;
+				var list:Array = e.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				if (list && list.length == 1)
+					newProjectWindow(getProjectDir(list[0]));
+			});
 		}
 		
 		private function onClosing(e:Event):void
@@ -132,8 +144,8 @@ package ro.minibuilder.main.air
 		{
 			if (!file.isDirectory) file = file.parent;
 			var path:String = file.nativePath;
-			if (path.lastIndexOf(File.separator) != path.length-1)
-				path = path + File.separator;
+			if (path.lastIndexOf(File.separator) == path.length-1)
+				path = path.substr(0, -1);
 			return path;
 		}
 		
@@ -200,6 +212,8 @@ package ro.minibuilder.main.air
 		---------------------------------------------------------------------------------------
 		*/
 		
+		private var fileDropHandler:FileDropHandler;
+		
 		public function startProject(path:String):void
 		{
 			stage.align = 'TL';
@@ -207,21 +221,12 @@ package ro.minibuilder.main.air
 			windowID = path;
 			
 			pwin = new ProjectWindow;
+			fileDropHandler = new FileDropHandler(pwin);
 			
 			new ActionManager(this);
 			stage.addChild(pwin);
 			pwin.start(path);
 			
-			pwin.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, function(e:NativeDragEvent):void {
-				NativeDragManager.acceptDragDrop(pwin);
-			});
-			
-			pwin.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, function(e:NativeDragEvent):void {
-				NativeDragManager.dropAction = NativeDragActions.COPY;
-				var list:Array = e.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
-				if (list && list.length == 1)
-					newProjectWindow(getProjectDir(list[0]));
-			});
 			
 			var mXml:XML = Constants.MAIN_MENU;
 			
