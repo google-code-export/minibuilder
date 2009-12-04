@@ -116,6 +116,9 @@ package ro.minibuilder.data.fileBased
 		private function writeConfig():void
 		{
 			var config:XML = Constants.FLASH_CONFIG.copy();
+			
+			config['target-player'] = project.config.targetPlayerVersion;
+			
 			var path:String;
 			for each (path in project.config.sourcePaths)
 				config.compiler['source-path'].appendChild(<path-element>{absPath(path)}</path-element>);
