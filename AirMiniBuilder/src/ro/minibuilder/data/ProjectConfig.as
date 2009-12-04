@@ -9,6 +9,9 @@ package ro.minibuilder.data
 		//load nothing
 		public static const TARGET_OTHER:String = 'other';
 		
+		//target player version
+		public var targetPlayerVersion:String = '9.0.124';
+		
 		//paths
 		public var sourcePaths:Vector.<String>;
 		public var libs:Vector.<String>;
@@ -35,6 +38,11 @@ package ro.minibuilder.data
 				target = TARGET_AIR;
 			else
 				target = TARGET_OTHER;
+			
+			if (asprops.compiler.@targetPlayerVersion.length())
+				targetPlayerVersion = String(asprops.compiler.@targetPlayerVersion);
+			
+			
 			
 			createProjector = asprops.minibuilder.@projector == 'true';
 			extractAbc = asprops.minibuilder.@extract == 'true';

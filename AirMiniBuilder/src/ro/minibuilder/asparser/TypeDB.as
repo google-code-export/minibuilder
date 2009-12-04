@@ -86,6 +86,9 @@ package ro.minibuilder.asparser
 			//if (classField.fieldType != 'class' && classField.fieldType != 'interface')
 			//	throw new Error('not a type');
 			
+			if (/^_.*flash_display_(Sprite|MovieClip)$/.test(classField.name))
+				return;
+			
 			if (packageName == '') packageName = '-';//toplevel name is '-'
 			
 			if (!data.hasKey(packageName))
