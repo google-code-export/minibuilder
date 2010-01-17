@@ -69,7 +69,9 @@ package ro.minibuilder.main.editor
 			});
 			
 			area.addEventListener(Event.CHANGE, function(e:Event):void {
-				revalidate();
+				//we can't revalidate at each keystroke, too often
+				clearTimeout(changeRevalIID);
+				changeRevalIID = setTimeout(revalidate, 200);
 			});
 			
 			lineNums = new LineNumbers(area.boxSize, area.textFormat);
@@ -80,6 +82,8 @@ package ro.minibuilder.main.editor
 				stage.addEventListener(MouseEvent.MOUSE_UP, numStageMouseUp);
 			});
 		}
+		
+		private var changeRevalIID:int;
 		
 		private function numStageMouseUp(e:Event):void
 		{
