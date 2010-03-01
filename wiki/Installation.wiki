@@ -35,7 +35,7 @@ Thanks to Dimitri Scheftelowitsch for building it.
  # Start !AirMiniBuilder 
  # You will see the Setup pane
   * enter Flex SDK path (the directory that contains the "frameworks" directory)
-  * create a louncher on Linux or a shortcut on Windows for the [MBCompiler] start script. You will see the start script location down in the setup pane
+  * create a launcher on Linux or a shortcut on Windows for the [MBCompiler] start script. You will see the start script location down in the setup pane
   * run the shortcut
   * click "Check again" button
   * if MBCompiler is running, the red box disappears.
