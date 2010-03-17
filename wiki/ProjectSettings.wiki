@@ -6,7 +6,7 @@ How to add a swc library in a !MiniBuilder project:
   # add the swc to `lib` (for static linking) or to `lib-extern` (for dynamic linking) directory
   # Simply press F5 to refresh the project.
 
-Unfortunately, to completely remove a swc library, you have to restart the project window.
+Unfortunately, to completely remove a swc library, you have to restart the project window after removing the file from lib/lib-extern.
 
 == Targets ==
 Using !MiniBuilder, you can target the following runtimes:
