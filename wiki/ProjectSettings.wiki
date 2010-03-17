@@ -2,11 +2,11 @@
 
 ||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
 
-*Important notice*<br/>
 How to add a swc library in a !MiniBuilder project:
   # add the swc to `lib` (for static linking) or to `lib-extern` (for dynamic linking) directory
-  # <font color="red">close and reopen the project window</font>. Due to a bug, the refresh command will not load new libraries (will be fixed in alpha-3, in a couple of days).
+  # Simply press F5 to refresh the project.
 
+Unfortunately, to completely remove a swc library, you have to restart the project window.
 
 == Targets ==
 Using !MiniBuilder, you can target the following runtimes:
