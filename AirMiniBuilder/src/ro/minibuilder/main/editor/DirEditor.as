@@ -95,7 +95,7 @@ package ro.minibuilder.main.editor
 			});
 			
 			pan.append(btn = new FButton('Class', Skins.icnAS()));
-			btn.setToolTipText('New flass in this package');
+			btn.setToolTipText('New class in this package');
 			btn.addActionListener(function(e:Event):void {
 				ActionManager.inst.doAddClass();
 			});

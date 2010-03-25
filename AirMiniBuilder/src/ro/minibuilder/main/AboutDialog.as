@@ -44,7 +44,7 @@ package ro.minibuilder.main
 			
 			pane.newRow();
 			pane.addLabel('Version:');
-			pane.addLabel('1.0-alpha-2');
+			pane.addLabel('1.0-alpha-4');
 			
 			pane.newRow();
 			pane.addLabel('License and details:');

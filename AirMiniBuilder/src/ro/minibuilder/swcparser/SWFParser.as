@@ -67,6 +67,8 @@ bugs:
 
 package ro.minibuilder.swcparser
 {
+	import __AS3__.vec.Vector;
+	
 	import com.victordramba.console.debug;
 	
 	import flash.utils.ByteArray;
@@ -197,6 +199,7 @@ import flash.utils.ByteArray;
 
 import ro.minibuilder.asparser.TypeDB;
 import ro.minibuilder.swcparser.abc.Abc;
+import __AS3__.vec.Vector;
 
 
 class Swf

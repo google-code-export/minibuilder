@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.data
 {
+	import __AS3__.vec.Vector;
+	
 	public interface IProjectPlug
 	{
 		/**

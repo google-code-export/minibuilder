@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import __AS3__.vec.Vector;
+	
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;

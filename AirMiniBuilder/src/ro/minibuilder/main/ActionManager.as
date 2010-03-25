@@ -161,7 +161,8 @@ package ro.minibuilder.main
 		
 		public function doTestSWF():void
 		{
-			main.swfPopup(win.project.path + '/bin-debug/' + win.project.config.appName + '.swf');
+			//main.swfPopup(win.project.path + '/bin-debug/' + win.project.config.appName + '.swf');
+			navigateToURL(new URLRequest('file://'+win.project.path + '/bin-debug/' + win.project.config.appName + '.swf'));
 		}
 		
 		public function doCustomize():void

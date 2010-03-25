@@ -1,5 +1,7 @@
 package ro.minibuilder.main
 {
+	import __AS3__.vec.Vector;
+	
 	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.net.SharedObject;

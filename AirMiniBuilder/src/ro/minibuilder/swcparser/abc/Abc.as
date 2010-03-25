@@ -31,6 +31,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.swcparser.abc
 {
+	import __AS3__.vec.Vector;
+	
 	//import com.victordramba.debug.debug;
 	import flash.utils.ByteArray;
 	
