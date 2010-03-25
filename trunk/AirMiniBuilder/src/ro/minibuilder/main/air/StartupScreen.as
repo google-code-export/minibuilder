@@ -20,12 +20,14 @@ Author: Victor Dramba
 
 package ro.minibuilder.main.air
 {
+	import ro.minibuilder.main.air.startupscreen.BriefSearch;
 	import com.victordramba.console.debug;
 	
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.net.SharedObject;
+	import flash.system.Capabilities;
 	
 	import org.aswing.AsWingManager;
 	import org.aswing.AssetBackground;
@@ -41,10 +43,8 @@ package ro.minibuilder.main.air
 	import org.aswing.border.EmptyBorder;
 	import org.aswing.skinbuilder.orange.OrangeLookAndFeel;
 	
-	import ro.mbaswing.FButton;
-	import ro.mbaswing.TablePane;
+	import ro.mbaswing.*;
 	import ro.minibuilder.main.Skins;
-	import ro.minibuilder.main.air.startupscreen.BriefSearch;
 	import ro.minibuilder.main.air.startupscreen.NewProject;
 	import ro.minibuilder.main.air.startupscreen.Setup;
 
@@ -77,6 +77,7 @@ package ro.minibuilder.main.air
 		private function init():void
 		{
 			debug('init stage='+stage);
+			debug(Capabilities.version);
 			
 			getContentPane().setBorder(new EmptyBorder(null, new Insets(80, 20, 20, 20)));
 			
@@ -87,6 +88,7 @@ package ro.minibuilder.main.air
 			getContentPane().append(pane);
 			
 			//debugReference('screen', this);
+			
 			
 			pane.appendTab(new NewProject(main), 'Create New Project');
 			pane.appendTab(briefPane = new BriefSearch(main), 'Brief Search');
@@ -197,9 +199,6 @@ package ro.minibuilder.main.air
 			pane.setBorder(new EmptyBorder(null, new Insets(20, 20, 20, 20)));
 			return pane;
 		}
-		
-
-		
 		
 		
 	}

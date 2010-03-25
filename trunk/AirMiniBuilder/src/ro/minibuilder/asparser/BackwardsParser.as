@@ -21,6 +21,8 @@ Author: Victor Dramba
 package ro.minibuilder.asparser
 {
 
+	import __AS3__.vec.Vector;
+	
 	public class BackwardsParser
 	{
 		public static const EXPR:String = 'expr';

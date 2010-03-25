@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import __AS3__.vec.Vector;
+	
 	import org.aswing.JList;
 	import org.aswing.ListCellFactory;
 	

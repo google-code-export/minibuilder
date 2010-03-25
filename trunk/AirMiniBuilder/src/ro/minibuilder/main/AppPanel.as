@@ -20,7 +20,10 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import flash.utils.setInterval;
+	import org.aswing.ASColor;
 
+import __AS3__.vec.Vector;
 
 import flash.display.InteractiveObject;
 import flash.events.Event;
@@ -191,8 +194,11 @@ public class AppPanel extends JPanel
 		split.setResizeWeight(0);
 		split.setDividerLocation(200);
 		append(split);
+		
+		setInterval(updateChangedMarkers, 500);
 	}
 	
+	//compiler error markers
 	public function resetMarkers():void
 	{
 		for (var i:int=0; i<tabs.getComponentCount(); i++)
@@ -275,7 +281,20 @@ public class AppPanel extends JPanel
 		editor.filePath = fullpath;
 		
 		editor.addEventListener('status', onEditorStatus, false, 0, true);
+		
 		return editor;
+	}
+	
+	private function updateChangedMarkers():void
+	{
+		for (var i:int=0; i<tabs.getComponentCount(); i++)
+		{
+			var title:String = tabs.getTitleAt(i);
+			var changed:Boolean = getEditorAt(i).changed;
+			var star:Boolean = title.charAt(0) == '*';
+			if (changed && !star) tabs.setTitleAt(i, '*' + title);
+			if (!changed && star) tabs.setTitleAt(i, title.substr(1));
+		}
 	}
 	
 	private function getEditorAt(i:int):IEditor

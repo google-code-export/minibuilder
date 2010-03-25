@@ -21,6 +21,7 @@ Author: Victor Dramba
 
 package ro.minibuilder.main.editor
 {
+	import __AS3__.vec.Vector;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;

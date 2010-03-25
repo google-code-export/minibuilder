@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import __AS3__.vec.Vector;
+	
 	import org.aswing.JTree;
 	import org.aswing.tree.DefaultMutableTreeNode;
 	import org.aswing.tree.DefaultTreeModel;

@@ -1,5 +1,7 @@
 package ro.minibuilder.data
 {
+	import __AS3__.vec.Vector;
+	
 	public class ProjectConfig
 	{
 		//load playerglobal

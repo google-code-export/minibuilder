@@ -28,6 +28,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.asparser
 {
+	import __AS3__.vec.Vector;
+	
 	import com.victordramba.console.debug;
 	
 	import flash.net.registerClassAlias;

@@ -20,6 +20,7 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import __AS3__.vec.Vector;
 	import com.victordramba.console.*;
 	
 	import flash.display.GradientType;

@@ -1,5 +1,6 @@
 package ro.minibuilder.data
 {
+	import __AS3__.vec.Vector;
 	import com.victordramba.console.debug;
 	
 	import flash.utils.ByteArray;

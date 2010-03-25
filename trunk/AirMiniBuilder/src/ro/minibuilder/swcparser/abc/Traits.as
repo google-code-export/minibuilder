@@ -1,5 +1,6 @@
 package ro.minibuilder.swcparser.abc
 {
+	import __AS3__.vec.Vector;
 	import ro.minibuilder.asparser.TypeDB;
 
 	internal class Traits
