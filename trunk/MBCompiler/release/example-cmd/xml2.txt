@@ -1,4 +1,0 @@
-<command
-	name="exec"
-	command="explorer \users\victor\temp"
-	/>
