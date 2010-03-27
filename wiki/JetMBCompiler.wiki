@@ -1,0 +1,24 @@
+#summary Compilation Server for !MiniBuilder version 1.1.1
+
+= Introduction =
+
+!MiniBuilder uses the standard Adobe Flex SDK to build !ActionScript and Flex projects.<br>
+Therefore, !MiniBuilder benefits all the features offered by the SDK.  
+
+In order to connect to Flex SDK, which is a Java program, !MiniBuilder, which is a Flash application, uses JetMBCompiler a Java communication layer between !ActionScript and the SDK. You can't use !MiniBuilder without JetMBCompiler.
+
+
+= Compiler Installation =
+
+Requiremets:
+||Java JRE || http://java.sun.com/javase/downloads/index.jsp#jre||
+||JetMBCompiler|| see [http://code.google.com/p/minibuilder/downloads/list Downloads]||
+Note: Flex SDK 3.5 mpl is included with JetMBCompiler download.
+
+*You need to have JetMBCompiler started when you work with !MiniBuilder*<br>
+You can manually start it with this command:
+
+{{{
+cd JetMBCompiler
+java -jar start.jar
+}}}
