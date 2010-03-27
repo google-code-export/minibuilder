@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+java -jar VerTest.jar
+
+INFOFILE=~/.mbcompiler/sdkpath
+
+if [ -r $INFOFILE ] 
+then
+	FLEX_SDK=`less $INFOFILE`
+	echo "SDK: $FLEX_SDK"
+
+	HOME=`dirname $0`
+	cd $HOME
+	AH="-Dapplication.home=$FLEX_SDK"
+	JA="-Xmx384m -Dsun.io.useCanonCaches=false"
+	JNI="-Djava.library.path=."
+
+	#CP=$(echo $FLEX_SDK/lib/*.jar|sed 's/ /:/g')
+	CP="$HOME/MBCompiler.jar:$HOME/jnotify-0.91.jar:$FLEX_SDK/lib/*"
+
+	java $JA $JNI $AH -classpath $CP ro.minibuilder.MBCompiler
+else
+	echo "Start MiniBuilder and set Flex SDK path"
+fi
+

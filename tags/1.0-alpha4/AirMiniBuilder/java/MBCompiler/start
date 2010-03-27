@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+MBHOME=`dirname $0`
+cd $MBHOME
+
+java -jar VerTest.jar
+
+INFOFILE=~/.mbcompiler/sdkpath
+
+if [ -r $INFOFILE ]
+then
+	FLEX_SDK=`less $INFOFILE`
+	echo "SDK: $FLEX_SDK"
+
+	AH="-Dapplication.home=$FLEX_SDK"
+	JA="-Xmx384m -Dsun.io.useCanonCaches=false"
+	JNI="-Djava.library.path=."
+
+	#CP=$(echo $FLEX_SDK/lib/*.jar|sed 's/ /:/g')
+	CP="$MBHOME/MBCompiler.jar:$MBHOME/jnotify-0.91.jar:$FLEX_SDK/lib/*"
+	
+	UH=""
+	if [ `uname` = "Darwin" ]; then
+		UH="-Duser.home=$HOME"
+	fi
+
+	java $UH $JA $JNI $AH -classpath $CP ro.minibuilder.MBCompiler
+else
+	echo "Start MiniBuilder and set Flex SDK path"
+fi
+

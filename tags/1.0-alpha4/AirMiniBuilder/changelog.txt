@@ -1,0 +1,15 @@
+1.0 alpha 4
+ - mark unsaved files
+ - quick run opens browser
+ - linux air scripts (run adl, create certificate, package air)
+
+1.0 alpha 3
+ - support for mac ox x
+ - refresh project -> load/parse new files (swc/as)
+ - base class for all windows
+ - prevent autocomplete in comments
+ - fix bug default class is public
+
+1.0 alpha 2
+
+1.0 alpha 1
