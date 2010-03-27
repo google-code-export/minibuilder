@@ -13,6 +13,8 @@ In order to connect to Flex SDK, which is a Java program, !MiniBuilder, which is
 Requiremets:
 ||Java JRE || http://java.sun.com/javase/downloads/index.jsp#jre||
 ||JetMBCompiler|| see [http://code.google.com/p/minibuilder/downloads/list Downloads]||
+
+
 Note: Flex SDK 3.5 mpl is included with JetMBCompiler download.
 
 *You need to have JetMBCompiler started when you work with !MiniBuilder*<br>
