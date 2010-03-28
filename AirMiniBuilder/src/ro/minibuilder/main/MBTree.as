@@ -60,6 +60,7 @@ package ro.minibuilder.main
 			var entry:String;
 			for each (entry in paths)
 			{
+				entry = entry.replace('://', '/');
 				var path:Array = entry.split('/');
 				
 				//filter

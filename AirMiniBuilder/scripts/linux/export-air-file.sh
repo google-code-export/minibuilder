@@ -12,7 +12,7 @@ HERE=`pwd`
 # prepare output files - copy nonsource files to bin-debug
 cd $HERE/../..
 java -jar java/MBCompiler/reccopy.jar src bin-debug
-
+cp -R java/MBCompiler bin-debug
 
 cd bin-debug
 

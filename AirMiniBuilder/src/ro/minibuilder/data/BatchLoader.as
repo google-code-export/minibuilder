@@ -56,7 +56,8 @@ package ro.minibuilder.data
 				});
 			}
 			//ignore bin, bin-relese and bin-debug swf
-			else if (!fileName.indexOf('bin')==0 && /\.sw[fc]$/.test(fileName) && /^\\?libs?/.test(fileName))
+			else if (!fileName.indexOf('bin')==0 && /\.sw[fc]$/.test(fileName) && 
+				(/^\\?libs?/.test(fileName) || fileName.indexOf('sdk://') == 0))
 			{
 				debug('LIB ' + fileName);
 				project.readBinFile(fileName, function (data:ByteArray):void

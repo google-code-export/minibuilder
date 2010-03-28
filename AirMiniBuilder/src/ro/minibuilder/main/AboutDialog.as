@@ -20,6 +20,7 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import ro.minibuilder.data.Constants;
 	import flash.events.Event;
 	import flash.filters.DropShadowFilter;
 	import flash.net.URLRequest;
@@ -44,7 +45,7 @@ package ro.minibuilder.main
 			
 			pane.newRow();
 			pane.addLabel('Version:');
-			pane.addLabel('1.0-alpha-4');
+			pane.addLabel(Constants.VERSION);
 			
 			pane.newRow();
 			pane.addLabel('License and details:');

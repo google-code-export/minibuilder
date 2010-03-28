@@ -124,14 +124,15 @@ package ro.minibuilder.main.air.startupscreen
 			var max:int = 50;
 			for each (var d:File in dir.getDirectoryListing())
 			{
-				if (d.name == 'AppData' || d.name=='.svn' || d.name.indexOf('.')==0 || d.isHidden) continue;
+				if (d.isSymbolicLink) continue;
+				if (d.name == 'AppData' || d.name.indexOf('.')==0 || d.name.indexOf('.')==0 || d.isHidden) continue;
 				if (dir.nativePath == File.userDirectory.nativePath && d.name == 'Music') continue;
 				if (max-- > 0 && d.isDirectory && depth > 0)
 				{
 					briefQueue.push({dir:d, depth:depth-1});
 				}
 			}
-			setTimeout(recSearch, 2);
+			setTimeout(recSearch, 10);
 		}
 	}
 }

@@ -20,6 +20,16 @@ Author: Victor Dramba
 
 package ro.minibuilder.main.air
 {
+	import flash.utils.setTimeout;
+	import flash.net.navigateToURL;
+	import org.aswing.JLabel;
+	import org.aswing.JLabelButton;
+	import flash.net.URLRequest;
+	import flash.net.URLLoader;
+	import ro.minibuilder.data.Constants;
+	import org.aswing.ext.MultilineLabel;
+	import org.aswing.BorderLayout;
+	import ro.minibuilder.data.fileBased.SDKCompiler;
 	import ro.minibuilder.main.air.startupscreen.BriefSearch;
 	import com.victordramba.console.debug;
 	
@@ -83,9 +93,35 @@ package ro.minibuilder.main.air
 			
 			setBackgroundDecorator(new AssetBackground(Skins.topbar()));
 			
+			var rPane:JPanel = new JPanel(new BorderLayout);
+			getContentPane().append(rPane);
+			
 			var pane:JTabbedPane = new JTabbedPane;
 			tabbedPane = pane;
-			getContentPane().append(pane);
+			rPane.append(pane);
+			
+			var notes:TablePane = new TablePane(1);
+			notes.setPreferredHeight(50);
+			var verLbl:JLabel = notes.addLabel("Latest version: loading...");
+			var lnk:JLabelButton;
+			notes.addCell(lnk = new JLabelButton("Project Page", Skins.icnAS(), JLabel.LEFT));
+			lnk.addActionListener(function():void {
+				navigateToURL(new URLRequest('http://minibuilder.googlecode.com/'));
+			});
+			notes.newRow();
+			notes.addLabel("Installed version: " + Constants.VERSION);
+			notes.addCell(noCompilerLnk = new JLabelButton("Compiler server not found! See how to install.", 
+				Skins.icnDeny(), JLabel.LEFT));
+			noCompilerLnk.visible = false;
+			
+			rPane.append(notes, BorderLayout.NORTH);
+			
+			var ld:URLLoader = new URLLoader;
+			ld.addEventListener(Event.COMPLETE, function(e:Event):void {
+				var xml:XML = XML(ld.data);
+				verLbl.setText("Latest version: " + xml.version + " " + xml.version.@type);
+			});
+			ld.load(new URLRequest("http://minibuilder.googlecode.com/svn/trunk/AirMiniBuilder/version.xml"));
 			
 			//debugReference('screen', this);
 			
@@ -94,7 +130,7 @@ package ro.minibuilder.main.air
 			pane.appendTab(briefPane = new BriefSearch(main), 'Brief Search');
 			pane.appendTab(makeBrowsePane(), 'Browse for Project');
 			pane.appendTab(makeRecentPane(), 'Recent projects');
-			pane.appendTab(setupPane = new Setup, 'Setup');
+			//pane.appendTab(setupPane = new Setup, 'Setup');
 			
 			pane.addStateListener(function():void {
 				var i:int = pane.getSelectedIndex();
@@ -106,16 +142,19 @@ package ro.minibuilder.main.air
 					refreshRecent();
 			});
 			
-			if (!File.userDirectory.resolvePath('.mbcompiler/sdkpath').exists)
-				pane.setSelectedIndex(4);
-			
-			setupPane.checkPing();
-			
-			setupPane.addEventListener('noPing', function(e:Event):void {
-				pane.setSelectedIndex(4, true);
-			});
+			checkPing();
 			
 			show();
+		}
+		
+		private var noCompilerLnk:JLabelButton;
+		
+		public function checkPing():void
+		{
+			new SDKCompiler().pingCompiler(function(ok:Boolean):void {
+				noCompilerLnk.visible = !ok;
+				if (!ok) setTimeout(checkPing, 1000);
+			});
 		}
 		
 		private function makeRecentPane():JPanel
