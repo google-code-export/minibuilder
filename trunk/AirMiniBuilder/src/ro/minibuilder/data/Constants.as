@@ -23,6 +23,8 @@ package ro.minibuilder.data
 	public class Constants
 	{
 		
+		public static const VERSION:String = "1.1.1 alpha";
+		
 		public static const MAIN_MENU:XML = 
 		<menu>
 			<n label="File">

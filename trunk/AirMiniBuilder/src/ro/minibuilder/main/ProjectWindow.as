@@ -301,27 +301,27 @@ package ro.minibuilder.main
 		
 		private function init2(str:String):void
 		{
+			debug('init2');
+			
 			config.load(XML(str));
+			var fileList:Vector.<String> = project.listFiles();
 			
 			//add playerglobals & stuff
-			//we need to do thid better! it should be based on the project compile configuration
-			//TODO change this to remove dependency on AIR
-			//currently, project can only read files inside the project, relative path
+			//TODO we need to do thid better! it should be based on the project compile configuration
 			if (config.target == ProjectConfig.TARGET_PLAYER)
 			{
-				addSDKLib('frameworks/libs/player/10/playerglobal.swc');
-				addSDKLib('frameworks/libs/utilities.swc');
+				fileList.push('sdk://frameworks/libs/player/10/playerglobal.swc');
+				fileList.push('sdk://frameworks/libs/utilities.swc');
 				if (config.useFlex)
-					addSDKLib('frameworks/libs/framework.swc');
+					fileList.push('sdk://frameworks/libs/framework.swc');
 				else
-					addSDKLib('frameworks/libs/flex.swc');
+					fileList.push('sdk://frameworks/libs/flex.swc');
 			}
 			if (config.target == ProjectConfig.TARGET_AIR)
 			{
-				addSDKLib('frameworks/libs/air/airglobal.swc');
+				fileList.push('sdk://frameworks/libs/air/airglobal.swc');
 			}
 			
-			var fileList:Vector.<String> = project.listFiles();
 			panel.tree.loadPlainList(fileList);
 			
 			batchLoader.load(fileList, function(progress:Number, fileName:String):void {
@@ -336,7 +336,7 @@ package ro.minibuilder.main
 		}
 		
 		
-		// We need to extend a bit the IProjectPlug to be able to load libraries from outside the project
+		/* // We need to extend a bit the IProjectPlug to be able to load libraries from outside the project
 		// for the online version, this will be a common repository
 		private function addSDKLib(path:String):void
 		{
@@ -347,7 +347,7 @@ package ro.minibuilder.main
 			str.readBytes(ba, 0, str.bytesAvailable);
 			str.close();
 			TypeDB.setDB(path, SWCParser.parse(ba));
-		}
+		}*/
 		
 		
 		private function init3():void

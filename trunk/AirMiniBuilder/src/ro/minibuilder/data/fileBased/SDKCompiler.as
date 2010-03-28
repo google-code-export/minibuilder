@@ -20,6 +20,12 @@ Author: Victor Dramba
 
 package ro.minibuilder.data.fileBased
 {
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLVariables;
+	import flash.events.ProgressEvent;
+	import flash.net.URLRequest;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLLoader;
 	import __AS3__.vec.Vector;
 	
 	import com.victordramba.console.debug;
@@ -47,28 +53,34 @@ package ro.minibuilder.data.fileBased
 
 	public class SDKCompiler extends EventDispatcher
 	{
+		static private const MBC_URL:String = 'http://localhost:8564/JetMBCompiler/';
 		
-		static public const MBC_DIR:File = File.userDirectory.resolvePath('.mbcompiler');
-
+		static private const MBC_DIR:File = File.userDirectory.resolvePath('.mbcompiler');
+		
+		private static var logFile:String;
+		private static var lastConfigStr:String;
 		private static var _sdkPath:String;
-		private var targetConf:String;
 
+		public var statusOK:Boolean;
+		public var messages:Vector.<CompilerMessage>;
+		public var duration:int;
+		public var progress:int;
+		
+		private var lastPollSize:int = 0;
+		private var t0:Number;
+		private var targetConf:String;
 		private var project:IProjectPlug;
 		
 		public function pingCompiler(onReady:Function):void
 		{
-			var file:File = doCmd(<command name="ping"/>);
-			
-			var count:int = 3;
-			var tid:int = setInterval(function():void {
-				if (!file.exists || --count == 0)
-				{
-					clearInterval(tid);
-					if (count == 0)
-						file.deleteFileAsync();
-					onReady(count != 0);//notify true on success
-				}
-			}, 50);
+			var ld:URLLoader = new URLLoader;
+			ld.addEventListener(Event.COMPLETE, function():void {
+				onReady(true);
+			});
+			ld.addEventListener(IOErrorEvent.IO_ERROR, function():void {
+				onReady(false);
+			});
+			ld.load(new URLRequest(MBC_URL));
 		}
 		
 		
@@ -77,45 +89,72 @@ package ro.minibuilder.data.fileBased
 			var xml:XML = <command name="exec"/>;
 			path = path.replace(/\//g, File.separator); 
 			
-			xml.@command = /windows/i.test(Capabilities.os) ?
-				('explorer "' + path + '"') : 
-				('nautilus file:' + path.replace(/ /g, '\\ '));
+			xml.@command = /windows/i.test(Capabilities.os) ? 'explorer' : 'nautilus';
+			xml.arg = path;
 			doCmd(xml);
 		}
 		
-		private function doCmd(cmd:XML, onReady:Function=null):File
+		/**
+		 * function onProgress(percentReady:Number):void
+		 */
+		private function doCmd(cmd:XML, onReady:Function=null, onProgress:Function=null):void
 		{
-			var cmdFile:File = MBC_DIR.resolvePath('msg/command-' + (new Date().getTime()) + '.xml');
-			writeFile(cmdFile, cmd.toXMLString(), onReady);
-			return cmdFile;
-		}
-		
-		public static function get sdkPath():String
-		{
-			if (!_sdkPath)
+			cmd.@id = generateUID();
+			var ld:URLLoader = new URLLoader;
+			if (onReady != null) 
 			{
-				var str:FileStream = new FileStream;
-				str.open(MBC_DIR.resolvePath('sdkpath'), FileMode.READ);
-				_sdkPath = str.readUTFBytes(str.bytesAvailable);
-				str.close();
+				ld.addEventListener(Event.COMPLETE, function(e:Event):void {
+					getLog(cmd.@id, onReady);
+				});
 			}
-			return _sdkPath;
+			if (onProgress != null)
+			{
+				ld.addEventListener(ProgressEvent.PROGRESS, function (e:Event):void {
+					onProgress(ld.bytesLoaded / ld.bytesTotal);
+				});
+			}
+			var rq:URLRequest = new URLRequest(MBC_URL);
+			rq.method = 'post';
+			rq.contentType = 'application/xml';
+			rq.data = cmd.toXMLString();
+			ld.load(rq);
 		}
 		
-		
-		public function compile(project:IProjectPlug):void
+		private function getLog(id:String, onReady:Function):void
 		{
-			this.project = project;
-			
-			t0 = new Date().getTime();
-			debug('Target:'+project.config.target);
-			writeConfig();
+			var ld:URLLoader = new URLLoader;
+			ld.addEventListener(Event.COMPLETE, function(e:Event):void {
+				onReady(ld.data);
+			});
+			ld.load(new URLRequest(MBC_URL + '?log=' + id));
 		}
 		
-		private var t0:Number;
-		public var duration:int;
 		
-		private function writeConfig():void
+		//generate world-unique ID
+		public function generateUID():String
+		{
+			var d:Date = new Date;
+			var s:String = d.getTime()+''+d.getMilliseconds();
+			s = Number(s.substr(0,8)).toString(36) + Number(s.substr(8)).toString(36);
+			return s + Math.ceil(Math.random()*60466176).toString(36);
+		}		
+		
+		public static function getSDKFile(url:String, onReady:Function):void
+		{
+			debug('get sdk file: '+url);
+			var ld:URLLoader = new URLLoader;
+			var rq:URLRequest = new URLRequest(MBC_URL);
+			rq.data = new URLVariables;
+			rq.data.file = url.substr('sdk://'.length);
+			ld.dataFormat = URLLoaderDataFormat.BINARY;
+			ld.addEventListener(Event.COMPLETE, function(e:Event):void {
+				debug(ld.data.length);
+				onReady(ld.data);
+			});
+			ld.load(rq);
+		}
+		
+		private function createConfig():XML
 		{
 			var config:XML = Constants.FLASH_CONFIG.copy();
 			
@@ -129,61 +168,63 @@ package ro.minibuilder.data.fileBased
 			for each (path in project.config.libsExtern)
 				config.compiler['external-library-path'].appendChild(<path-element>{absPath(path)}</path-element>);
 				
-			var frameworkLibs:String = new File(sdkPath).resolvePath('frameworks/libs').nativePath.replace(/\\/g, '/');
 			if (project.config.useFlex)
 			{
-				config.compiler['library-path'].appendChild(<path-element>{frameworkLibs}</path-element>);
-				config.compiler['library-path'].appendChild(<path-element>{frameworkLibs}/../locale/en_US</path-element>);
+				config.compiler['library-path'].appendChild(<path-element>$sdk/frameworks/libs</path-element>);
+				config.compiler['library-path'].appendChild(<path-element>$sdk/frameworks/locale/en_US</path-element>);
 			}
 			else
-				config.compiler['library-path'].appendChild(<path-element>{frameworkLibs}/flex.swc</path-element>);
+				config.compiler['library-path'].appendChild(<path-element>$sdk/frameworks/libs/flex.swc</path-element>);
 			
 			//TARGET
 			if (project.config.target == ProjectConfig.TARGET_AIR)
 			{
 				config.compiler['external-library-path'].appendChild(
-					<path-element>{frameworkLibs}/air/airglobal.swc</path-element>);
+					<path-element>$sdk/frameworks/libs/air/airglobal.swc</path-element>);
 			}
 			else if(project.config.target == ProjectConfig.TARGET_PLAYER)
 			{
 				config.compiler['external-library-path'].appendChild(
-					<path-element>{frameworkLibs}/player/10/playerglobal.swc</path-element>);
+					<path-element>$sdk/frameworks/libs/player/10/playerglobal.swc</path-element>);
 			}
 				
-			debug(config.toXMLString());
+			//debug(config.toXMLString());
 			//debug('app='+absPath(sourcePath[0] + File.separator + mainApp));
 			//debug('sdk='+sdkPath);
-			
-			
-			if (!configFile)
-				configFile = File.createTempFile();
-			
-			var cstr:String = config.toXMLString();
-			if (cstr == lastConfigStr)
-				sendCompileCmd();
-			else
-			{
-				//we keep old config if no changes
-				lastConfigStr = cstr;
-				writeFile(configFile, cstr, sendCompileCmd);
-			}
+			return config;
 		}
 		
-		private function sendCompileCmd():void 
+		
+		public function compile(project:IProjectPlug):void
 		{
+			this.project = project;
+			
+			t0 = new Date().getTime();
+			debug('Target:'+project.config.target);
+			
+			//create command
 			var xml:XML = <command name="compile"/>;
 			xml.@mainApplication = absPath(project.config.sourcePaths[0] + File.separator + project.config.mainApp);
-			xml.@configFile = configFile.nativePath.replace(/\\/g, '/');
+			xml.config = createConfig().toXMLString();
 			xml.@log = logFile = File.createTempFile().nativePath;
 			
 			xml.@out = absPath('bin-debug');
 			//debug(xml.toXMLString());
-			doCmd(xml, pollProgress);
+			doCmd(xml, 
+				function(compileLog:String):void {
+					decodeMessages(compileLog);
+					duration = new Date().getTime() - t0;
+					dispatchEvent(new Event(Event.COMPLETE));
+					
+					//TODO check if we have errors
+					afterCompile();
+				},
+				function(percent:Number):void {
+					progress = percent * 100;
+					dispatchEvent(new Event('progress'));
+				});
 		}
 		
-		private static var logFile:String;
-		private static var configFile:File;
-		private static var lastConfigStr:String;
 		
 		private function absPath(path:String):String
 		{
@@ -191,70 +232,28 @@ package ro.minibuilder.data.fileBased
 			return new File(project.path).resolvePath(path).nativePath.replace(/\\/g, '/');
 		}
 		
-		public var progress:int;
-		private var lastPollSize:int = 0;
-		
-		private function pollProgress():void
+		private function decodeMessages(text:String):void
 		{
-			var file:File = new File(logFile);
-			if (!file.exists)
+			statusOK = false;
+			messages = new Vector.<CompilerMessage>;
+			for each (var line:String in text.replace(/\r?\n/g, '\r').split('\r'))
 			{
-				debug('file not here '+file.name);
-				setTimeout(pollProgress, 100);
-				return;
+				if (line.indexOf('compile-ok') == 0) statusOK = true;
+				var a:Array = line.split('|');
+				if (a.length < 5) continue;
+				var msg:CompilerMessage = new CompilerMessage;
+				var i:int = 0;
+				msg.code = a[i++];
+				msg.line = a[i++];
+				msg.col = a[i++];
+				msg.level = a[i++];
+				msg.path = a[i++];
+				msg.message = a[i++];
+				messages.push(msg);
 			}
-			
-			var str:FileStream = new FileStream;
-			str.open(file, FileMode.READ);
-			var text:String = str.readUTFBytes(str.bytesAvailable);
-			
-			if (text.indexOf('end-') == 0)
-			{
-				messages = new Vector.<CompilerMessage>;
-				
-				debug('end poll');
-				debug('-----------------------------------');
-				for each (var line:String in text.replace(/\r?\n/g, '\r').split('\r'))
-				{
-					if (/^-?\d+/.test(line))
-					{
-						var a:Array = line.split('|');
-						var msg:CompilerMessage = new CompilerMessage;
-						var i:int = 0;
-						msg.code = a[i++];
-						msg.line = a[i++];
-						msg.col = a[i++];
-						msg.level = a[i++];
-						msg.path = a[i++];
-						msg.message = a[i++];
-						messages.push(msg);
-					}
-				}
-				statusOK = text.indexOf('end-ok') == 0;
-				if (statusOK)
-					afterCompile();
-				duration = new Date().getTime() - t0;
-				dispatchEvent(new Event(Event.COMPLETE));
-				return;
-			}
-			
-			var mat:Array;
-			var np:int;
-			if (text.length < lastPollSize || !(mat=text.match(/^\d+/)) || (np=mat[0])<progress)
-			{
-				debug('<<<');
-				debug(text);
-			}
-			else
-			{
-				lastPollSize = text.length;
-				progress = np;
-				dispatchEvent(new Event('progress'));
-			}
-			
-			debug('progress='+progress);
-			setTimeout(pollProgress, 100);
 		}
+		
+
 		
 		//TODO this should be moved in a configurable builders list
 		private function afterCompile():void
@@ -297,9 +296,6 @@ package ro.minibuilder.data.fileBased
 			
 		}
 		
-		public var statusOK:Boolean;
-		
-		public var messages:Vector.<CompilerMessage>;
 		
 		private function writeFile(file:File, data:String, onReady:Function=null):void
 		{
@@ -311,11 +307,3 @@ package ro.minibuilder.data.fileBased
 		}
 	}
 }
-
-/*
-1. read project config: source paths, libs, main app
-2. write config file
-3. start compilation
-4. show progress
-5. show results
-*/

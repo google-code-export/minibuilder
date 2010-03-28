@@ -1,3 +1,10 @@
+1.1.1 alpha
+ - new java compiler architecture based on http server
+ - remove sdk dependency (flex sdk 3.5 mpl included)
+ 	- fix spaces in sdk path problem
+ 	- fix execution flag problem - starter is java now
+ 	- fix file explorer command for project paths with spaces on linux
+
 1.0 alpha 4
  - mark unsaved files
  - quick run opens browser

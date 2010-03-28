@@ -280,7 +280,7 @@ package ro.minibuilder.main.air
 			pwin.stage.nativeWindow.close();
 		}
 		
-		public function swfPopup(swfPath:String):void
+		/*public function swfPopup(swfPath:String):void
 		{
 			htmlPopup(new File(swfPath).url, 600, 400);
 		}
@@ -298,6 +298,6 @@ package ro.minibuilder.main.air
 				if (win.visible) return;
 				NativeApplication.nativeApplication.exit();
 			});
-		}
+		}*/
 	}
 }

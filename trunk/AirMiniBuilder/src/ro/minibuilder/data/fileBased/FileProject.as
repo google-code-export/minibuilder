@@ -114,13 +114,20 @@ package ro.minibuilder.data.fileBased
 		 */
 		public function readBinFile(url:String, onReady:Function):void
 		{
-			var file:File = new File(rootPath).resolvePath(url);
-			filesReading[file] = true;
-			file.load();
-			file.addEventListener(Event.COMPLETE, function (e:Event):void {
-				onReady(file.data);
-				delete filesReading[file];
-			});
+			if (url.indexOf('sdk://') == 0)
+			{
+				SDKCompiler.getSDKFile(url, onReady);
+			}
+			else
+			{
+				var file:File = new File(rootPath).resolvePath(url);
+				filesReading[file] = true;
+				file.load();
+				file.addEventListener(Event.COMPLETE, function (e:Event):void {
+					onReady(file.data);
+					delete filesReading[file];
+				});
+			}
 		}
 		
 		/**

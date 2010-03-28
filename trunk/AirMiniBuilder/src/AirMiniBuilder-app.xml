@@ -25,7 +25,7 @@
 	<name>MiniBuilder</name>
 
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
-	<version>1.0-alpha-3</version>
+	<version>1.0-alpha-4</version>
 
 	<!-- Description, displayed in the AIR application installer. Optional. -->
 	<!-- <description></description> -->
@@ -61,8 +61,8 @@
 		<!-- <resizable></resizable> -->
 
 
-		<height>550</height>
-		<width>570</width>
+		<height>590</height>
+		<width>580</width>
 
 		<!-- The window's initial x position. Optional. -->
 		<!-- <x></x> -->

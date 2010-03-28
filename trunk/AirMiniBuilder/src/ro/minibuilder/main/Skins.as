@@ -27,6 +27,10 @@ package ro.minibuilder.main
 
 	public class Skins
 	{
+		[Embed(source="/icons/deny.png")]
+		private static var DenyIcon:Class;
+
+
 		[Embed(source="/icons/as.png")]
 		private static var AS3Icon:Class;
 		
@@ -88,6 +92,11 @@ package ro.minibuilder.main
 		public static function icnLoading():Icon
 		{
 			return new AssetIcon(new LoadingIcn, 16, 16);
+		}
+		
+		public static function icnDeny():Icon
+		{
+			return new AssetIcon(new DenyIcon, 16, 16);
 		}
 	}
 }
