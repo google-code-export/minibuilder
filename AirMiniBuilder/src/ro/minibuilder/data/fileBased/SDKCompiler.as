@@ -55,8 +55,6 @@ package ro.minibuilder.data.fileBased
 	{
 		static private const MBC_URL:String = 'http://localhost:8564/JetMBCompiler/';
 		
-		static private const MBC_DIR:File = File.userDirectory.resolvePath('.mbcompiler');
-		
 		private static var logFile:String;
 		private static var lastConfigStr:String;
 		private static var _sdkPath:String;
@@ -71,31 +69,39 @@ package ro.minibuilder.data.fileBased
 		private var targetConf:String;
 		private var project:IProjectPlug;
 		
-		public function pingCompiler(onReady:Function):void
+		/** function onReady(isRunning:String):void */
+		public static function pingCompiler(onReady:Function):void
 		{
 			var ld:URLLoader = new URLLoader;
 			ld.addEventListener(Event.COMPLETE, function():void {
-				onReady(true);
+				onReady(ld.data);
 			});
 			ld.addEventListener(IOErrorEvent.IO_ERROR, function():void {
-				onReady(false);
+				onReady(null);
 			});
-			ld.load(new URLRequest(MBC_URL));
+			ld.load(new URLRequest(MBC_URL+"?path=1"));
 		}
 		
 		
 		public function nativeOpenDir(path:String):void
 		{
+			executeNative(
+				/windows/i.test(Capabilities.os) ? 'explorer' : 'nautilus',
+				[path.replace(/\//g, File.separator)]);
+		}
+		
+		public function executeNative(cmd:String, args:Array, onReady:Function=null):void
+		{
 			var xml:XML = <command name="exec"/>;
-			path = path.replace(/\//g, File.separator); 
-			
-			xml.@command = /windows/i.test(Capabilities.os) ? 'explorer' : 'nautilus';
-			xml.arg = path;
-			doCmd(xml);
+			xml.@command = cmd;
+			for each (var arg:String in args)
+				xml.appendChild(<arg>{arg}</arg>);
+			doCmd(xml, onReady);
 		}
 		
 		/**
 		 * function onProgress(percentReady:Number):void
+		 * function onReady(data:String):void
 		 */
 		private function doCmd(cmd:XML, onReady:Function=null, onProgress:Function=null):void
 		{

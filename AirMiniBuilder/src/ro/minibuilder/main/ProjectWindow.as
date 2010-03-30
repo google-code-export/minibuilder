@@ -60,7 +60,7 @@ package ro.minibuilder.main
 	public class ProjectWindow extends AsWingApplication
 	{
 		public var project:IProjectPlug;
-		private var panel:AppPanel;
+		private var panel:ProjectWindowPanel;
 		public var crtEditor:IEditor;
 		private var batchLoader:BatchLoader;
 		
@@ -95,7 +95,7 @@ package ro.minibuilder.main
 			
 			UIManager.setLookAndFeel(new OrangeLookAndFeel);
 
-			panel = new AppPanel;
+			panel = new ProjectWindowPanel;
 			setContentPane(panel);
 			
 			project = new FileProject;
@@ -198,7 +198,7 @@ package ro.minibuilder.main
 			if (fileName.indexOf(project.path) == 0)
 				fileName = fileName.substr(project.path.length);
 			
-			debug('2open:'+fileName);
+			//debug('2open:'+fileName);
 
 			//special case directory
 			if (project.isDirectory(fileName))
@@ -229,6 +229,7 @@ package ro.minibuilder.main
 					if (editor is ITextEditor)
 					{
 						crtEditor = editor;
+						if (line == -1) line = 0;
 						project.readTextFile(fileName, function(src:String):void {
 							(editor as ITextEditor).loadSource(src, fileName);
 							initTextEditor(line);
@@ -263,7 +264,7 @@ package ro.minibuilder.main
 				editor.markLines(lines, tips);
 			}
 			
-			if (line > 0)
+			if (line >= 0)
 				editor.gotoLine(line);
 				
 			//set focus to Editor
@@ -358,7 +359,7 @@ package ro.minibuilder.main
 				if (/\.as$/.test(project.listFiles()[i]))
 				{
 					debug('open file '+project.listFiles()[i]);				
-					openFile(project.config.sourcePaths[0] + '/' + project.config.mainApp);
+					openFile(project.config.sourcePaths[0] + '/' + project.config.mainApp, 0);
 					break;
 				}
 			}

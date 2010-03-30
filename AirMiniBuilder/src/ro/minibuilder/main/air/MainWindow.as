@@ -20,6 +20,7 @@ Author: Victor Dramba
 
 package ro.minibuilder.main.air
 {
+	import ro.minibuilder.main.ProjectWindowPanel;
 	import com.victordramba.console.*;
 	
 	import flash.desktop.ClipboardFormats;
@@ -56,7 +57,6 @@ package ro.minibuilder.main.air
 	import ro.minibuilder.data.Constants;
 	import ro.minibuilder.data.IProjectPlug;
 	import ro.minibuilder.main.ActionManager;
-	import ro.minibuilder.main.AppPanel;
 	import ro.minibuilder.main.ProjectWindow;
 	import ro.victordramba.util.StringEx;
 
@@ -64,7 +64,7 @@ package ro.minibuilder.main.air
 	{
 		public var windowID:String;
 		private var project:IProjectPlug;
-		private var panel:AppPanel;
+		private var panel:ProjectWindowPanel;
 		private var tid:int;
 		
 		function MainWindow()

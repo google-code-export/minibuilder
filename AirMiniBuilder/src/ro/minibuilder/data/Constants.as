@@ -36,13 +36,13 @@ package ro.minibuilder.data
 				<n label="Close Project" action="closeProject"/>
 			</n>
 			<n label="Compile">
-				<n label="Compiler Settings" action="buildSettings"/>
+				<n label="Deploy files" action="deploySettings"/>
 				<n separator="yes"/>
 				<n label="Compile" action="compile"/>
-				<n label="Compile and QuickRun" action="compileAndRun"/>
+				<n label="Compile and Run" action="compileAndRun"/>
 				<!-- n label="Compile release" action="compileRelease"/ -->
 				<n separator="yes"/>
-				<n label="Quick run swf" action="testSWF"/>
+				<n label="Run" action="run"/>
 			</n>
 			<n label="Search">
 				<n label="Search next" action="searchNext"/>
@@ -50,8 +50,10 @@ package ro.minibuilder.data
 				<n label="Search/Replace" action="searchReplace"/>
 			</n>
 			<n label="Tools">
-				<n label="Add License Block" action="addLicense"/>
+				<n label="Preferences" action="preferences"/>
 				<n label="Customize Buttons" action="customize"/>
+				<n separator="yes"/>
+				<n label="Add License Block" action="addLicense"/>
 			</n>
 			<n label="Help">
 				<n label="Help Contents" action="helpContents"/>

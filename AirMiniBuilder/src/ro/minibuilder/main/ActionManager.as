@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import ro.minibuilder.main.air.Preferences;
+	import ro.minibuilder.data.ProjectConfig;
 	import com.victordramba.console.debug;
 	
 	import flash.desktop.NativeApplication;
@@ -49,6 +51,11 @@ package ro.minibuilder.main
 			this.main = main;
 			win = main.pwin;
 			inst = this;
+		}
+		
+		public function doPreferences():void
+		{
+			new Preferences().show();
 		}
 		
 		public function doShowStartup():void
@@ -155,14 +162,28 @@ package ro.minibuilder.main
 		public function doCompileAndRun():void
 		{
 			win.compile(function():void {
-				doTestSWF();
+				doRun();
 			});
 		}
 		
-		public function doTestSWF():void
+		public function doRun():void
 		{
-			//main.swfPopup(win.project.path + '/bin-debug/' + win.project.config.appName + '.swf');
-			navigateToURL(new URLRequest('file://'+win.project.path + '/bin-debug/' + win.project.config.appName + '.swf'));
+			if (win.project.config.target == ProjectConfig.TARGET_AIR)
+			{
+				if (Preferences.config.data.airsdk)
+				{
+					debug(win.project.path + 'bin-debug/'+win.project.name+'-app.xml');
+					new SDKCompiler().executeNative(Preferences.config.data.airsdk + '/bin/adl', 
+						[win.project.path + '/bin-debug/'+win.project.name+'-app.xml']);
+				}
+				else
+					new Preferences().show();
+			}
+			else
+			{
+				navigateToURL(new URLRequest('file://'+
+					win.project.path + '/bin-debug/' + win.project.config.appName + '.swf'));
+			}
 		}
 		
 		public function doCustomize():void
@@ -181,9 +202,9 @@ package ro.minibuilder.main
 			new AboutDialog().show();
 		}
 		
-		public function doBuildSettings():void
+		public function doDeploySettings():void
 		{
-			new BuildSettings(win.project).show();
+			new DeployFiles(win.project).show();
 		}
 		
 		public function doHelpContents():void

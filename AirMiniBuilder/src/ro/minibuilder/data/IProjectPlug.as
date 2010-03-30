@@ -33,6 +33,8 @@ package ro.minibuilder.data
 		
 		function get path():String;
 		
+		function get name():String;
+		
 		//TODO rename to getFileList()
 		function listFiles():Vector.<String>;
 

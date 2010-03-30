@@ -56,14 +56,12 @@ package ro.minibuilder.main.air
 	import ro.mbaswing.*;
 	import ro.minibuilder.main.Skins;
 	import ro.minibuilder.main.air.startupscreen.NewProject;
-	import ro.minibuilder.main.air.startupscreen.Setup;
 
 	public class StartupScreen extends JWindow
 	{
 		
 		private var main:MainWindow;
 		private var tabbedPane:JTabbedPane;
-		private var setupPane:Setup;
 		
 		private var briefPane:BriefSearch;
 		
@@ -114,6 +112,10 @@ package ro.minibuilder.main.air
 				Skins.icnDeny(), JLabel.LEFT));
 			noCompilerLnk.visible = false;
 			
+			noCompilerLnk.addActionListener(function():void {
+				navigateToURL(new URLRequest('http://code.google.com/p/minibuilder/wiki/JetMBCompiler'));
+			});
+			
 			rPane.append(notes, BorderLayout.NORTH);
 			
 			var ld:URLLoader = new URLLoader;
@@ -136,8 +138,6 @@ package ro.minibuilder.main.air
 				var i:int = pane.getSelectedIndex();
 				if (i == 1)
 					briefPane.briefLookup();
-				else if (i == 4)
-					setupPane.checkPing();
 				else if (i == 3)
 					refreshRecent();
 			});
@@ -151,7 +151,7 @@ package ro.minibuilder.main.air
 		
 		public function checkPing():void
 		{
-			new SDKCompiler().pingCompiler(function(ok:Boolean):void {
+			SDKCompiler.pingCompiler(function(ok:*):void {
 				noCompilerLnk.visible = !ok;
 				if (!ok) setTimeout(checkPing, 1000);
 			});
@@ -181,7 +181,10 @@ package ro.minibuilder.main.air
 			pane.addCell(btn = new FButton('Open Project'), TablePane.ALIGN_RIGHT);
 			btn.addActionListener(function(e:Event):void {
 				if (recentList.getSelectedValue())
+				{
 					main.newProjectWindow(recentList.getSelectedValue());
+					stage.nativeWindow.visible = false;
+				}
 			});
 			
 			
@@ -232,6 +235,7 @@ package ro.minibuilder.main.air
 			pane.addCell(btn2 = new FButton('Open Project'), TablePane.ALIGN_RIGHT, 3);
 			btn2.addActionListener(function(e:Event):void {
 				main.newProjectWindow(txt.getText());
+				stage.nativeWindow.visible = false;
 			});
 			btn2.setEnabled(false);
 			
