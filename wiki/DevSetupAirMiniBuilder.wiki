@@ -1,4 +1,5 @@
 #summary MiniBuilder development setup: workspace, projects
+#labels Deprecated
 
 =Linux=
 
