@@ -1,9 +1,17 @@
-1.1.1 alpha
- - new java compiler architecture based on http server
+1.1.0 alpha
+ - new java compiler architecture based on http server (jetty)
+ - show latest MiniBuilder release version in startup page
+ - Flex SDK compiler included (Flex SDK 3.5 MPL release)
  - remove sdk dependency (flex sdk 3.5 mpl included)
  	- fix spaces in sdk path problem
  	- fix execution flag problem - starter is java now
  	- fix file explorer command for project paths with spaces on linux
+ - editor focus issues:
+ 	- show focus in editor after project startup
+ 	- preserve focus and line number when chaging tabs or using the tree
+ - air project support: 
+ 	- one click run/test with adl
+ 	- set AIR SDK path
 
 1.0 alpha 4
  - mark unsaved files

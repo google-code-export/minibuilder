@@ -1,5 +1,7 @@
 package ro.minibuilder.main
 {
+	import org.aswing.Insets;
+	import org.aswing.border.EmptyBorder;
 	import flash.filters.DropShadowFilter;
 	
 	import org.aswing.AsWingUtils;
@@ -13,8 +15,10 @@ package ro.minibuilder.main
 			filters = [new DropShadowFilter(2, 45, 0, .3, 6, 6)];	
 		}
 		
+		
 		protected function setSizeAndCenter(w:int, h:int):void
 		{
+			getContentPane().setBorder(new EmptyBorder(null, new Insets(10, 10, 10, 10)));			
 			setSizeWH(w, h);
 			AsWingUtils.centerLocate(this);
 		}

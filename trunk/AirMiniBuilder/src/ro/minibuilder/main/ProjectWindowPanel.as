@@ -57,7 +57,7 @@ import ro.minibuilder.main.editor.ITextEditor;
 /**
  * MyPane
  */
-public class AppPanel extends JPanel
+public class ProjectWindowPanel extends JPanel
 {
 	//members
 	private var _tree:MBTree;
@@ -76,7 +76,7 @@ public class AppPanel extends JPanel
 	public function refreshButtons():void
 	{
 		var so:SharedObject = SharedObject.getLocal('buttons');
-		var buttons:Array = so.data.buttons ? so.data.buttons : [];
+		var buttons:Array = so.data.buttons ? so.data.buttons : ['ShowStartup', 'Customize'];
 		
 		buttonsPane.removeAll();
 		
@@ -96,7 +96,7 @@ public class AppPanel extends JPanel
 	/**
 	 * MyPane Constructor
 	 */
-	public function AppPanel()
+	public function ProjectWindowPanel()
 	{
 		//component creation
 		setSize(new IntDimension(300, 300));
@@ -110,41 +110,6 @@ public class AppPanel extends JPanel
 		var btn:JButton;
 		
 		refreshButtons();
-		
-		
-		/*pan.append(btn = new JButton('Save'));
-		btn.setToolTipText('Save File [Ctrl+S]');
-		btn.addActionListener(function():void {
-			ActionManager.inst.doSave();
-		})
-		
-		pan.append(btn = new JButton('Compile and Fun'));
-		btn.setToolTipText('Compile and Run [F8]');
-		btn.addActionListener(function():void {
-			ActionManager.inst.doCompile();
-		})
-		
-		pan.append(btn = new JButton('Search'));
-		btn.setToolTipText('Search [F3 | Ctrl+K]');
-		btn.addActionListener(function():void {
-			ActionManager.inst.doSearchNext();
-		})
-		
-		pan.append(btn = new JButton('In-Project Search'));
-		btn.setToolTipText('Search for a file [Ctrl+R]');
-		btn.addActionListener(function():void {
-			ActionManager.inst.doProjectSearch();
-		})
-		
-		pan.append(btn = new JButton('Goto Line'));
-		btn.setToolTipText('Goto line number [Ctrl+L]');
-		btn.addActionListener(function():void {
-			ActionManager.inst.doGotoLine();
-		})
-		
-		pan.append(btn = new JButton('About MiniBuilder'));
-		btn.addActionListener(function():void {new AboutDialog().show()});*/
-		
 		
 		//top right
 		var toppan:JPanel = new JPanel(new BorderLayout);
@@ -180,7 +145,12 @@ public class AppPanel extends JPanel
 		
 		tabs.addStateListener(function():void {
 			if (noTabChangeDisplatch) return;
-			else dispatchEvent(new Event('selectedEditor'));
+			else
+			{
+				if (crtEditor is InteractiveObject)
+					stage.focus = (crtEditor as InteractiveObject);
+				dispatchEvent(new Event('selectedEditor'));
+			}
 		});
 		
 		var split1:JSplitPane = new JSplitPane(AsWingConstants.VERTICAL, true, 

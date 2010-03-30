@@ -71,6 +71,12 @@ package ro.minibuilder.data.fileBased
 			return rootPath;
 		}
 		
+		public function get name():String
+		{
+			var tmp:String = path.substr(0, -1);
+			return tmp.substr(tmp.lastIndexOf('/')+1);
+		}
+		
 		private function recListFiles(path:String):void
 		{
 			var file:File = new File(path);

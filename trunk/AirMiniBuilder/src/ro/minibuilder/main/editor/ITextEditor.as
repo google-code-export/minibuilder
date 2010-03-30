@@ -29,5 +29,6 @@ package ro.minibuilder.main.editor
 		function search(pattern:*, backwards:Boolean=false):Boolean;
 		function get text():String;
 		function get selection():String;
+		function setSelection(beginIndex:int, endIndex:int):void
 	}
 }
