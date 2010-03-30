@@ -1,4 +1,5 @@
 #summary Installation and System Requirements
+#labels Featured
 
 ||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
 
