@@ -1,0 +1,23 @@
+#summary Installation and System Requirements
+
+||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
+
+== System and Software Requirements ==
+
+Operating System: Windows, Linux<br/>
+On Mac OS X, copy/paste still not working. If you have a Mac and like to help the project, let me know!
+
+Software dependency:
+
+||Adobe AIR Runtime||http://get.adobe.com/air/||
+||Java runtime (JRE), minimum version 1.5||http://java.sun.com/javase/downloads/index.jsp#jre||
+||JetMBCompiler||[http://code.google.com/p/minibuilder/downloads/list Downloads]||
+||For AIR Projects, you also need AIR SDK||http://www.adobe.com/cfusion/entitlement/index.cfm?e=airsdk||
+
+Note: On Linux you will need Nautilus in order to be able to use "Open native file browser" command.
+
+== Installation ==
+
+  # Install AirMiniBuilder-...air
+  # Download and unzip JetMBCompiler
+  # Run `java -jar start.jar` inside JetMBCompiler directory (see [http://code.google.com/p/minibuilder/wiki/JetMBCompiler JetMBCompiler])
