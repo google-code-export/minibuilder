@@ -1,4 +1,5 @@
 #summary Installation and System Requirements
+#labels Deprecated
 
 ||[Contribute Contribute] to !MiniBuilder! Your help is needed.||
 
