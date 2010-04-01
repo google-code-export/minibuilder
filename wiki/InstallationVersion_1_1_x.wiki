@@ -23,4 +23,4 @@ Note: On Linux you will need Nautilus in order to be able to use "Open native fi
   # Download and unzip JetMBCompiler
   # Run `java -jar start.jar` inside JetMBCompiler directory (see [http://code.google.com/p/minibuilder/wiki/JetMBCompiler JetMBCompiler])
 
-<wiki:video url="http://www.youtube.com/watch?v=3xA4eyV-Uo8" width="800" height="620"/>
+<wiki:video url="http://www.youtube.com/watch?v=2fqfmPj8QTo" width="860" height="550"/>
