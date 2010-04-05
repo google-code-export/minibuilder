@@ -70,6 +70,7 @@ package ro.minibuilder.data
 				<key key="S" ctrl="1" shift="1" action="saveAll"/>
 				<key key="L" ctrl="1" action="gotoLine"/>
 				<key key="G" ctrl="1" action="gotoLine"/>
+				<key key="F4" action="gotoDefinition"/>
 				<key key="F5" action="refreshProject"/>
 				<key key="F7" action="compile"/>
 				<key key="F8" action="compileAndRun"/>

@@ -42,7 +42,7 @@ package ro.minibuilder.asparser
 
 		private var string:String;
 		private var pos:uint;
-
+		
 		private static const keywordsA:Array = [
 			'as', 'is', 'in', 'break', 'case', 'continue', 'default', 'do', 'while', 'else', 'for', 'in', 'each',
 			'if', 'label', 'return', 'super', 'switch', 'throw', 'try', 'catch', 'finally', 'while',
@@ -142,7 +142,7 @@ package ro.minibuilder.asparser
 				{
 					//look for regexp syntax
 					lt = tokens[tokens.length-1].string;
-					if (lt=='=' || lt==',' || lt=='[' || lt=='(' || lt=='}' || lt=='{' || lt==';')
+					if (lt=='=' || lt==',' || lt=='[' || lt=='(' || lt=='}' || lt=='{' || lt==';' || lt=='&' || lt=='|')
 					{
 						skipUntilWithEscNL('/');
 						while (isLetter(string.charAt(pos))) pos++;

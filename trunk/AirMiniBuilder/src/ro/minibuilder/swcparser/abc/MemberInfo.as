@@ -20,7 +20,7 @@ package ro.minibuilder.swcparser.abc
 		//abstract
 		public function createField():Field
 		{
-			var f:Field = new Field();
+			var f:Field = new Field(null);
 			f.fieldType = fieldKinds[kind];
 			f.name = name.name;
 			f.access = (name.nsset[0] as Namespace_).type;

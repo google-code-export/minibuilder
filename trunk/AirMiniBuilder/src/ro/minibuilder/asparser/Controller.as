@@ -28,6 +28,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.asparser
 {
+	import com.victordramba.console.debug;
+	import ro.minibuilder.main.editor.Location;
 	import __AS3__.vec.Vector;
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -175,6 +177,23 @@ package ro.minibuilder.asparser
 		public function isInScope(name:String, pos:int):Boolean
 		{
 			return parser.newResolver().isInScope(name, pos);
+		}
+		
+		public function findDefinition(index:int):Location
+		{
+			var field:Field = parser.newResolver().findDefinition(fld.text, index);
+			if (!field) return null;
+			var loc:Location = new Location(field.sourcePath, field.pos);
+			debug('finddef='+field+' pos='+field.pos);
+			for (var parent:Field = field, i:int=0; parent && i<10; parent = field.parent, i++)
+			{
+				if (parent.sourcePath)
+				{
+					loc.path = parent.sourcePath;
+					break;
+				}
+			}
+			return loc;
 		}
 	}
 }
