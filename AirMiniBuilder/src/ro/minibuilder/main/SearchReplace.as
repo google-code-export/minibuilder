@@ -65,7 +65,7 @@ package ro.minibuilder.main
 				srcTxt.setText((val as RegExp).source);
 				regexCk.setSelected(true);
 			}
-			stage.focus = srcTxt;
+			srcTxt.setSelection(0, srcTxt.getLength());
 		}
 		
 		public function SearchReplace()

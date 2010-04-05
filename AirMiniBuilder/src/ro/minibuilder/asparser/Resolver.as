@@ -157,6 +157,19 @@ package ro.minibuilder.asparser
 			return a;
 		}
 		
+		
+		public function findDefinition(text:String, pos:int):Field
+		{
+			//adjust position to next word end
+			var re:RegExp = /\b/g;
+			re.lastIndex = pos;
+			pos = re.exec(text).index;
+			
+			var field:Field = resolve(text, pos, true);
+			if (!field) field = resolve(text, pos, false);
+			return field;
+		}
+		
 		//find the imports for this token
 		private function findImports(token:Token):HashMap
 		{

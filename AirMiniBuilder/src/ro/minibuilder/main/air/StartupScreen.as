@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main.air
 {
+	import ro.minibuilder.main.ActionManager;
+	import com.victordramba.console.debugReference;
 	import flash.utils.setTimeout;
 	import flash.net.navigateToURL;
 	import org.aswing.JLabel;
@@ -86,6 +88,7 @@ package ro.minibuilder.main.air
 		{
 			debug('init stage='+stage);
 			debug(Capabilities.version);
+			debugReference('action', ActionManager);
 			
 			getContentPane().setBorder(new EmptyBorder(null, new Insets(80, 20, 20, 20)));
 			

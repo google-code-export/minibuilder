@@ -189,7 +189,7 @@ package ro.minibuilder.main
 		}
 		
 		
-		public function openFile(fileName:String, line:int=-1):void
+		public function openFile(fileName:String, line:int=-1, pos:int=-1):void
 		{
 			debug('open:'+fileName);
 			
@@ -220,7 +220,7 @@ package ro.minibuilder.main
 				
 				if ((crtEditor = panel.getEditor(fileName)))
 				{
-					initTextEditor(line);
+					initTextEditor(line, pos);
 				}
 				else
 				{
@@ -232,7 +232,7 @@ package ro.minibuilder.main
 						if (line == -1) line = 0;
 						project.readTextFile(fileName, function(src:String):void {
 							(editor as ITextEditor).loadSource(src, fileName);
-							initTextEditor(line);
+							initTextEditor(line, pos);
 						});
 					}
 					else if (editor is IBinEditor)
@@ -246,7 +246,7 @@ package ro.minibuilder.main
 			updateTitle();
 		}
 		
-		private function initTextEditor(line:int=-1):void
+		private function initTextEditor(line:int=-1, pos:int=-1):void
 		{
 			var editor:ITextEditor = crtEditor as ITextEditor;
 			if (!editor) return;
@@ -264,8 +264,11 @@ package ro.minibuilder.main
 				editor.markLines(lines, tips);
 			}
 			
-			if (line >= 0)
+			if (pos > 0)
+				editor.setSelection(pos, pos);
+			else if (line >= 0)
 				editor.gotoLine(line);
+			
 				
 			//set focus to Editor
 			stage.focus = crtEditor as InteractiveObject;
@@ -306,9 +309,27 @@ package ro.minibuilder.main
 			
 			config.load(XML(str));
 			var fileList:Vector.<String> = project.listFiles();
+			addSdkLibs();			
+			
+			panel.tree.loadPlainList(fileList);
+			
+			batchLoader.load(fileList, function(progress:Number, fileName:String):void {
+				if (progress == 1)
+				{
+					init3();
+					progressPopup.closeReleased();
+				}
+				else
+					progressPopup.update(progress*100, fileName);
+			});
+		}
+		
+		private function addSdkLibs():void
+		{
+			var fileList:Vector.<String> = project.listFiles();
 			
 			//add playerglobals & stuff
-			//TODO we need to do thid better! it should be based on the project compile configuration
+			//TODO we need to do this better! it should be based on the project compile configuration
 			if (config.target == ProjectConfig.TARGET_PLAYER)
 			{
 				fileList.push('sdk://frameworks/libs/player/10/playerglobal.swc');
@@ -322,18 +343,6 @@ package ro.minibuilder.main
 			{
 				fileList.push('sdk://frameworks/libs/air/airglobal.swc');
 			}
-			
-			panel.tree.loadPlainList(fileList);
-			
-			batchLoader.load(fileList, function(progress:Number, fileName:String):void {
-				if (progress == 1)
-				{
-					init3();
-					progressPopup.closeReleased();
-				}
-				else
-					progressPopup.update(progress*100, fileName);
-			});
 		}
 		
 		
@@ -433,6 +442,7 @@ package ro.minibuilder.main
 			
 			project.open(project.path, function():void {
 				var newList:Vector.<String> = project.listFiles();
+				addSdkLibs();
 				panel.tree.loadPlainList(newList);
 				var fileName:String;
 				var diffNew:Vector.<String> = new Vector.<String>;

@@ -100,5 +100,10 @@ package ro.minibuilder.main.editor
 			fileName = filePath;
 			ctrl.sourceChanged(text, fileName);
 		}
+		
+		public function findDefinition():Location
+		{
+			return ctrl.findDefinition(caretIndex);
+		}
 	}
 }

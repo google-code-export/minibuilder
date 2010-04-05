@@ -1,3 +1,7 @@
+1.1.1 alpha
+	- implement Goto Definition
+	- fix bug6 http://code.google.com/p/minibuilder/issues/detail?id=6 (Refresh project)
+
 1.1.0 alpha
  - new java compiler architecture based on http server (jetty)
  - show latest MiniBuilder release version in startup page

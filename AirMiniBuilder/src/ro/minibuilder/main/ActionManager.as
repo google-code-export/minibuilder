@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import ro.minibuilder.main.editor.Location;
+	import ro.minibuilder.main.editor.AS3Editor;
 	import ro.minibuilder.main.air.Preferences;
 	import ro.minibuilder.data.ProjectConfig;
 	import com.victordramba.console.debug;
@@ -95,6 +97,15 @@ package ro.minibuilder.main
 		public function doSearchPrev():void
 		{
 			win.searchPrev();
+		}
+		
+		public function doGotoDefinition():void
+		{
+			var editor:AS3Editor = win.crtEditor as AS3Editor;
+			if (!editor) return;
+			var loc:Location = editor.findDefinition();
+			if (!loc) return;
+			win.openFile(loc.path ? loc.path : editor.filePath, -1, loc.pos);
 		}
 		
 		public function doNativeOpen():void
