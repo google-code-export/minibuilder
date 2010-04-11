@@ -20,6 +20,7 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import ro.minibuilder.main.air.Preferences;
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	
@@ -28,13 +29,19 @@ package ro.minibuilder.main
 
 	public class KeyBindings
 	{
-		static private var keysXML:XML = Constants.SHORTCUTS;
-		
-		private static var keys:Object = {};
+		private static var keys:Object;
 		
 		public static function init(stage:Stage):void
 		{
+			resetKeys();
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true, 100);
+		}
+		
+		public static function resetKeys():void
+		{
+			var keysXML:XML = Preferences.config.data['shortcuts'] as XML;
+			if (!keysXML) keysXML = Constants.SHORTCUTS;
+			keys = {};
 			for each (var n:XML in keysXML.key)
 				keys[n.@key.toLowerCase()+(n.@ctrl==1?'1':'0')+(n.@shift==1?'1':'0')+(n.@alt==1?'1':'0')] = n.@action;
 		}

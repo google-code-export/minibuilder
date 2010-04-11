@@ -1,0 +1,46 @@
+code completion
+
+1. names in current scope (list names)
+
+	if scope is class:
+		private function
+		protected function
+		private var
+		protected var
+		static
+	all scopes:
+		function
+	all function scopes
+		return
+
+	a. all package-level items (check auto-import)
+	b. function scope chain (local vars + function params)
+	c. class scope
+		- static class members, 
+			+non-private inherited static members
+		- only in instance scope: all class members, 
+			+non-private inherited
+	
+2. eval first name (before first dot)
+	a. expression: regexp, cast, string, array
+	b. keyword: this, super
+	c. name in scope: 
+		- toplevel, imported things (crt package included)
+		- function scope chain
+		- class scope
+			- instance scope: all class members, non-private inherited
+			- static scope: static class members, non-private inherited static members
+			
+3. inst members (after first dot)
+	- public class members + 
+	- internal if in same package + 
+	- private&protected if in same class
+
+4. type (after column ':')
+	- all types (check auto-import)
+	- +void if it's function return
+
+5. function signature
+
+
+

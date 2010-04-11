@@ -35,7 +35,8 @@ package ro.minibuilder.main.editor
 	
 	import ro.minibuilder.asparser.Controller;
 	import ro.victordramba.util.vectorToArray;
-
+	import com.victordramba.console.debug;
+	
 	public class AssistMenu
 	{
 		private var menuData:Vector.<String>
@@ -157,7 +158,8 @@ package ro.minibuilder.main.editor
 					var sumChars:int = 0;
 					for (var i:int=0; i<missing.length; i++)
 					{
-						var pos:int = fld.text.lastIndexOf('package', fld.caretIndex);
+						//TODO make a better regexp
+						var pos:int = fld.text.lastIndexOf('package ', fld.caretIndex);
 						pos = fld.text.indexOf('{', pos) + 1;
 						var imp:String = '\n\t'+(i>0?'//':'')+'import '+missing[i] + '.' + name + ';';
 						sumChars += imp.length;
@@ -191,6 +193,7 @@ package ro.minibuilder.main.editor
 			//look back for last trigger
 			var tmp:String = fld.text.substring(Math.max(0, pos-100), pos).split('').reverse().join('');
 			var m:Array = tmp.match(/^(\w*?)\s*(\:|\.|\(|\bsa\b|\bwen\b)/);
+			debug('trigger mat='+(m?m[0]:'')+' 100='+tmp);
 			var trigger:String = m ? m[2] : '';
 			if (tooltip.isShowing() && trigger=='(') trigger = '';
 			if (m) menuStr = m[1];

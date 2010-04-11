@@ -50,15 +50,16 @@ package ro.minibuilder.data
 				<n label="Search/Replace" action="searchReplace"/>
 			</n>
 			<n label="Tools">
-				<n label="Preferences" action="preferences"/>
-				<n label="Customize Buttons" action="customize"/>
-				<n separator="yes"/>
 				<n label="Add License Block" action="addLicense"/>
+			</n>
+			<n label="Preferences">
+				<n label="Settings" action="preferences"/>
+				<n label="Keyboard Shortcuts" action="shortcuts"/>
+				<n label="Customize Toolbar" action="customize"/>
 			</n>
 			<n label="Help">
 				<n label="Help Contents" action="helpContents"/>
 				<n label="About MiniBuilder" action="about"/>
-				<n label="Keyboard Shortcuts" action="shortcuts"/>
 			</n>
 		</menu>;
 		
@@ -82,6 +83,7 @@ package ro.minibuilder.data
 				<key key="F" ctrl="1" action="searchReplace"/>
 				<key key="W" ctrl="1" action="closeEditor"/>
 				<key key="F4" ctrl="1" action="closeEditor"/>
+				<key key="F4" shift="1" action="goBack"/>
 			</keys>;
 		
 		

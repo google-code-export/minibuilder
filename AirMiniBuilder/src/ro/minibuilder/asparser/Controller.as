@@ -183,17 +183,17 @@ package ro.minibuilder.asparser
 		{
 			var field:Field = parser.newResolver().findDefinition(fld.text, index);
 			if (!field) return null;
-			var loc:Location = new Location(field.sourcePath, field.pos);
-			debug('finddef='+field+' pos='+field.pos);
-			for (var parent:Field = field, i:int=0; parent && i<10; parent = field.parent, i++)
+			debug(field + '-' + field.parent);
+			for (var parent:Field = field, i:int=0; parent && i<10; parent = parent.parent, i++)
 			{
+				debug('def path'+i+': '+parent.sourcePath);
 				if (parent.sourcePath)
 				{
-					loc.path = parent.sourcePath;
-					break;
+					debug('found');
+					return new Location(parent.sourcePath, field.pos);
 				}
 			}
-			return loc;
+			return new Location(null, field.pos);
 		}
 	}
 }

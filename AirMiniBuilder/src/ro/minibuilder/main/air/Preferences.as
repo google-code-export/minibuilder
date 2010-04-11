@@ -16,9 +16,6 @@ package ro.minibuilder.main.air
 		private var lbl1:JLabel;
 		private var lbl2:JLabel;
 		private var txt1:JTextField;
-		private var okBtn:FButton;
-		private var cancelBtn:FButton;
-		
 		
 		private static var so:SharedObject;
 		static public function get config():SharedObject
@@ -54,18 +51,7 @@ package ro.minibuilder.main.air
 			pane.newRow(true);
 			pane.addCell(null);
 			
-			pane.addSeparatorRow();
-			pane.addCell(
-				TablePane.hBox(5, okBtn=new FButton('OK'), 
-				cancelBtn=new FButton('Cancel')), TablePane.ALIGN_RIGHT, 2);
-			
-			okBtn.addActionListener(function(e:Event):void {
-				save();
-				dispose();
-			});
-			cancelBtn.addActionListener(function(e:Event):void {
-				dispose();
-			});
+			addOKCancel(pane);
 			
 			
 			checkServer();
@@ -78,10 +64,11 @@ package ro.minibuilder.main.air
 			setSizeAndCenter(600, 400);
 		}
 		
-		private function save():void
+		override protected function okClick(e:Event=null):void
 		{
 			config.data.airsdk = txt1.getText();
 			config.flush();
+			super.okClick();
 		}
 		
 		private function checkServer():void
