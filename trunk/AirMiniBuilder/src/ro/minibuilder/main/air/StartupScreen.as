@@ -171,8 +171,12 @@ package ro.minibuilder.main.air
 			pane.newRow(true);
 			pane.addCell(new JScrollPane(recentList = new JList));
 			
+			pane.addSeparatorRow();
+			
 			pane.newRow();
 			pane.addCell(btn = new JButton('Delete history'), TablePane.ALIGN_LEFT);
+			
+			
 			btn.addActionListener(function(e:Event):void {
 				var so:SharedObject = SharedObject.getLocal('recent');
 				for (var n:String in so.data) delete so.data[n];
@@ -180,13 +184,14 @@ package ro.minibuilder.main.air
 				recentList.setListData([]);
 			});
 			
-			pane.addSeparatorRow();
-			pane.addCell(btn = new FButton('Open Project'), TablePane.ALIGN_RIGHT);
-			btn.addActionListener(function(e:Event):void {
+			recentList.addSelectionListener(function(e:Event):void {
 				if (recentList.getSelectedValue())
 				{
-					main.newProjectWindow(recentList.getSelectedValue());
-					stage.nativeWindow.visible = false;
+					setTimeout(function():void {
+						main.newProjectWindow(recentList.getSelectedValue());
+						stage.nativeWindow.visible = false;
+						recentList.setSelectedIndex(-1);
+					}, 10);
 				}
 			});
 			

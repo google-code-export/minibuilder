@@ -20,6 +20,7 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import __AS3__.vec.Vector;
 	import ro.minibuilder.main.editor.Location;
 	import ro.minibuilder.main.editor.AS3Editor;
 	import ro.minibuilder.main.air.Preferences;
@@ -103,9 +104,24 @@ package ro.minibuilder.main
 		{
 			var editor:AS3Editor = win.crtEditor as AS3Editor;
 			if (!editor) return;
+			
 			var loc:Location = editor.findDefinition();
 			if (!loc) return;
+			
+			//store crt location
+			history.push(new Location(editor.filePath, editor.caretIndex));
+			
 			win.openFile(loc.path ? loc.path : editor.filePath, -1, loc.pos);
+		}
+		
+		private var history:Vector.<Location> = new Vector.<Location>;
+		
+		public function doGoBack():void
+		{
+			var editor:AS3Editor = win.crtEditor as AS3Editor;
+			if (history.length == 0 || !editor) return;
+			var loc:Location = history.pop();
+			win.openFile(loc.path, -1, loc.pos);
 		}
 		
 		public function doNativeOpen():void

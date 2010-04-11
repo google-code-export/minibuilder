@@ -129,6 +129,7 @@ package ro.minibuilder.main
 			if (unsaved.length)
 			{
 				e.preventDefault();
+				stage.nativeWindow.activate();
 				OptionPane.showMessageDialog('Unsaved files', 'The folowing files are unsaved:\n\n'+unsaved.join('\n')+
 					'\n\nDo you want to save all before closing project?',
 				function(opt:Number):void {

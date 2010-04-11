@@ -174,7 +174,12 @@ package ro.minibuilder.asparser
 		{
 			if (!type) return null;
 			//TODO do we need to be able to clear all resolved at one point?
-			//if (type.resolved) return type.resolved;
+			/*if (type.resolved)
+			{
+				var tmp:Field = type.resolved;
+				type.resolved = null;
+				return tmp;
+			}*/
 			
 			//if (type && type.imports)
 			//	debug('look for ' + type.imports.toArray()+'::'+type.type + ' DB:'+dbName);
@@ -200,8 +205,7 @@ package ro.minibuilder.asparser
 					//debug(type.type + ' resolved in ' + pack + ' DB:'+dbName);
 					var res:Field = packMap.getValue(type.type);
 					res.sourcePath = dbName;
-					debug('fld src: ' + res.sourcePath);
-					type.resolved = res;
+					debug('fld src: ' + res + '-' + res.sourcePath);
 					return res;
 				}
 			}

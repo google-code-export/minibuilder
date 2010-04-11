@@ -439,7 +439,13 @@ package ro.minibuilder.asparser
 					{
 						field.access = access;
 						access = null;
+						
 					}
+					//all interface methods are public
+					if (scope.fieldType == 'interface')
+						field.access = 'public';
+					//this is so members will have the parent set to the scope
+					field.parent = scope;
 				}
 				if (_scope && (tp.string=='class' || tp.string=='interface' || scope.fieldType=='package'))
 				{
@@ -544,6 +550,12 @@ package ro.minibuilder.asparser
 			{
 				//info += scope.parent.name + '<-' + scope.name+'\n';
 				scope = scope.parent;
+				
+				//force a ; to close the scope here. needs further testing
+				var sepT:Token = new Token(';', Token.SYMBOL, t.pos+1);
+				sepT.scope = scope;
+				sepT.parent = t.parent;
+				tokens.push(sepT);
 			}
 
 			return true;

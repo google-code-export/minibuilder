@@ -61,28 +61,16 @@ package ro.minibuilder.main
 			
 			pane.newRow(true);
 			pane.addCell(null);
-			
-			pane.addSeparatorRow();
-			
-			pane.newRow();
-			var okBtn:JButton;
-			var cancelBtn:JButton;
-			pane.addCell(TablePane.hBox(5, okBtn=new FButton('OK'), cancelBtn=new FButton('Cancel')), TablePane.ALIGN_RIGHT, 2);
+
+			addOKCancel(pane);
 			
 			setSizeAndCenter(500, 350);
 			
 			load();
-			okBtn.addActionListener(function(e:Event):void {
-				save();
-				dispose();
-			});
-			cancelBtn.addActionListener(function(e:Event):void {
-				dispose();
-			});
 		}
 		
 		
-		private function save():void
+		override protected function okClick(e:Event=null):void
 		{
 			var so:SharedObject = SharedObject.getLocal('build');
 			
@@ -95,6 +83,8 @@ package ro.minibuilder.main
 				if (cb.isSelected())
 					o[cb.getText()] = destTxt.getText();
 			so.flush();
+			
+			super.okClick();
 		}
 		
 		

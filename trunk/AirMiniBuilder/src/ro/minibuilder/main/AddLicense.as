@@ -21,8 +21,6 @@ package ro.minibuilder.main
 	
 	public class AddLicense extends Frame
 	{
-		private var cancelBtn:JButton;
-		private var okBtn:JButton;
 		private var filterTxt:JTextField;
 		private var titleTxt:JTextField;
 		private var authorTxt:JTextField;
@@ -81,24 +79,14 @@ package ro.minibuilder.main
 			textTxt.setWordWrap(true);
 			pane.addCell(new JScrollPane(textTxt), 136, 2);
 
-			pane.addSeparatorRow();
+			addOKCancel(pane, 'Procede', 'Cancel', 3);
 			
-			pane.newRow();
-			pane.addCell(TablePane.hBox(5, okBtn=new FButton('Procede'), cancelBtn=new FButton('Cancel')), 136, 3);
-			
-			pane.setBorder(new EmptyBorder(null, new Insets(10, 10, 10, 10)));
 			setContentPane(pane);
 			
 			setSizeAndCenter(550, 400);
-			
-			cancelBtn.addActionListener(function():void {
-				dispose();
-			});
-			
-			okBtn.addActionListener(procede);
 		}
 		
-		private function procede(e:Event):void
+		override protected function okClick(e:Event=null):void
 		{
 			var reg:RegExp = new RegExp(filterTxt.getText(), 'i');
 			text = textTxt.getText()
@@ -118,7 +106,7 @@ package ro.minibuilder.main
 				}
 			}
 				
-			dispose();
+			super.okClick();
 		}
 		
 		private function doCodeFile(fileName:String):void

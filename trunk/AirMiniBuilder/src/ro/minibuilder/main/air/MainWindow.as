@@ -181,6 +181,7 @@ package ro.minibuilder.main.air
 			win.height = 600;
 			win.title = 'Flash MiniBuilder - ' + new File(path).name;
 			win.visible = true;
+			win.activate();
 			win.stage.align = 'TL';
 			win.stage.scaleMode = 'noScale';
 			var ld:Loader = new Loader;

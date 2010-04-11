@@ -1,13 +1,5 @@
 TASKS
 
-
-[bug] project compatibility C:\Users\victor\workspace\ScriptArea
-[bug] hints for class instance vars (?) (only without this. and CTRL+SPACE)
-[bug] toplevel vars not recognized (cpu in cabanova)
-[bug] private class variables not hinted without this.
-[bug] some static vars not listed (?)
-
-
 - refactor AS3Editor and AssistMenu
 - add 'implements' and 'is' as triggers
 

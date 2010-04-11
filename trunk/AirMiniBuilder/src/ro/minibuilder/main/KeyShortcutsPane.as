@@ -1,5 +1,10 @@
 package ro.minibuilder.main
 {
+	import com.victordramba.console.debug;
+	import ro.minibuilder.main.air.Preferences;
+	import flash.events.Event;
+	import org.aswing.JButton;
+	import org.aswing.JTextField;
 	import org.aswing.AsWingUtils;
 	import org.aswing.Insets;
 	import org.aswing.JFrame;
@@ -21,7 +26,10 @@ package ro.minibuilder.main
 			setContentPane(pane);
 			
 			var map:Object = {};
-			var xml:XML = Constants.SHORTCUTS;
+			var xml:XML = Preferences.config.data['shortcuts'] as XML;
+			if (!xml) xml = Constants.SHORTCUTS;
+			
+			
 			for each (var n:XML in xml.key)
 			{
 				if (!map[n.@action]) map[n.@action] = [];
@@ -37,21 +45,60 @@ package ro.minibuilder.main
 			{
 				pane.newRow();
 				pane.addCell(new JLabel(StringEx.ucFirst(act)), TablePane.ALIGN_LEFT);
-				pane.addCell(new JLabel(map[act].join(', ')), TablePane.ALIGN_LEFT);
+				var txt:JTextField = new JTextField(map[act].join(', '));
+				fields.push({txt:txt, act:act});
+				pane.addCell(txt);
 			}
-			pane.newRow(true);
-			pane.addCell(null);
 			
-			pane.addSeparatorRow();
-			
+			pane.newRow();
 			var btn:FButton;
-			pane.addCell(TablePane.hBox(5, btn=new FButton('Close')), TablePane.ALIGN_RIGHT, 2);
-			btn.addActionListener(function(e:*):void {
+			pane.addCell(btn = new FButton('Reset all'), TablePane.ALIGN_RIGHT, 2);
+			btn.addActionListener(function():void {
+				delete Preferences.config.data['shortcuts'];
 				dispose();
 			});
 			
-			pane.setBorder(new EmptyBorder(null, new Insets(10, 10, 10, 10)));
-			setSizeAndCenter(550, 350);
+			pane.newRow(true);
+			pane.addCell(null);
+			
+			addOKCancel(pane, 'Save');
+			
+			setSizeAndCenter(500, 500);
+		}
+		
+		private var fields:Array = [];
+		
+		override protected function okClick(e:Event=null):void
+		{
+			var xml:XML = <keys/>;
+			for each (var o:Object in fields)
+			{
+				var txt:JTextField = o.txt;
+				var str:String = txt.getText().toLowerCase();
+				
+				for each (var part:String in str.split(/ *, */g))
+				{
+					if (part.length == 0) continue;
+					var n:XML = <key action={o.act}/>;
+					var a:Array = part.split(/ *\+ */);
+					for each(var s:String in a)
+					{
+						if ({shift:true, alt:true, ctrl:true}[s])
+							n['@' + s.toLowerCase()] = '1';
+						else
+							n.@key = s.toUpperCase();
+					}
+					
+					xml.appendChild(n);
+				}
+			}
+			XML.prettyPrinting = true;
+			debug(xml.toXMLString());
+			
+			Preferences.config.data['shortcuts'] = xml;
+			KeyBindings.resetKeys();
+			
+			dispose();
 		}
 	}
 }
