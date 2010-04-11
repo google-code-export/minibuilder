@@ -1,6 +1,6 @@
 
 1.1.1 alpha
-	- implement Goto Definition and (!)Back where you were before
+	- implement Goto Definition(F4) and Back(SHIFT+F4) where you were before
 	- configurable keyboard shortcuts
 	- added private, function, void, and others to code hinting
 	- set focus to newly open project window
