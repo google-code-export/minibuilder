@@ -1,5 +1,6 @@
 package ro.victordramba.scriptarea
 {
+	import flash.system.Capabilities;
 	import com.victordramba.console.debug;
 	
 	import flash.desktop.Clipboard;
@@ -130,7 +131,7 @@ package ro.victordramba.scriptarea
 			replaceSelection('');
 			dipatchChange();
 		}
-		private function onSelectAll(e:Event):void
+		private function onSelectAll(e:Event=null):void
 		{
 			_setSelection(0, _text.length, true);
 		}
@@ -211,6 +212,22 @@ package ro.victordramba.scriptarea
 				dipatchChange();
 				return;
 			}
+			
+			// cut, copy, paste, select all for mac
+			// on mac, when a textfield has focus, these events are not dispatched
+			// contributed by Romain fdp
+			if (e.ctrlKey && /mac os/i.test(Capabilities.os))
+			{
+				if (String.fromCharCode(e.charCode) == 'c')
+					onCopy();
+				else if (String.fromCharCode(e.charCode) == 'v')
+					onPaste();
+				else if (String.fromCharCode(e.charCode) == 'x')
+					onCut();
+				else if (String.fromCharCode(e.charCode) == 'a')
+					onSelectAll();
+			}
+			
 			
 			/*if (extChar==0 && e.charCode > 127)
 			{
