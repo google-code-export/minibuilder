@@ -142,7 +142,7 @@ package ro.minibuilder.asparser
 				{
 					//look for regexp syntax
 					lt = tokens[tokens.length-1].string;
-					if (lt=='=' || lt==',' || lt=='[' || lt=='(' || lt=='}' || lt=='{' || lt==';' || lt=='&' || lt=='|')
+					if (lt=='=' || lt==',' || lt=='[' || lt=='(' || lt=='}' || lt=='{' || lt==';' || lt=='&&' || lt=='|')
 					{
 						skipUntilWithEscNL('/');
 						while (isLetter(string.charAt(pos))) pos++;
