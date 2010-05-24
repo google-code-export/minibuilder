@@ -20,39 +20,45 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import flash.utils.setTimeout;
+	import org.aswing.JTextArea;
+	import org.aswing.JList;
+	import org.aswing.Viewportable;
+	import org.aswing.Icon;
+	import org.aswing.AsWingConstants;
+	import org.aswing.JSplitPane;
+	import org.aswing.Component;
+	import org.aswing.JScrollPane;
+	import org.aswing.EmptyLayout;
+	import org.aswing.FlowLayout;
+	import org.aswing.BorderLayout;
+	import org.aswing.Insets;
+	import org.aswing.JButton;
+	import org.aswing.JClosableTabbedPane;
+	import org.aswing.JComboBox;
+	import org.aswing.JProgressBar;
+	import org.aswing.JLabel;
+	import org.aswing.JPanel;
+	import org.aswing.JTabbedPane;
+	import org.aswing.border.EmptyBorder;
+	import org.aswing.event.TabCloseEvent;
+	import org.aswing.geom.IntDimension;
+	
 	import flash.utils.setInterval;
 	import org.aswing.ASColor;
 
-import __AS3__.vec.Vector;
-
-import flash.display.InteractiveObject;
-import flash.events.Event;
-import flash.external.ExternalInterface;
-import flash.net.SharedObject;
-
-import org.aswing.AsWingConstants;
-import org.aswing.BorderLayout;
-import org.aswing.EmptyLayout;
-import org.aswing.FlowLayout;
-import org.aswing.Icon;
-import org.aswing.Insets;
-import org.aswing.JButton;
-import org.aswing.JClosableTabbedPane;
-import org.aswing.JComboBox;
-import org.aswing.JLabel;
-import org.aswing.JPanel;
-import org.aswing.JProgressBar;
-import org.aswing.JScrollPane;
-import org.aswing.JSplitPane;
-import org.aswing.Viewportable;
-import org.aswing.border.EmptyBorder;
-import org.aswing.event.TabCloseEvent;
-import org.aswing.geom.IntDimension;
-
-import ro.mbaswing.OptionPane;
-import ro.minibuilder.main.editor.EditorMap;
-import ro.minibuilder.main.editor.IEditor;
-import ro.minibuilder.main.editor.ITextEditor;
+	import __AS3__.vec.Vector;
+	
+	import flash.display.*;
+	import flash.events.Event;
+	import flash.external.ExternalInterface;
+	import flash.net.SharedObject;
+	
+	
+	import ro.mbaswing.OptionPane;
+	import ro.minibuilder.main.editor.EditorMap;
+	import ro.minibuilder.main.editor.IEditor;
+	import ro.minibuilder.main.editor.ITextEditor;
 
 /**
  * MyPane
@@ -99,11 +105,9 @@ public class ProjectWindowPanel extends JPanel
 	public function ProjectWindowPanel()
 	{
 		//component creation
-		setSize(new IntDimension(300, 300));
-		var border0:EmptyBorder = new EmptyBorder(null, new Insets(3,3,3,3));
-		setBorder(border0);
-		var layout2:BorderLayout = new BorderLayout();
-		setLayout(layout2);
+		setSize(new IntDimension(500, 500));
+		setBorder(new EmptyBorder(null, new Insets(3,3,3,3)));
+		setLayout(new BorderLayout());
 
 		//button list
 		buttonsPane = new JPanel(new FlowLayout);
@@ -153,19 +157,38 @@ public class ProjectWindowPanel extends JPanel
 			}
 		});
 		
+		var txt:JTextArea;
+		var under:String = 'Under construction :D\n\nBut, come on, why don\'t YOU do it? ' +
+			'Piece of cake, it\'s Actionscript!';
+			
+		//bottom tabs
+		var bTabs:JTabbedPane = new JTabbedPane;
+		bTabs.appendTab(new JScrollPane(msgList = new MessagesList), 'Compiler Messages');
+		bTabs.appendTab(txt = new JTextArea, 'Reference');
+		txt.setText(under);
+		txt.setWordWrap(true);
+		
+		
 		var split1:JSplitPane = new JSplitPane(AsWingConstants.VERTICAL, true, 
 			tabs,
-			new JScrollPane(msgList = new MessagesList));
+			bTabs);
 		split1.setResizeWeight(1);
-		split1.setDividerLocation(-50);
+		split1.setDividerLocation(-100);
 		
-		var split:JSplitPane = new JSplitPane(AsWingConstants.HORIZONTAL, true, new JScrollPane(_tree = new MBTree), split1);
+		var lTabs:JTabbedPane = new JTabbedPane;
+		lTabs.appendTab(new JScrollPane(_tree = new MBTree), 'Project', Skins.icnAS());
+		lTabs.appendTab(txt = new JTextArea, 'Outline');
+		txt.setText(under);
+		txt.setWordWrap(true);
+		
+		var split:JSplitPane = new JSplitPane(AsWingConstants.HORIZONTAL, true, lTabs, split1);
+			
 		_tree.setMinimumWidth(150);
 		split.setResizeWeight(0);
 		split.setDividerLocation(200);
 		append(split);
 		
-		setInterval(updateChangedMarkers, 500);
+		setInterval(updateChangedMarkers, 500);		
 	}
 	
 	//compiler error markers

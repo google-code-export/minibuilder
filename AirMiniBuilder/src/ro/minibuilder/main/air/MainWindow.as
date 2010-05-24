@@ -76,7 +76,7 @@ package ro.minibuilder.main.air
 			stage.scaleMode = 'noScale';
 			
 			//associate files
-			NativeApplication.nativeApplication.setAsDefaultApplication('actionScriptProperties');
+			NativeApplication.nativeApplication.setAsDefaultApplication('mbproject');
 			//prepare startup
 			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvoke);
 			
@@ -177,13 +177,24 @@ package ro.minibuilder.main.air
 			}
 			
 			var win:NativeWindow = new NativeWindow(new NativeWindowInitOptions());
-			win.width = 900;
-			win.height = 600;
+			
+			//remebered size
+			if (!Preferences.config.data.winSize) Preferences.config.data.winSize = {};
+			if (!Preferences.config.data.winSize[path]) Preferences.config.data.winSize[path] = {w:900, h:600};
+			win.width = Preferences.config.data.winSize[path].w;
+			win.height = Preferences.config.data.winSize[path].h;
+			
 			win.title = 'Flash MiniBuilder - ' + new File(path).name;
 			win.visible = true;
 			win.activate();
 			win.stage.align = 'TL';
 			win.stage.scaleMode = 'noScale';
+			
+			//remember size
+			win.addEventListener(Event.RESIZE, function(e:Event):void {
+				Preferences.config.data.winSize[path] = {w:win.width, h:win.height};
+			});
+			
 			var ld:Loader = new Loader;
 			
 			win.addEventListener(Event.CLOSE, function(e:Event):void {

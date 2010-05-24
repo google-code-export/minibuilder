@@ -31,11 +31,8 @@ package ro.minibuilder.asparser
 			this.type = type;
 		}
 		
-		//public var resolved:Field;
 		public var imports:HashMap;
 		public var type:String;
-		
-		//public var resolved:Field;
 		
 		public function toString():String
 		{

@@ -18,13 +18,6 @@ Author: Victor Dramba
 2009
 */
 
-/*
- * @Author Dramba Victor
- * 2009
- * 
- * You may use this code any way you like, but please keep this notice in
- * The code is provided "as is" without warranty of any kind.
- */
 
 package ro.minibuilder.asparser
 {
@@ -62,7 +55,7 @@ package ro.minibuilder.asparser
 		public var scope:Field;//lexical scope
 		public var imports:HashMap;//used to solve names and types
 
-		public static var map:Dictionary = new Dictionary(true);
+		public static const map:Dictionary = new Dictionary(true);
 
 		static private var count:Number = 0;
 

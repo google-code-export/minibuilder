@@ -1,3 +1,8 @@
+1.1.2
+	- cut/copy/paste/select all for mac os
+	- other changes
+	- UI preparation for features to come (outline, context reference)
+	- other minor fixes
 
 1.1.1 alpha
 	- implement Goto Definition(F4) and Back(SHIFT+F4) where you were before
