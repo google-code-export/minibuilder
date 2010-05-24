@@ -20,6 +20,8 @@ Author: Victor Dramba
 
 package ro.minibuilder.main
 {
+	import flash.display.StageScaleMode;
+	import flash.display.Shape;
 	import __AS3__.vec.Vector;
 	import com.victordramba.console.*;
 	
@@ -89,11 +91,20 @@ package ro.minibuilder.main
 		
 		public function start(projectPath:String):void
 		{
+			//workaround for the stage size bug
+			stage.scaleMode = StageScaleMode.EXACT_FIT;
+			visible = false;
+			setTimeout(function():void {
+				stage.scaleMode = StageScaleMode.NO_SCALE;
+				visible = true;
+			}, 1000);
+			
 			Debugger.setParent(this, Capabilities.isDebugger);
 			debugReference('win', this);
 			KeyBindings.init(stage);
 			
 			UIManager.setLookAndFeel(new OrangeLookAndFeel);
+			//UIManager.setLookAndFeel(new PPZhaoLAF);
 
 			panel = new ProjectWindowPanel;
 			setContentPane(panel);

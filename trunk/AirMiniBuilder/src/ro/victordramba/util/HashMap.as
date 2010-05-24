@@ -20,29 +20,23 @@ Author: Victor Dramba
 
 package ro.victordramba.util
 {
-	
-	
-
 	public class HashMap
 	{
-		private static const o:Object = {};
 		private var data:Object = {};
-		private var data2:Object = {};
 		
 		public function setValue(key:String, value:*):void
 		{
-			if (key in o) data2['_'+key] = value;
-			else data[key] = value;
+			data['$' + key] = value;
 		}
 
 		public function getValue(key:String):*
 		{
-			return (key in o) ? data2['_'+key] : data[key];
+			return data['$' + key];
 		}
 
 		public function hasKey(key:String):Boolean
 		{
-			return (key in o) ? (('_'+key) in data2) : (key in data);
+			return ('$' + key) in data;
 		}
 
 		public function toArray():Array
@@ -50,8 +44,6 @@ package ro.victordramba.util
 			var a:Array = [];
 			var item:*;
 			for each (item in data)
-				a.push(item);
-			for each (item in data2)
 				a.push(item);
 			return a;
 		}
@@ -61,9 +53,7 @@ package ro.victordramba.util
 			var a:Array = [];
 			var item:String;
 			for (item in data)
-				a.push(item);
-			for (item in data2)
-				a.push(item);
+				a.push(item.substr(1));
 			return a;
 		}
 		

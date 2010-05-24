@@ -18,13 +18,6 @@ Author: Victor Dramba
 2009
 */
 
-/*
- * @Author Dramba Victor
- * 2009
- * 
- * You may use this code any way you like, but please keep this notice in
- * The code is provided "as is" without warranty of any kind.
- */
 
 package ro.minibuilder.asparser
 {
@@ -228,7 +221,7 @@ package ro.minibuilder.asparser
 		}*/
 		
 		
-		public function get ser():Array
+		/*public function get ser():Array
 		{
 			//debug('ser...');
 			
@@ -285,12 +278,12 @@ package ro.minibuilder.asparser
 			}
 			
 			return [list, tList];			
-		}
+		}*/
 		
 		static private var fieldLst:Array = ('pos,fieldType,name,access,' + 
 				'hasRestParams,isGetter,defaultValue,isStatic').split(',');
 		
-		public function set ser(arr:Array):void
+		/*public function set ser(arr:Array):void
 		{
 			var list:Array = arr[0];
 			var tList:Array = arr[1];
@@ -341,7 +334,7 @@ package ro.minibuilder.asparser
 			{
 				addDefinition(pair[0], deserFld(pair[1]));
 			}
-		}
+		}*/
 		
 		public function toByteArray():ByteArray
 		{
