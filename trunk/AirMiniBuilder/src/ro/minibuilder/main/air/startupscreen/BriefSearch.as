@@ -8,6 +8,7 @@ package ro.minibuilder.main.air.startupscreen
 	import flash.filesystem.File;
 	import flash.ui.Keyboard;
 	import flash.utils.setTimeout;
+	import flash.net.SharedObject;
 	
 	import org.aswing.Insets;
 	import org.aswing.JButton;
@@ -100,7 +101,12 @@ package ro.minibuilder.main.air.startupscreen
 			if (briefListData) return;
 			briefListData = [];
 			briefQueue = [];
+			var so:SharedObject = SharedObject.getLocal('newproject');
 			briefQueue.push({dir:File.userDirectory, depth:3});
+			//Added search to the saved path
+			if (so.data.path) {
+				briefQueue.push({dir:new File(so.data.path), depth:3});
+			}
 			recSearch();
 		}
 		
@@ -119,9 +125,12 @@ package ro.minibuilder.main.air.startupscreen
 			
 			if (dir.resolvePath('.actionScriptProperties').exists)
 			{
-				if (filter(dir.nativePath))
-					(briefList.getModel() as MutableListModel).insertElementAt(dir.nativePath, 0);
-				briefListData.push(dir.nativePath);
+				//If the path is not already in cache
+				if (briefListData.lastIndexOf(dir.nativePath) == -1) {
+					if (filter(dir.nativePath))
+						(briefList.getModel() as MutableListModel).insertElementAt(dir.nativePath, 0);
+					briefListData.push(dir.nativePath);
+				}
 			}
 			
 			//debug('search '+dir.nativePath);
