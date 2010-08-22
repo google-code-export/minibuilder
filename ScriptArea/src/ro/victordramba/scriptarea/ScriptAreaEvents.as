@@ -42,9 +42,19 @@ package ro.victordramba.scriptarea
 			
 			inputTF = new TextField;
 			inputTF.type = TextFieldType.INPUT;
+			inputTF.name = 'inputTF';
 			inputTF.addEventListener(TextEvent.TEXT_INPUT, onInputText);
+			
+			//beginning with air 10,1,82,73 a textfield that is not attached does not dispatch changes
+			//fix issue 21
+			addChild(inputTF);
+			inputTF.visible = false;
+			//inputTF.border = true;
+			
+			
 			var me:ScriptAreaEvents = this;
 			inputTF.addEventListener(KeyboardEvent.KEY_UP, function(e:KeyboardEvent):void {
+				debug('key up: '+stage.focus.name);
 				if (stage) stage.focus = me;
 			});
 			
@@ -491,7 +501,10 @@ package ro.victordramba.scriptarea
 		private function captureInput():void
 		{
 			if (stage && stage.focus == this)
+			{
 				stage.focus = inputTF;
+				debug('capture:'+(stage.focus == inputTF));
+			}
 		}
 		
 		private function onInputText(e:TextEvent):void
@@ -503,7 +516,8 @@ package ro.victordramba.scriptarea
 			checkScrollToCursor();
 			e.preventDefault();
 			if (stage) stage.focus = this;
-			dipatchChange();				
+			dipatchChange();
+			debug('input text');				
 		}
 		
 		private function saveLastCol():void

@@ -49,10 +49,6 @@ package ro.minibuilder.main.editor
 			area = new ScriptAreaEvents;
 			addChild(area);
 			
-			addEventListener(FocusEvent.FOCUS_IN, function(e:FocusEvent):void {
-				stage.focus = area;
-			});
-			
 			addEventListener(FocusEvent.KEY_FOCUS_CHANGE, function(e:Event):void {
 				e.preventDefault();
 			});

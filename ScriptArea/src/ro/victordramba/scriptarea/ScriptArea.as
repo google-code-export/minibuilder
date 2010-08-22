@@ -443,8 +443,9 @@ package ro.victordramba.scriptarea
 			var c:String;
 			for (var i:int=pos; i<_text.length && (c=_text.charAt(i))!=NL; i++)
 			{
-				cx += (c=='\t' ? 4 : 1)*boxWidth;
-				if (cx > p.x) break;
+				var isTab:Boolean = c == '\t';
+				cx += (isTab ? 4 : 1)*boxWidth;
+				if (cx > p.x + (isTab ? boxWidth*2 : boxWidth/2)) break;
 			}
 			
 			return i;
