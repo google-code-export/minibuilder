@@ -54,7 +54,7 @@ package ro.victordramba.scriptarea
 			
 			var me:ScriptAreaEvents = this;
 			inputTF.addEventListener(KeyboardEvent.KEY_UP, function(e:KeyboardEvent):void {
-				debug('key up: '+stage.focus.name);
+				//debug('key up: '+stage.focus.name);
 				if (stage) stage.focus = me;
 			});
 			
@@ -503,7 +503,7 @@ package ro.victordramba.scriptarea
 			if (stage && stage.focus == this)
 			{
 				stage.focus = inputTF;
-				debug('capture:'+(stage.focus == inputTF));
+				//debug('capture:'+(stage.focus == inputTF));
 			}
 		}
 		
@@ -517,7 +517,7 @@ package ro.victordramba.scriptarea
 			e.preventDefault();
 			if (stage) stage.focus = this;
 			dipatchChange();
-			debug('input text');				
+			//debug('input text');				
 		}
 		
 		private function saveLastCol():void
