@@ -1,4 +1,6 @@
 package {
+	import com.victordramba.console.debug;
+	import flash.system.Capabilities;
 	
 	import com.victordramba.console.Debugger;
 	
@@ -15,7 +17,9 @@ package {
 			stage.align = 'TL';
 			stage.scaleMode = 'noScale';
 			
-			Debugger.setParent(stage);
+			Debugger.setParent(stage, true);
+			
+			//stage.nativeWindow.visible = true;
 			
 			var ta:ScriptAreaEvents = new ScriptAreaEvents;
 			ta.x = 20;
@@ -38,6 +42,11 @@ package {
 			ta.addFormatRun(30, 40, true, true, '00ff00');
 			ta.addFormatRun(70, 1000, true, false, '0000ff');
 			ta.applyFormatRuns();
+			
+			
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, function(e:Event):void {
+				debug('down '+stage.focus.name);
+			});
 		}
 	}
 }
