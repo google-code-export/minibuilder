@@ -182,6 +182,7 @@ package ro.minibuilder.main.editor
 		{
 			setTimeout(function():void {
 				stage.focus = fld;
+				//fld.setFocus();
 				//???
 				FocusManager.getManager(stage).setFocusOwner(fld);
 			}, 1);

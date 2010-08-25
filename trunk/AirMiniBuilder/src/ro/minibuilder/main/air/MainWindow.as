@@ -49,6 +49,7 @@ package ro.minibuilder.main.air
 	import flash.system.LoaderContext;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
+	import flash.desktop.*;
 	
 	import org.aswing.*;
 	import org.aswing.tree.*;
@@ -71,6 +72,9 @@ package ro.minibuilder.main.air
 		{
 			if (!stage) return;
 			Debugger.setParent(stage, Capabilities.isDebugger);
+			
+			//var npsi:NativeProcessStartupInfo = new NativeProcessStartupInfo();
+			//debug(npsi);
 			
 			stage.align = 'TL';
 			stage.scaleMode = 'noScale';

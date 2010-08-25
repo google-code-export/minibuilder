@@ -43,6 +43,7 @@ package ro.minibuilder.main.editor
 				'js' : TextEditor,
 				'php' : TextEditor,
 				'sh' : TextEditor,
+				'tpl' : TextEditor,
 				'png' : ImageEditor,
 				'gif' : ImageEditor,
 				'jpg' : ImageEditor
