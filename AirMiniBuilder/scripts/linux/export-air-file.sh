@@ -20,3 +20,8 @@ $SDK/bin/adt -package \
 	*-app.xml \
 	.
 
+echo "package deb installer"
+#package native
+$SDK/bin/adt -package -target native \
+	../release/AirMiniBuilder.deb \
+	../release/AirMiniBuilder.air

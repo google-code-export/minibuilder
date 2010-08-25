@@ -163,13 +163,22 @@ package ro.minibuilder.main
 			stage.nativeWindow.title = 'MiniBuilder - ' + (crtEditor ? (project.path + crtEditor.filePath) : '');
 		}
 		
-		
 		public function compile(onReady:Function=null):void
 		{
 			var unsaved:Vector.<String> = panel.listUnsaved();
 			if (unsaved.length)
 			{
-				OptionPane.showMessageDialog('Unsaved', 'The folowing files are not saved:\n\n'+unsaved.join('\n'));
+				OptionPane.showMessageDialog('Unsaved files', 
+					'The folowing files are not saved:\n'+unsaved.join('\n')+'\n'+
+					'Save all and continue?',
+					function(res:int):void {
+						if (res & OptionPane.OK)
+						{
+							ActionManager.inst.doSaveAll();
+							compile(onReady);
+						}
+					}, null, true, null, OptionPane.OK | OptionPane.CANCEL
+				);
 				return;
 			}
 			

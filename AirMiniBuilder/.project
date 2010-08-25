@@ -27,11 +27,5 @@
 		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>[source path] src</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/ScriptArea/src</locationURI>
-		</link>
-	</linkedResources>
+	<linkedResources/>
 </projectDescription>
