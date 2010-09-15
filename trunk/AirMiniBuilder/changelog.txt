@@ -2,6 +2,7 @@
 	- fix editor for linux version with new AIR runtime (10.1.82)
 	- deb native installer for debian linux
 	- save all option on compile
+	- have the brief search use the new project's path as another source for projects. (issue 19)
 
 1.1.2
 	- cut/copy/paste/select all for mac os
