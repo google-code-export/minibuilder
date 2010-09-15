@@ -238,5 +238,15 @@ package ro.minibuilder.main
 		{
 			navigateToURL(new URLRequest('http://code.google.com/p/minibuilder/wiki/Contents'));
 		}
+		
+		
+		static private var libSearch:LibrarySearch;
+		public function doLibrarySearch():void
+		{
+			if (!libSearch)
+				libSearch = new LibrarySearch;
+			libSearch.setModal(true);
+			libSearch.show();
+		}
 	}
 }

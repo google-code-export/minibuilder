@@ -35,7 +35,10 @@ package ro.minibuilder.data
 				<n separator="yes"/>
 				<n label="Close Project" action="closeProject"/>
 			</n>
-			<n label="Compile">
+			<n label="Project">
+				<n label="Libraries">
+					<n label="Search for a library" action="librarySearch"/>
+				</n>
 				<n label="Deploy files" action="deploySettings"/>
 				<n separator="yes"/>
 				<n label="Compile" action="compile"/>
