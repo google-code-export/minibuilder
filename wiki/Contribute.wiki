@@ -4,10 +4,8 @@ Don't ask, you can help. That's for sure. Start by posting at least a comment on
 
 Skill is not always the most precious asset, creativity, desire to help other people or just to share your work will sometimes be more productive.
 
-I started this project in !ActionScript especially because it's an easy language, you can do so much with so little effort. Now the core of the IDE is ready. Sip down the [http://code.google.com/p/minibuilder/source/browse/ sources] and compile them with your favorite other IDE or with !MiniBuilder itself. It's easy, I'll be delighted to help you with the setup. Then come up with YOUR plan. If I'll find it cool, it will become part of !MiniBuilder. (If not, you're free to create your own branch/fork, whatever. This software is GPL licensed, so you'll also have to publish your changed sources in case you want to make your version public.)
+I started this project in !ActionScript especially because it's an easy language, you can do so much with so little effort. Now the core of the IDE is ready. Sip down the [http://code.google.com/p/minibuilder/source/browse/ sources] and compile them with your favorite other IDE or with !MiniBuilder itself. It's easy, I'll be delighted to help you with the setup. Then come up with YOUR plan. If I'll find it cool, it will become part of !MiniBuilder. (If not, you're free to create your own modification, branch, fork, whatever. This software is free and GPL licensed, so you'll also have to publish your changed sources in case you want to make your version public.)
 
 All contributions will be really appreciated! Be it UI, skin, architecture, anything you find fit. Some people like to have TV screens on the washing machine. Frankly, I'm not that inventive, but maybe you are.
-
-!MiniBuilder will be in 2 versions, desktop and web. Very soon, there will be several server-side !ActionScript solutions available on the market, some of them free. Using just the web-based !MiniBuilder and your AS3 skills, you will be able to create even complex web-apps in no time, right in your browser. Or in AIR if you prefer.
 
 Future is open. Be a part of it!
