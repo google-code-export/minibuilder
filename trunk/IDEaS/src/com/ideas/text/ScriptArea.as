@@ -50,6 +50,10 @@ package com.ideas.text {
 			}
 			return str;
 		}
+		public function checkCaretFocus():void{
+			//trace("checkCaretFocus",this.scrollV,this.getLineOffset(this.scrollV),this.caretIndex,this.getLineIndexOfChar(this.caretIndex-1));
+			this.scrollV=this.getLineIndexOfChar(this.caretIndex-1);
+		}
 		public function get percent():Number {
 			return _percent;
 		}
@@ -70,8 +74,10 @@ package com.ideas.text {
 			}
 		}
 		private function onFocusIn(e:FocusEvent):void {
+			_killKeyboardManually = false;
 		}
 		private function onFocusOut(e:FocusEvent):void {
+			trace("focus out",_killKeyboardManually);
 			if (_killKeyboardManually) {
 				_killKeyboardManually = false;
 				return;

@@ -190,6 +190,7 @@ package com.ideas.gui {
 			codeLoader.load(new URLRequest(CODE_URL.split("<codeid>").join(_codeId).split("<api_key>").join(WONDERFL_KEY)));
 		}
 		private function onRemove(e:Event):void {
+			this.forceKeyboardClose();
 			this.scrollerContainer.clearContainer();
 			removeChild(scrollerContainer);
 		}

@@ -65,6 +65,7 @@ package com.ideas.gui {
 		}
 		private function onKeyboardActivate(event:SoftKeyboardEvent):void {
 			this.dispatchEvent(new Event(KEYBOARD_EVENT));
+			writeTextField.checkCaretFocus();
 		}
 		public function setNew():void {
 			if (codeString.split("\t").join("").split("\n").join("").split(" ").join("") != writeTextField.text.split("\t").join("").split("\n").join("").split("\r").join("").split(" ").join("")) {
