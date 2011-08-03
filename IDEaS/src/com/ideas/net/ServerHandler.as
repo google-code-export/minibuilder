@@ -2,7 +2,6 @@ package com.ideas.net {
 	import com.ideas.data.DataHolder;
 	import com.ideas.data.Resources;
 	import com.ideas.gui.buttons.GeneralButton;
-	
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.display.StageDisplayState;
@@ -21,7 +20,6 @@ package com.ideas.net {
 	import flash.net.URLVariables;
 	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
-
 	public class ServerHandler extends EventDispatcher {
 		//public static const LANG_REF:String="http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/all-classes.html";
 		public static const LANG_REF:String = "http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/"
@@ -41,6 +39,7 @@ package com.ideas.net {
 		private var id:String;
 		private var fileName:String;
 		private var _message:String;
+		private var _pause:Boolean;
 		private var _compile:Boolean;
 		private var _inPlayer:Boolean;
 		private var _inWeb:Boolean;
@@ -66,6 +65,12 @@ package com.ideas.net {
 			welcomeLdr.addEventListener(Event.COMPLETE, onCompleteWelcomeTest);
 			welcomeLdr.addEventListener(IOErrorEvent.IO_ERROR, onErrorWelcomeTest);
 			doCheckWelcome();
+		}
+		public function get pause():Boolean {
+			return _pause;
+		}
+		public function set pause(value:Boolean):void {
+			_pause = value;
 		}
 		public function get compile():Boolean {
 			return _compile;
@@ -97,7 +102,7 @@ package com.ideas.net {
 			setTimeout(doCheckWelcome, 5 * 60 * 1000);
 		}
 		private function doCheckWelcome():void {
-			if (_inPlayer) {
+			if (_inPlayer || _pause) {
 				onErrorWelcomeTest();
 				return;
 			}
@@ -125,7 +130,7 @@ package com.ideas.net {
 			}
 			_codeLoading = true;
 			fileName = file;
-			trace("get init:"+getTimer());
+			trace("get init:" + getTimer());
 			var variables:URLVariables = new URLVariables();
 			var req:URLRequest = new URLRequest(WRITE_URL);
 			variables.code = code;
@@ -143,7 +148,7 @@ package com.ideas.net {
 			codeLdr.load(req);
 		}
 		private function onLoadDone(e:Event):void {
-			trace("get done:"+getTimer());
+			trace("get done:" + getTimer());
 			_codeLoading = false;
 			XML.ignoreWhitespace = true;
 			var xml:XML = new XML(e.target.data);
@@ -218,7 +223,6 @@ package com.ideas.net {
 			if (webView) {
 				webView.viewPort = new Rectangle(OFFSET, OFFSET, _stageReference.stageWidth - OFFSET * 2, _height);
 			}
-			
 			stageBgCover.graphics.clear();
 			stageBgCover.graphics.beginFill(0x0, 0.1);
 			stageBgCover.graphics.drawRect(0, 0, _stageReference.stageWidth, _stageReference.stageHeight);
@@ -292,7 +296,7 @@ package com.ideas.net {
 				} catch (e:*) {
 				}
 			}
-			if ( this._inWeb && this.webView) {
+			if (this._inWeb && this.webView) {
 				this.webView.viewPort = new Rectangle(5, 5, 100, 100);
 				stageBgCover.graphics.clear();
 				setTimeout(delayedLaunch, 100);

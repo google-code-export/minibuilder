@@ -38,15 +38,22 @@ package ro.minibuilder.asparser {
 
 	[Event(type = "flash.events.Event", name = "change")]
 	public class Controller extends EventDispatcher {
-		[Embed(source = "../../../assets/playerglobal.swc", mimeType = "application/octet-stream")] //working
+		[Embed(source = "../../../assets/playerglobal_4.0_10.1.swc", mimeType = "application/octet-stream")] //most updated working version (playerglobal_4.0_10.1.swc)
 		private static var PlayerglobalAsset:Class;
 		//
-		[Embed(source = "../../../assets/textLayout.swc", mimeType = "application/octet-stream")] //working
-		private static var TextLayoutAsset:Class;
+		
+		//[Embed(source = "../../../assets/textLayout.swc", mimeType = "application/octet-stream")] //working
+		//private static var TextLayoutAsset:Class;
 		//
 		//[Embed(source = "../../../assets/Away3D-3.6.0-FlashPlayer10.swc", mimeType = "application/octet-stream")] //working
 		//private static var Away3DAsset:Class;
 		//
+		//[Embed(source = "../../../assets/Box2D_2_1a.swc", mimeType = "application/octet-stream")] //working
+		//private static var Box2D_2_1a:Class;
+		//
+		//[Embed(source = "../../../assets/Alternativa3D.swc", mimeType = "application/octet-stream")] 
+		//private static var Alternativa3D:Class;
+		
 		private var parser:Parser;
 		private var t0:Number;
 		static private var tc:ThreadsController;
@@ -66,8 +73,12 @@ package ro.minibuilder.asparser {
 				TypeDB.setDB('playerglobal', db);
 				//db = SWCParser.parse(new Away3DAsset);
 				//TypeDB.setDB('away', db);
-				db = SWCParser.parse(new TextLayoutAsset);
-				TypeDB.setDB('textLayout', db);
+				//db = SWCParser.parse(new TextLayoutAsset);
+				//TypeDB.setDB('textLayout', db);
+				//db = SWCParser.parse(new Box2D_2_1a);
+				//TypeDB.setDB('Box2D_2_1a', db);
+				//db = SWCParser.parse(new Alternativa3D);
+				//TypeDB.setDB('Alternativa3D', db);
 			}
 			parser = new Parser;
 			tc.addEventListener(ThreadEvent.THREAD_READY, function(e:ThreadEvent):void {

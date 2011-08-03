@@ -32,7 +32,8 @@ package com.ideas.data {
 		public static const RECENT_LIMIT:uint = 10;
 		private static var _mainFont:Font;
 		public static const STAGE_OPTIONS:Array = [{ label: "« Exact Fit »", value: "exactfit" }, { label: "« Show All »", value: "showall" }, { label: "« No Border »", value: "noborder" }, { label: "« No Scale »", value: "noscale" }];
-		public static const DEFAULT_CODE:String = "package {\n\timport flash.display.Sprite;\n\tpublic class Main extends Sprite{\n\t\tpublic function Main(){\n\t\t\t// begin coding here\n\t\t}\n\t}\n}";
+		//public static const DEFAULT_CODE:String = "package {\n\timport flash.display.Sprite;\n\tpublic class Main extends Sprite{\n\t\tpublic function Main(){\n\t\t\t// begin coding here\n\t\t}\n\t}\n}";
+		public static const DEFAULT_CODE:String = "package {\n\timport flash.display.*;\n\tpublic class Main extends Sprite{\n\t\tpublic function Main(){\n\t\t\tvar b:Bitmap=new Bitmap();\n\t\tb\n\t\t}\n\t}\n}";
 		public static function set recentFiles(value:Array):void {
 			_recentFiles = value;
 			if (_recentFiles.length > RECENT_LIMIT) {

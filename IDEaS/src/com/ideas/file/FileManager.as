@@ -129,6 +129,7 @@
 			return writed;
 		}
 		private function onRemove(e:Event):void {
+			this.forceKeyboardClose();
 			this.scrollerContainer.clearContainer();
 			removeChild(scrollerContainer);
 		}

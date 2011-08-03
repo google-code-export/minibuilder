@@ -15,20 +15,25 @@ package {
 	import com.ideas.gui.WonderflScreen;
 	import com.ideas.local.SettingsController;
 	import com.ideas.net.ServerHandler;
+	import com.ideas.utils.Stats;
+	
 	import flash.desktop.NativeApplication;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
+	import flash.events.InvokeEvent;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Rectangle;
 	import flash.system.Capabilities;
 	import flash.text.Font;
 	import flash.ui.Keyboard;
 	import flash.utils.setTimeout;
+	
 	import jp.psyark.utils.CodeUtil;
-	[SWF(width = "520", height = "660", frameRate = "24", backgroundColor = "#eeeeee")]
+
+	[SWF(width = "520", height = "660", frameRate = "60", backgroundColor = "#eeeeee")]
 	public class IDEaS extends Sprite {
 		private var mainScreen:MainScreen
 		private var menu:MenuScreen = new MenuScreen();
@@ -114,11 +119,19 @@ package {
 			this.stage.stageFocusRect = false;
 			if (Capabilities.cpuArchitecture == "ARM") {
 				NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys);
+				NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE,onActivate);
+				NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE,onDeactivate);
 			} else if (Capabilities.cpuArchitecture == "x86") {
 				this.stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeysDebug);
 			}
 			this.settingsCtrl.initUserData();
 			onSettingsSaved(null);
+		}
+		private function onActivate(e:Event):void {
+			serverHandler.pause=false;
+		}
+		private function onDeactivate(e:Event):void {
+			serverHandler.pause=true;
 		}
 		private function onWelcomeDone(e:Event):void {
 			serverLife.status = ServerLifeIndicator.CONFIRM;

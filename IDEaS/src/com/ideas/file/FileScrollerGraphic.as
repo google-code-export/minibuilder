@@ -26,24 +26,30 @@ package com.ideas.file {
 				return;
 			}
 			txt.text = value.title; //(is_parent ? "../" : _file.name);
-			if(icon && icon.parent){
+			if(icon && icon.parent==this){
 				this.removeChild(icon);
 			}
-			if (value.isDirectory) {
-				icon = new Resources.FolderIcon()
-			} else {
-				if (value.extension == "txt") {
-					icon = new Resources.NoteIcon()
-				} else if (value.extension == "as") {
-					icon = new Resources.ActionScriptIcon()
-				} else if (value.extension == "swf") {
-					icon = new Resources.SwfIcon()
+			if(!value.icon){
+				if (value.isDirectory) {
+					icon = new Resources.FolderIcon()
 				} else {
-					icon = new Resources.DocumentBlankIcon()
+					if (value.extension == "txt") {
+						icon = new Resources.NoteIcon()
+					} else if (value.extension == "as") {
+						icon = new Resources.ActionScriptIcon()
+					} else if (value.extension == "swf") {
+						icon = new Resources.SwfIcon()
+					} else {
+						icon = new Resources.DocumentBlankIcon()
+					}
 				}
-			}
-			if (value.is_parent) {
-				icon = new Resources.FolderParentIcon();
+				if (value.is_parent) {
+					icon = new Resources.FolderParentIcon();
+				}
+			
+				value.icon=icon;
+			}else{
+				icon=value.icon;
 			}
 			icon.width = icon.height = ICON;
 			icon.x = icon.y = (HEIGHT - ICON) / 2;
