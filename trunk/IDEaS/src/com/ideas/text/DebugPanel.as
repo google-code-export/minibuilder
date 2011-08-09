@@ -3,9 +3,15 @@ package com.ideas.text {
 	import flash.events.MouseEvent;
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
+	import flash.utils.getTimer;
 	public class DebugPanel extends TextField {
-		private var _debugExtended:Boolean = false;
-		public static const DEBUG_RESIZE:String = "debug_resize";
+		public static const INIT_SCROLLING:String = "init_scrolling";
+		private var scrollDiffernce:Number = 0;
+		private var _scrollV:Number = 0;
+		private var mouseDown:Boolean;
+		private var scrollDelta:int = 0;
+		private var _percent:Number = 0;
+		private var scrollTimerDelta:int = 0;
 		public function DebugPanel() {
 			this.border = true;
 			this.selectable = false;
@@ -13,34 +19,46 @@ package com.ideas.text {
 			this.multiline = true;
 			this.background = true;
 			this.backgroundColor = 0xcccccc;
-			this.addEventListener(MouseEvent.MOUSE_DOWN, onMessageDown);
+			this.addEventListener(Event.SCROLL, scrollHandler);
+			this.addEventListener(MouseEvent.MOUSE_UP, onWriteTextUp);
+			this.addEventListener(MouseEvent.MOUSE_DOWN, onWriteTextDown);
 		}
-		public function getDebugOffset():int {
-			return int(_debugExtended) * 200;
+		private function onWriteTextDown(e:MouseEvent):void {
+			scrollDiffernce = 0;
+			mouseDown = true;
+			this.removeEventListener(Event.ENTER_FRAME, onKineticScroll);
 		}
-		private function onMessageDown(e:Event):void {
-			if (!_debugExtended) {
-				_debugExtended = true;
-				this.dispatchEvent(new Event(DEBUG_RESIZE));
-				return;
+		private function onWriteTextUp(e:MouseEvent):void {
+			mouseDown = false;
+			if (Math.abs(scrollDiffernce) > 0) {
+				_scrollV = this.scrollV;
+				this.addEventListener(Event.ENTER_FRAME, onKineticScroll);
 			}
-			highlightError(false);
-			if (this.scrollV >= this.maxScrollV) {
-				this.scrollV = -1;
-				if (_debugExtended) {
-					_debugExtended = false;
-					this.dispatchEvent(new Event(DEBUG_RESIZE));
+		}
+		private function onKineticScroll(e:Event):void {
+			scrollDiffernce *= 0.95;
+			_scrollV -= scrollDiffernce / 2;
+			this.scrollV = _scrollV
+			var scrollIndex:int = this.getLineOffset(this.scrollV)
+			this.setSelection(scrollIndex, scrollIndex);
+			if (Math.abs(scrollDiffernce) <= 0.1) {
+				scrollDiffernce = 0;
+				this.removeEventListener(Event.ENTER_FRAME, onKineticScroll);
+			}
+		}
+		private function scrollHandler(e:Event):void {
+			if (mouseDown) {
+				var dif:Number = scrollDelta - this.scrollV;
+				if (getTimer() - scrollTimerDelta < 40) { 
+					scrollDiffernce += dif
+				} else {
+					scrollDiffernce = 0;
 				}
-			} else {
-				this.scrollV++;
+				scrollTimerDelta = getTimer();
+				scrollDelta = this.scrollV
 			}
-		}
-		public function highlightError(value:Boolean = true):void {
-			if (value) {
-				this.filters = [ new GlowFilter(0xff0000, 1, 8, 8, 1, 3, true), new GlowFilter()]
-			} else {
-				this.filters = [];
-			}
+			_percent = (this.scrollV - 1) / (this.maxScrollV - 1);
+			this.dispatchEvent(new Event(INIT_SCROLLING));
 		}
 	}
 }

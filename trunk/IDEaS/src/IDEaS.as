@@ -13,8 +13,10 @@ package {
 	import com.ideas.gui.SettingsScreen;
 	import com.ideas.gui.ToastNotification;
 	import com.ideas.gui.WonderflScreen;
+	import com.ideas.gui.ConsoleScreen;
 	import com.ideas.local.SettingsController;
 	import com.ideas.net.ServerHandler;
+	import com.ideas.utils.DebugAnalyzer;
 	import com.ideas.utils.Stats;
 	
 	import flash.desktop.NativeApplication;
@@ -51,6 +53,7 @@ package {
 		private var wflScreen:WonderflScreen = new WonderflScreen();
 		private var serverLife:ServerLifeIndicator = new ServerLifeIndicator();
 		private var recentFilesScreen:RecentFilesScreen = new RecentFilesScreen();
+		private var consoleScreen:ConsoleScreen=new ConsoleScreen();
 		[Embed(mimeType = "application/x-font", source = "C:/Windows/Fonts/Inconsolata.otf", fontName = "HelveticaComp", embedAsCFF = 'false', unicodeRange = 'U+0020,U+0041-U+005A,U+0020,U+0061-U+007A,U+0030-U+0039,U+002E,U+0020-U+002F,U+003A-U+0040,U+005B-U+0060,U+007B-U+007E,U+05e7,U+05e8,U+05d0,U+05d8,U+05d5,U+05df,U+05dd,U+05e4,U+05e9,U+05d3,U+05d2,U+05db,U+05e2,U+05d9,U+05d7,U+05dc,U+05da,U+05e3,U+05d6,U+05e1,U+05d1,U+05d4,U+05e0,U+05de,U+05e6,U+05ea,U+05e5')]
 		public static const EmailFont:Class;
 		public function IDEaS() {
@@ -100,6 +103,8 @@ package {
 			folderScreen.addEventListener(CreateFolderScreen.CANCEL_CLICKED, onCancelFolder);
 			folderScreen.addEventListener(CreateFolderScreen.SAVE_CLICKED, onSaveFolder);
 			//
+			consoleScreen.addEventListener(ConsoleScreen.CANCEL_CLICKED, onCancelConsole);
+			//
 			recentFilesScreen.addEventListener(RecentFilesScreen.OPEN_FILE, onOpenRecentFile);
 			recentFilesScreen.addEventListener(RecentFilesScreen.UPDATE_LIST, onUpdateFilesList);
 			//
@@ -111,6 +116,8 @@ package {
 			editButtons.addEventListener(EditButtons.UNDO, onUndoClicked);
 			editButtons.addEventListener(EditButtons.HINTS, onHintsClicked);
 			editButtons.addEventListener(EditButtons.AUTO_INDENT, onAutoIndentClicked);
+			editButtons.addEventListener(EditButtons.HELP_SEARCH, onOpenConsole);
+			
 			//
 			menu.addEventListener(MenuScreen.MENU_SELECTED, onMenuSelected);
 			//pass
@@ -135,15 +142,16 @@ package {
 		}
 		private function onWelcomeDone(e:Event):void {
 			serverLife.status = ServerLifeIndicator.CONFIRM;
-			if (mainScreen.getDebugger() == "") {
-				mainScreen.setDebugger(" <- Server Status Ok");
+			if(!DataHolder.initialServerCheck){
+				DataHolder.initialServerCheck=true;
 				ToastNotification.makeText("Server Status Ok");
 			}
 		}
 		private function onWelcomeError(e:Event):void {
 			serverLife.status = ServerLifeIndicator.ERROR;
-			if (mainScreen.getDebugger() == "") {
-				mainScreen.setDebugger(" <- Server Status Error");
+			if(!DataHolder.initialServerCheck){
+				DataHolder.initialServerCheck=true;
+				ToastNotification.makeText("Server Status Error");
 			}
 		}
 		private function onKeyboardActivate(e:Event):void {
@@ -172,6 +180,13 @@ package {
 			this.mainScreen.setSelection();
 		}
 		private function onContractClicked(e:Event):void {
+		}
+		
+		private function onOpenConsole(e:Event):void {
+			this.openConsole();
+		}
+		private function onCancelConsole(e:Event):void {
+			this.closeConsole();
 		}
 		private function onCancelFolder(e:Event):void {
 			this.closeCreateFolder();
@@ -215,17 +230,21 @@ package {
 		private function onCompileError(event:Event):void {
 			trace("onCompileError")
 			stage.removeChild(preloader);
-			mainScreen.highlightError();
-			mainScreen.setDebugger(serverHandler.message);
+			//mainScreen.highlightError();
+			consoleScreen.setDebugger(serverHandler.message);
 			ToastNotification.makeText(serverHandler.message);
 		}
 		private function onCompileDone(event:Event):void {
 			stage.removeChild(preloader);
-			mainScreen.setDebugger(serverHandler.message);
+			DataHolder.debugArray=DebugAnalyzer.parse(serverHandler.message);
+			consoleScreen.setDebugger(serverHandler.message);
+			mainScreen.highlightError();
 			if (!serverHandler.compile) {
 				ToastNotification.makeText("Compile Error");
+				openConsole();
 			}
-			mainScreen.highlightError(!serverHandler.compile);
+			
+			//mainScreen.highlightError(!serverHandler.compile);
 		}
 		private function onFocusOut(event:Event):void {
 			trace("out");
@@ -263,7 +282,7 @@ package {
 			closeExplorer();
 		}
 		private function onCompile(event:Event):void {
-			mainScreen.setDebugger("Sending");
+			//mainScreen.setDebugger("Sending");
 			serverHandler.send(CodeUtil.getDefinitionLocalName(mainScreen.getCode()), mainScreen.getCode());
 			stage.addChild(preloader);
 		}
@@ -312,6 +331,10 @@ package {
 				}
 				if (this.settingsScreen.stage) {
 					this.closeSettings();
+					return;
+				}
+				if (this.consoleScreen.stage) {
+					this.closeConsole();
 					return;
 				}
 				if (exitConfirm.stage) {
@@ -363,6 +386,7 @@ package {
 			fileManager.onResizeStage(e);
 			wflScreen.onResizeStage(e);
 			serverHandler.resize();
+			consoleScreen.resize(this.stage.stageWidth, this.stage.stageHeight);
 			this.settingsScreen.resize(this.stage.stageWidth, this.stage.stageHeight);
 			exitConfirm.resize(this.stage.stageWidth, this.stage.stageHeight);
 			overwriteConfirm.resize(this.stage.stageWidth, this.stage.stageHeight);
@@ -425,6 +449,12 @@ package {
 					break;
 			}
 			closeMenu();
+		}
+		private function openConsole():void {
+			stage.addChild(this.consoleScreen);
+		}
+		private function closeConsole():void {
+			stage.removeChild(this.consoleScreen);
 		}
 		private function closeCreateFolder():void {
 			stage.removeChild(folderScreen);
