@@ -5,20 +5,22 @@ package com.ideas.gui {
 	import com.ideas.text.DebugPanel;
 	import com.ideas.text.LineNumbers;
 	import com.ideas.text.ScriptArea;
+	import com.ideas.utils.DebugAnalyzer;
 	import com.ideas.utils.MenuHelper;
 	import com.ideas.utils.PrettyPrint;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.SoftKeyboardEvent;
 	import flash.filters.GlowFilter;
+	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	import ro.minibuilder.asparser.Controller;
 	public class MainScreen extends Sprite {
-		private var compileButton:GeneralButton = new GeneralButton(120, 50, "Run");
+		private var compileButton:GeneralButton = new GeneralButton(100, 50, "Run");
 		private var writeTextField:ScriptArea = new ScriptArea();
-		private var debugTextField:DebugPanel = new DebugPanel();
 		private var numbersTextField:LineNumbers = new LineNumbers();
 		private var yPos:Number = 0;
 		private var searchScreen:SearchScreen = new SearchScreen();
@@ -30,14 +32,15 @@ package com.ideas.gui {
 		private var menuHelper:MenuHelper;
 		private var codeString:String = DataHolder.DEFAULT_CODE;
 		private var _scrollerIndicator:ScrollerIndicator = new ScrollerIndicator();
+		private var _debugMarker:Shape = new Shape();
 		public function MainScreen(stg:Stage) {
 			addChild(compileButton);
+			addChild(_debugMarker);
 			addChild(numbersTextField);
 			addChild(writeTextField);
-			addChild(debugTextField);
 			addChild(_scrollerIndicator);
+			
 			searchScreen.addEventListener(SearchScreen.SEARCH, onSearchButtonClick);
-			debugTextField.addEventListener(DebugPanel.DEBUG_RESIZE, onResizeStage);
 			writeTextField.addEventListener(Event.CHANGE, onChange);
 			writeTextField.addEventListener(ScriptArea.INIT_SCROLLING, onScrollAreaInit);
 			writeTextField.addEventListener(SoftKeyboardEvent.SOFT_KEYBOARD_ACTIVATE, onKeyboardActivate);
@@ -54,6 +57,7 @@ package com.ideas.gui {
 			_scrollerIndicator.y = this.y + (this.height - _scrollerIndicator.height) * writeTextField.percent;
 			_scrollerIndicator.alpha = 1;
 			_scrollerIndicator.addEventListener(Event.ENTER_FRAME, onScrollIndicator);
+			this.highlightError();
 		}
 		private function onCtrlReady(e:Event):void {
 			trace(ctrl.status);
@@ -81,7 +85,7 @@ package com.ideas.gui {
 				writeTextField.scrollV = 0;
 			}
 			writeTextField.text = value;
-			ctrl.sourceChanged(getCode())
+			ctrl.sourceChanged(getCode());
 		}
 		public function onResizeStage(e:Event):void {
 			if (!this.stage) {
@@ -95,19 +99,24 @@ package com.ideas.gui {
 			writeTextField.width = this.stage.stageWidth - 10 - numbersTextField.numbersWidth - 5;
 			numbersTextField.height = writeTextField.height = this.stage.stageHeight - compileButton.height - 15 - this.stage.softKeyboardRect.height;
 			compileButton.x = 5;
-			compileButton.y = this.stage.stageHeight - compileButton.height - 5 - this.stage.softKeyboardRect.height
-			debugTextField.x = compileButton.x + compileButton.width + 5;
-			debugTextField.width = this.stage.stageWidth - debugTextField.x - 10 - 50;
-			debugTextField.height = compileButton.height + debugTextField.getDebugOffset();
-			debugTextField.y = this.stage.stageHeight - compileButton.height - 5 - this.stage.softKeyboardRect.height - debugTextField.getDebugOffset();
+			compileButton.y = this.stage.stageHeight - compileButton.height - 5 - this.stage.softKeyboardRect.height;
 			searchScreen.x = this.stage.stageWidth - 10 - SearchScreen.WIDTH;
 			_scrollerIndicator.x = this.stage.stageWidth - 5 - ScrollerIndicator.WIDTH - 2;
 			writeTextField.fixTextHeight();
+			redrawBgGraphics();
 			updateIndicator();
 			menuHelper.resize();
 			if (e) {
 				updateLineNumbers();
 			}
+		}
+		private function redrawBgGraphics():void {
+			this.graphics.clear();
+			this.graphics.lineStyle(0,0,1,true);
+			this.graphics.beginFill(DataHolder.backgroundColor);
+			this.graphics.drawRoundRect(writeTextField.x,writeTextField.y,writeTextField.width,writeTextField.height,8,8);
+			this.graphics.drawRoundRect(numbersTextField.x,numbersTextField.y,numbersTextField.numbersWidth,numbersTextField.height,8,8);
+			this.graphics.endFill();
 		}
 		private function updateIndicator():void {
 			if (writeTextField.maxScrollV > 1) {
@@ -156,20 +165,15 @@ package com.ideas.gui {
 			if (numbersTextField.getTextWidth()) {
 				onResizeStage(null);
 			}
+			highlightError();
 		}
 		public function getCode():String {
 			return this.writeTextField.text;
 		}
-		public function setDebugger(value:String):void {
-			this.debugTextField.text = value;
-		}
-		public function getDebugger():String {
-			return debugTextField.text;
-		}
 		public function setSettings():void {
 			numbersTextField.setFontSize();
 			this.stage.displayState = DataHolder.displayState;
-			writeTextField.backgroundColor = DataHolder.backgroundColor;
+			redrawBgGraphics();
 			ctrl.updateFormating();
 		}
 		private function onSearchButtonClick(e:Event):void {
@@ -200,8 +204,44 @@ package com.ideas.gui {
 		public function triggerAssist():void {
 			this.menuHelper.triggerAssist();
 		}
-		public function highlightError(value:Boolean = true):void {
-			this.debugTextField.highlightError(value);
+		public function highlightError():void {
+			_debugMarker.graphics.clear();
+			if (!DataHolder.debugArray) {
+				return;
+			}
+			for (var i:int = 0; i < DataHolder.debugArray.length; i++) {
+				//
+				var rect:Rectangle = getInfoRect(DataHolder.debugArray[i].line, DataHolder.debugArray[i].position);
+				var color:uint;
+				if (rect) {
+					if (DataHolder.debugArray[i].type == DebugAnalyzer.WARNING) {
+						color = 0xffdd00;
+					} else if (DataHolder.debugArray[i].type == DebugAnalyzer.ERROR) {
+						color = 0xff0000;
+					}
+					_debugMarker.graphics.lineStyle(0,color, 0.6);
+					_debugMarker.graphics.beginFill(color, 0.4);
+					_debugMarker.graphics.drawRoundRect(writeTextField.x, rect.y + writeTextField.y, writeTextField.width, rect.height,8,8);
+					_debugMarker.graphics.endFill();
+				}
+			}
+		}
+		private function getInfoRect(line:int, position:int):Rectangle {
+			var rect:Rectangle;
+			var pos:int = this.numbersTextField.getLinePosition(line)
+			if (pos >= 0) {
+				var char:int = writeTextField.getFirstCharInParagraph(writeTextField.getLineOffset(pos)) + position - 1
+				rect = writeTextField.getCharBoundaries(char);
+				if (rect) {
+					var scrollIndex:int = writeTextField.getLineOffset(writeTextField.scrollV - 1)
+					var rect2:Rectangle = writeTextField.getCharBoundaries(scrollIndex);
+					if (rect2) {
+						rect.x -= rect2.x;
+						rect.y -= rect2.y - 2; //fix lin offset
+					}
+				}
+			}
+			return rect;
 		}
 	}
 }

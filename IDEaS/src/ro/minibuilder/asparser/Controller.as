@@ -38,12 +38,12 @@ package ro.minibuilder.asparser {
 
 	[Event(type = "flash.events.Event", name = "change")]
 	public class Controller extends EventDispatcher {
-		[Embed(source = "../../../assets/playerglobal_4.0_10.1.swc", mimeType = "application/octet-stream")] //most updated working version (playerglobal_4.0_10.1.swc)
-		private static var PlayerglobalAsset:Class;
+		//[Embed(source = "../../../assets/playerglobal_4.5_11.0.swc", mimeType = "application/octet-stream")] //most updated working version (playerglobal_4.0_10.1.swc)
+		//private static var PlayerglobalAsset:Class;
 		//
 		
-		//[Embed(source = "../../../assets/textLayout.swc", mimeType = "application/octet-stream")] //working
-		//private static var TextLayoutAsset:Class;
+		[Embed(source = "../../../assets/textLayout.swc", mimeType = "application/octet-stream")] //working
+		private static var TextLayoutAsset:Class;
 		//
 		//[Embed(source = "../../../assets/Away3D-3.6.0-FlashPlayer10.swc", mimeType = "application/octet-stream")] //working
 		//private static var Away3DAsset:Class;
@@ -51,8 +51,8 @@ package ro.minibuilder.asparser {
 		//[Embed(source = "../../../assets/Box2D_2_1a.swc", mimeType = "application/octet-stream")] //working
 		//private static var Box2D_2_1a:Class;
 		//
-		//[Embed(source = "../../../assets/Alternativa3D.swc", mimeType = "application/octet-stream")] 
-		//private static var Alternativa3D:Class;
+		[Embed(source = "../../../assets/airglobal.swc", mimeType = "application/octet-stream")] 
+		private static var AirGlobal:Class;
 		
 		private var parser:Parser;
 		private var t0:Number;
@@ -69,12 +69,12 @@ package ro.minibuilder.asparser {
 			if (!tc) {
 				tc = new ThreadsController(stage);
 				var db:TypeDB
-				db = SWCParser.parse(new PlayerglobalAsset);
+				db = SWCParser.parse(new AirGlobal);//PlayerglobalAsset);
 				TypeDB.setDB('playerglobal', db);
 				//db = SWCParser.parse(new Away3DAsset);
 				//TypeDB.setDB('away', db);
-				//db = SWCParser.parse(new TextLayoutAsset);
-				//TypeDB.setDB('textLayout', db);
+				db = SWCParser.parse(new TextLayoutAsset);
+				TypeDB.setDB('textLayout', db);
 				//db = SWCParser.parse(new Box2D_2_1a);
 				//TypeDB.setDB('Box2D_2_1a', db);
 				//db = SWCParser.parse(new Alternativa3D);

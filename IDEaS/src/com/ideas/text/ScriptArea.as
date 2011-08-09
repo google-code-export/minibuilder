@@ -20,11 +20,11 @@ package com.ideas.text {
 		private var scrollTimerDelta:int = 0;
 		public function ScriptArea() {
 			this.embedFonts = true;
-			this.border = true;
+			//this.border = true;
 			this.type = TextFieldType.INPUT;
 			this.multiline = true;
 			this.wordWrap = true;
-			this.background = true;
+			//this.background = true;
 			this.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
 			this.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			this.addEventListener(MouseEvent.MOUSE_UP, onWriteTextUp);
@@ -32,7 +32,7 @@ package com.ideas.text {
 			this.addEventListener(FocusEvent.KEY_FOCUS_CHANGE, TextKeyFocusChange);
 			this.addEventListener(Event.SCROLL, scrollHandler);
 			this.antiAliasType = AntiAliasType.ADVANCED;
-			this.backgroundColor = DataHolder.backgroundColor;
+			//this.backgroundColor = DataHolder.backgroundColor;
 			this.defaultTextFormat = new TextFormat(DataHolder.mainFont.fontName, DataHolder.fontSize);
 		}
 		public function getLinesNumbers():String {

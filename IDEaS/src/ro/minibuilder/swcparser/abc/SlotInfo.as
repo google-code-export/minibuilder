@@ -68,7 +68,10 @@ package ro.minibuilder.swcparser.abc
 			//instance
 			for each (m in it.members)
 			{
-				field.addMember(fld = m.createField(), false);
+				fld = m.createField();
+				// skip setters in SWC so they don't overlap with getters (same name)
+				if (fld.fieldType == 'set') continue;
+				field.addMember(fld, false);
 				//Abc.log('5 '+fld);
 			}
 		}

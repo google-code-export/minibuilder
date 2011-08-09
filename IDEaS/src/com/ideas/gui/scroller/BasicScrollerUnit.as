@@ -50,6 +50,12 @@ package com.ideas.gui.scroller {
 			}
 			redraw();
 		}
+		public function setHeight(value:Number):void {
+			if (graphicUnit) {
+				graphicUnit.setHeight(value);
+			}
+			redraw();
+		}
 		protected function redraw():void {
 			if (graphicUnit) {
 				graphicUnit.redraw(_over);

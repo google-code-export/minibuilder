@@ -15,7 +15,7 @@ package com.ideas.gui {
 		private var redoButton:IconButton;
 		private var hintsButton:IconButton;
 		private var autoIndentButton:IconButton;
-		//private var helpSearchButton:IconButton
+		private var helpSearchButton:IconButton
 		public static const EXPAND:String="expand";
 		public static const CONTRACT:String="contract";
 		private var _expanded:Boolean;
@@ -34,7 +34,7 @@ package com.ideas.gui {
 			redoButton=new IconButton(new Resources.UndoIcon(), 50, 50);
 			hintsButton=new IconButton(new Resources.FormatIcon(), 50, 50);
 			autoIndentButton=new IconButton(new Resources.AutoIndentIcon(), 50, 50);
-			//helpSearchButton=new IconButton(new Resources.HelpIcon(), 50, 50);
+			helpSearchButton=new IconButton(new Resources.HelpIcon(), 50, 50);
 			addChild(expandButton);
 			this.addChild(contractButton);
 			this.addChild(indentButton);
@@ -43,7 +43,7 @@ package com.ideas.gui {
 			this.addChild(redoButton);
 			this.addChild(hintsButton);
 			this.addChild(autoIndentButton);
-			//this.addChild(helpSearchButton);
+			this.addChild(helpSearchButton);
 			contractButton.scaleX=-1;
 			redoButton.scaleX=-1;
 			contractButton.x=-5;
@@ -55,9 +55,9 @@ package com.ideas.gui {
 			redoButton.x=autoIndentButton.x - 5;
 			undoButton.x=redoButton.x - redoButton.width*2 - 5;
 			hintsButton.x=undoButton.x-undoButton.width-5;
-			//helpSearchButton.x=hintsButton.x-hintsButton.width-5;
+			helpSearchButton.x=hintsButton.x-hintsButton.width-5;
 			//
-			autoIndentButton.y=hintsButton.y=redoButton.y=undoButton.y=outdentButton.y=indentButton.y=contractButton.y=expandButton.y=-expandButton.height - 5;
+			helpSearchButton.y=autoIndentButton.y=hintsButton.y=redoButton.y=undoButton.y=outdentButton.y=indentButton.y=contractButton.y=expandButton.y=-expandButton.height - 5;
 			expandButton.addEventListener(MouseEvent.CLICK, onExpandClick);
 			contractButton.addEventListener(MouseEvent.CLICK, onContractClick);
 			indentButton.addEventListener(MouseEvent.CLICK, onIndentClicked);
@@ -67,15 +67,15 @@ package com.ideas.gui {
 			undoButton.addEventListener(MouseEvent.CLICK, onUndoClicked);
 			hintsButton.addEventListener(MouseEvent.CLICK, onHintsClicked);
 			autoIndentButton.addEventListener(MouseEvent.CLICK, onAutoIndentClicked);
-			//helpSearchButton.addEventListener(MouseEvent.CLICK, onHelpSearchClicked);
+			helpSearchButton.addEventListener(MouseEvent.CLICK, onHelpSearchClicked);
 			//
 			expanded=false;
 		}
-		/*
+		
 		private function onHelpSearchClicked(e:MouseEvent):void {
 			this.dispatchEvent(new Event(HELP_SEARCH));
 		}
-		*/
+		
 		private function onAutoIndentClicked(e:MouseEvent):void {
 			this.dispatchEvent(new Event(AUTO_INDENT));
 		}
@@ -115,12 +115,12 @@ package com.ideas.gui {
 			redoButton.visible=_expanded;
 			hintsButton.visible=_expanded;
 			autoIndentButton.visible=_expanded;
-			//helpSearchButton.visible=_expanded;
+			helpSearchButton.visible=_expanded;
 			this.graphics.clear();
 			if(_expanded){
 				this.graphics.lineStyle(0,0)
 				this.graphics.beginFill(0x808080);
-				this.graphics.drawRect(0,0,(-expandButton.width-5)*7-5,-expandButton.height - 10);
+				this.graphics.drawRect(0,0,(-expandButton.width-5)*8-10,-expandButton.height - 10);
 				this.graphics.endFill();
 			}
 		}
