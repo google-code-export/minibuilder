@@ -19,7 +19,7 @@ package com.ideas.gui {
 	import flash.text.TextField;
 	import ro.minibuilder.asparser.Controller;
 	public class MainScreen extends Sprite {
-		private var compileButton:GeneralButton = new GeneralButton(100, 50, "Run");
+		private var compileButton:GeneralButton = new GeneralButton(80, 54, "Run");
 		private var writeTextField:ScriptArea = new ScriptArea();
 		private var numbersTextField:LineNumbers = new LineNumbers();
 		private var yPos:Number = 0;
@@ -39,7 +39,6 @@ package com.ideas.gui {
 			addChild(numbersTextField);
 			addChild(writeTextField);
 			addChild(_scrollerIndicator);
-			
 			searchScreen.addEventListener(SearchScreen.SEARCH, onSearchButtonClick);
 			writeTextField.addEventListener(Event.CHANGE, onChange);
 			writeTextField.addEventListener(ScriptArea.INIT_SCROLLING, onScrollAreaInit);
@@ -60,7 +59,6 @@ package com.ideas.gui {
 			this.highlightError();
 		}
 		private function onCtrlReady(e:Event):void {
-			trace(ctrl.status);
 			updateLineNumbers();
 			updateIndicator();
 		}
@@ -99,7 +97,7 @@ package com.ideas.gui {
 			writeTextField.width = this.stage.stageWidth - 10 - numbersTextField.numbersWidth - 5;
 			numbersTextField.height = writeTextField.height = this.stage.stageHeight - compileButton.height - 15 - this.stage.softKeyboardRect.height;
 			compileButton.x = 5;
-			compileButton.y = this.stage.stageHeight - compileButton.height - 5 - this.stage.softKeyboardRect.height;
+			compileButton.y = this.stage.stageHeight - compileButton.height - 4 - this.stage.softKeyboardRect.height;
 			searchScreen.x = this.stage.stageWidth - 10 - SearchScreen.WIDTH;
 			_scrollerIndicator.x = this.stage.stageWidth - 5 - ScrollerIndicator.WIDTH - 2;
 			writeTextField.fixTextHeight();
@@ -112,10 +110,10 @@ package com.ideas.gui {
 		}
 		private function redrawBgGraphics():void {
 			this.graphics.clear();
-			this.graphics.lineStyle(0,0,1,true);
+			this.graphics.lineStyle(0, 0, 1, true);
 			this.graphics.beginFill(DataHolder.backgroundColor);
-			this.graphics.drawRoundRect(writeTextField.x,writeTextField.y,writeTextField.width,writeTextField.height,8,8);
-			this.graphics.drawRoundRect(numbersTextField.x,numbersTextField.y,numbersTextField.numbersWidth,numbersTextField.height,8,8);
+			this.graphics.drawRoundRect(writeTextField.x, writeTextField.y, writeTextField.width, writeTextField.height, 8, 8);
+			this.graphics.drawRoundRect(numbersTextField.x, numbersTextField.y, numbersTextField.numbersWidth, numbersTextField.height, 8, 8);
 			this.graphics.endFill();
 		}
 		private function updateIndicator():void {
@@ -148,7 +146,6 @@ package com.ideas.gui {
 			}
 		}
 		private function onChange(e:Event):void {
-			trace("onChange");
 			DataHolder.saveState(writeTextField.text);
 			onResizeStage(e);
 		}
@@ -219,9 +216,9 @@ package com.ideas.gui {
 					} else if (DataHolder.debugArray[i].type == DebugAnalyzer.ERROR) {
 						color = 0xff0000;
 					}
-					_debugMarker.graphics.lineStyle(0,color, 0.6);
+					_debugMarker.graphics.lineStyle(0, color, 0.6);
 					_debugMarker.graphics.beginFill(color, 0.4);
-					_debugMarker.graphics.drawRoundRect(writeTextField.x, rect.y + writeTextField.y, writeTextField.width, rect.height,8,8);
+					_debugMarker.graphics.drawRoundRect(writeTextField.x, rect.y + writeTextField.y, writeTextField.width, rect.height, 8, 8);
 					_debugMarker.graphics.endFill();
 				}
 			}

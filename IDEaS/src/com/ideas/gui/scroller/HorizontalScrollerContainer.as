@@ -13,7 +13,7 @@ package com.ideas.gui.scroller {
 		private var fingerPos:Point = new Point;
 		private var scrollDelta:Number = 0;
 		private var containerHeight:Number = 0;
-		private var hasScroller:Boolean = false;
+		private var _hasScroller:Boolean = false;
 		private var containerPos:Point = new Point;
 		private var _width:Number;
 		private var _height:Number;
@@ -28,6 +28,9 @@ package com.ideas.gui.scroller {
 			container.mouseEnabled = false;
 			this.addEventListener(Event.ADDED_TO_STAGE, onAdd);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
+		}
+		public function get hasScroller():Boolean {
+			return _hasScroller;
 		}
 		public function set selectedItem(value:BasicScrollerUnit):void {
 			_selectedItem = value;
@@ -88,7 +91,7 @@ package com.ideas.gui.scroller {
 			containerMask.graphics.endFill();
 			//
 			this.graphics.clear();
-			this.graphics.beginFill(0);
+			this.graphics.beginFill(0, 0.001);
 			this.graphics.drawRect(0, 0, Math.min(this._width, containerHeight), _height) //TODO: make generic
 			this.graphics.endFill();
 			//
@@ -134,7 +137,7 @@ package com.ideas.gui.scroller {
 			if (Math.abs(fingerPos.x - e.stageX) > 10) {
 				_overDisabled = true;
 			}
-			if (!hasScroller) {
+			if (!_hasScroller) {
 				return;
 			}
 			scrollDelta = container.x;
@@ -196,10 +199,10 @@ package com.ideas.gui.scroller {
 			}
 		}
 		private function checkScrollerHeight():void {
-			hasScroller = true;
+			_hasScroller = true;
 			if (_width >= containerHeight) {
 				container.x = 0;
-				hasScroller = false;
+				_hasScroller = false;
 			}
 		}
 		public function getFirstItem():BasicScrollerUnit {

@@ -1,8 +1,9 @@
 package {
 	import com.ideas.data.DataHolder;
+	import com.ideas.edit.EditContainer;
 	import com.ideas.file.FileManager;
+	import com.ideas.gui.ConsoleScreen;
 	import com.ideas.gui.CreateFolderScreen;
-	import com.ideas.gui.EditButtons;
 	import com.ideas.gui.ExitConfirm;
 	import com.ideas.gui.MainScreen;
 	import com.ideas.gui.MenuScreen;
@@ -13,12 +14,10 @@ package {
 	import com.ideas.gui.SettingsScreen;
 	import com.ideas.gui.ToastNotification;
 	import com.ideas.gui.WonderflScreen;
-	import com.ideas.gui.ConsoleScreen;
 	import com.ideas.local.SettingsController;
 	import com.ideas.net.ServerHandler;
 	import com.ideas.utils.DebugAnalyzer;
 	import com.ideas.utils.Stats;
-	
 	import flash.desktop.NativeApplication;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -32,9 +31,7 @@ package {
 	import flash.text.Font;
 	import flash.ui.Keyboard;
 	import flash.utils.setTimeout;
-	
 	import jp.psyark.utils.CodeUtil;
-
 	[SWF(width = "520", height = "660", frameRate = "60", backgroundColor = "#eeeeee")]
 	public class IDEaS extends Sprite {
 		private var mainScreen:MainScreen
@@ -47,13 +44,13 @@ package {
 		private var serverHandler:ServerHandler = new ServerHandler();
 		private var isSaveAndExit:Boolean = false;
 		private var preloader:Preloader = new Preloader();
-		private var editButtons:EditButtons = new EditButtons();
+		private var editContainer:EditContainer = new EditContainer();
 		private var settingsCtrl:SettingsController = new SettingsController();
 		private var keyboardRect:Rectangle = new Rectangle();
 		private var wflScreen:WonderflScreen = new WonderflScreen();
 		private var serverLife:ServerLifeIndicator = new ServerLifeIndicator();
 		private var recentFilesScreen:RecentFilesScreen = new RecentFilesScreen();
-		private var consoleScreen:ConsoleScreen=new ConsoleScreen();
+		private var consoleScreen:ConsoleScreen = new ConsoleScreen();
 		[Embed(mimeType = "application/x-font", source = "C:/Windows/Fonts/Inconsolata.otf", fontName = "HelveticaComp", embedAsCFF = 'false', unicodeRange = 'U+0020,U+0041-U+005A,U+0020,U+0061-U+007A,U+0030-U+0039,U+002E,U+0020-U+002F,U+003A-U+0040,U+005B-U+0060,U+007B-U+007E,U+05e7,U+05e8,U+05d0,U+05d8,U+05d5,U+05df,U+05dd,U+05e4,U+05e9,U+05d3,U+05d2,U+05db,U+05e2,U+05d9,U+05d7,U+05dc,U+05da,U+05e3,U+05d6,U+05e1,U+05d1,U+05d4,U+05e0,U+05de,U+05e6,U+05ea,U+05e5')]
 		public static const EmailFont:Class;
 		public function IDEaS() {
@@ -76,7 +73,7 @@ package {
 			mainScreen.addEventListener(MainScreen.KEYBOARD_EVENT, onKeyboardActivate);
 			stage.addChild(mainScreen);
 			stage.addChild(serverLife);
-			stage.addChild(editButtons);
+			stage.addChild(editContainer);
 			serverHandler.stageReference = this.stage;
 			serverHandler.addEventListener(ServerHandler.COMPILE, onCompileDone);
 			serverHandler.addEventListener(IOErrorEvent.IO_ERROR, onCompileError);
@@ -104,53 +101,46 @@ package {
 			folderScreen.addEventListener(CreateFolderScreen.SAVE_CLICKED, onSaveFolder);
 			//
 			consoleScreen.addEventListener(ConsoleScreen.CANCEL_CLICKED, onCancelConsole);
+			consoleScreen.addEventListener(ConsoleScreen.CLEAR_CLICKED, onClearMarkup);
 			//
 			recentFilesScreen.addEventListener(RecentFilesScreen.OPEN_FILE, onOpenRecentFile);
 			recentFilesScreen.addEventListener(RecentFilesScreen.UPDATE_LIST, onUpdateFilesList);
-			//
-			editButtons.addEventListener(EditButtons.EXPAND, onExpandClicked);
-			editButtons.addEventListener(EditButtons.CONTRACT, onContractClicked);
-			editButtons.addEventListener(EditButtons.INDENT, onIndentClicked);
-			editButtons.addEventListener(EditButtons.OUTDENT, onOutdentClicked);
-			editButtons.addEventListener(EditButtons.REDO, onRedoClicked);
-			editButtons.addEventListener(EditButtons.UNDO, onUndoClicked);
-			editButtons.addEventListener(EditButtons.HINTS, onHintsClicked);
-			editButtons.addEventListener(EditButtons.AUTO_INDENT, onAutoIndentClicked);
-			editButtons.addEventListener(EditButtons.HELP_SEARCH, onOpenConsole);
-			
-			//
+			editContainer.addEventListener(EditContainer.INDENT, onIndentClicked);
+			editContainer.addEventListener(EditContainer.OUTDENT, onOutdentClicked);
+			editContainer.addEventListener(EditContainer.REDO, onRedoClicked);
+			editContainer.addEventListener(EditContainer.UNDO, onUndoClicked);
+			editContainer.addEventListener(EditContainer.HINTS, onHintsClicked);
+			editContainer.addEventListener(EditContainer.AUTO_INDENT, onAutoIndentClicked);
+			editContainer.addEventListener(EditContainer.DEBUG, onOpenConsole);
 			menu.addEventListener(MenuScreen.MENU_SELECTED, onMenuSelected);
-			//pass
 			//stage.addChild(new Stats())
 			this.stage.addEventListener(Event.RESIZE, onResizeStage);
 			this.stage.stageFocusRect = false;
 			if (Capabilities.cpuArchitecture == "ARM") {
 				NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys);
-				NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE,onActivate);
-				NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE,onDeactivate);
-			} else if (Capabilities.cpuArchitecture == "x86") {
-				this.stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeysDebug);
+				NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, onActivate);
+				NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, onDeactivate);
 			}
 			this.settingsCtrl.initUserData();
 			onSettingsSaved(null);
 		}
 		private function onActivate(e:Event):void {
-			serverHandler.pause=false;
+			serverHandler.pause = false;
 		}
 		private function onDeactivate(e:Event):void {
-			serverHandler.pause=true;
+			serverHandler.pause = true;
 		}
 		private function onWelcomeDone(e:Event):void {
 			serverLife.status = ServerLifeIndicator.CONFIRM;
-			if(!DataHolder.initialServerCheck){
-				DataHolder.initialServerCheck=true;
+			if (!DataHolder.initialServerCheck) {
+				DataHolder.initialServerCheck = true;
 				ToastNotification.makeText("Server Status Ok");
 			}
 		}
 		private function onWelcomeError(e:Event):void {
 			serverLife.status = ServerLifeIndicator.ERROR;
-			if(!DataHolder.initialServerCheck){
-				DataHolder.initialServerCheck=true;
+			if (!DataHolder.initialServerCheck) {
+				DataHolder.initialServerCheck = true;
 				ToastNotification.makeText("Server Status Error");
 			}
 		}
@@ -176,13 +166,8 @@ package {
 		private function onOutdentClicked(e:Event):void {
 			mainScreen.indent(false);
 		}
-		private function onExpandClicked(e:Event):void {
-			this.mainScreen.setSelection();
-		}
-		private function onContractClicked(e:Event):void {
-		}
-		
 		private function onOpenConsole(e:Event):void {
+			mainScreen.forceKeyboardClose();
 			this.openConsole();
 		}
 		private function onCancelConsole(e:Event):void {
@@ -219,35 +204,33 @@ package {
 		}
 		private function onSaveExitClicked(e:Event):void {
 			isSaveAndExit = true;
-			trace("onSaveExitClicked" + isSaveAndExit);
 			fileManagerSave();
 			exitConfirmClose();
 		}
 		private function onExitClicked(e:Event):void {
-			trace("onExitClicked");
 			NativeApplication.nativeApplication.exit();
 		}
 		private function onCompileError(event:Event):void {
-			trace("onCompileError")
 			stage.removeChild(preloader);
-			//mainScreen.highlightError();
 			consoleScreen.setDebugger(serverHandler.message);
 			ToastNotification.makeText(serverHandler.message);
 		}
+		private function onClearMarkup(event:Event):void {
+			DataHolder.debugArray = null;
+			mainScreen.highlightError();
+			this.closeConsole();
+		}
 		private function onCompileDone(event:Event):void {
 			stage.removeChild(preloader);
-			DataHolder.debugArray=DebugAnalyzer.parse(serverHandler.message);
+			DataHolder.debugArray = DebugAnalyzer.parse(serverHandler.message);
 			consoleScreen.setDebugger(serverHandler.message);
 			mainScreen.highlightError();
 			if (!serverHandler.compile) {
 				ToastNotification.makeText("Compile Error");
 				openConsole();
 			}
-			
-			//mainScreen.highlightError(!serverHandler.compile);
 		}
 		private function onFocusOut(event:Event):void {
-			trace("out");
 			if (fileManager.stage) {
 				return;
 			}
@@ -285,15 +268,6 @@ package {
 			//mainScreen.setDebugger("Sending");
 			serverHandler.send(CodeUtil.getDefinitionLocalName(mainScreen.getCode()), mainScreen.getCode());
 			stage.addChild(preloader);
-		}
-		private function handleKeysDebug(event:KeyboardEvent):void {
-			var value:uint = event.keyCode;
-			if (value == Keyboard.LEFT) {
-				value = Keyboard.BACK;
-			} else if (value == Keyboard.UP) {
-				value = Keyboard.MENU;
-			}
-			processKeyInput(value, event);
 		}
 		private function handleKeys(event:KeyboardEvent):void {
 			processKeyInput(event.keyCode, event);
@@ -393,9 +367,8 @@ package {
 			preloader.resize(this.stage.stageWidth - 50 - 5, this.stage.stageHeight - this.stage.softKeyboardRect.height);
 			folderScreen.onResizeStage(e);
 			this.recentFilesScreen.resize(this.stage.stageWidth, this.stage.stageHeight);
-			serverLife.resize(120 + 10, this.stage.stageHeight - this.stage.softKeyboardRect.height - 55);
-			editButtons.x = this.stage.stageWidth;
-			editButtons.y = this.stage.stageHeight - this.stage.softKeyboardRect.height;
+			serverLife.resize(9, this.stage.stageHeight - this.stage.softKeyboardRect.height - 55);
+			editContainer.resize(this.stage.stageWidth, this.stage.stageHeight - this.stage.softKeyboardRect.height);
 			//
 			this.graphics.clear();
 			this.graphics.beginFill(0x808080);

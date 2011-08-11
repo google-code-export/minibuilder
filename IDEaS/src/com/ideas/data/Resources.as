@@ -66,6 +66,12 @@ package com.ideas.data {
 		[Embed(source = './assets/Undo-icon.png')]
 		public static var UndoIcon:Class;
 		//
+		[Embed(source = './assets/Redo-icon.png')]
+		public static var RedoIcon:Class;
+		//
+		[Embed(source = './assets/log-icon.png')]
+		public static var DebugIcon:Class;
+		//
 		//Menu icons
 		[Embed(source = './assets/iconAbout.png')]
 		public static var MenuAbout:Class;

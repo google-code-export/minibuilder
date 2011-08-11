@@ -77,7 +77,6 @@ package com.ideas.text {
 			_killKeyboardManually = false;
 		}
 		private function onFocusOut(e:FocusEvent):void {
-			trace("focus out",_killKeyboardManually);
 			if (_killKeyboardManually) {
 				_killKeyboardManually = false;
 				return;
