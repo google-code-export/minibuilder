@@ -38,8 +38,8 @@ package ro.minibuilder.asparser {
 
 	[Event(type = "flash.events.Event", name = "change")]
 	public class Controller extends EventDispatcher {
-		//[Embed(source = "../../../assets/playerglobal_4.5_11.0.swc", mimeType = "application/octet-stream")] //most updated working version (playerglobal_4.0_10.1.swc)
-		//private static var PlayerglobalAsset:Class;
+		[Embed(source = "../../../assets/playerglobal_4.5_11.0.swc", mimeType = "application/octet-stream")] //most updated working version (playerglobal_4.0_10.1.swc)
+		private static var PlayerglobalAsset:Class;
 		//
 		
 		[Embed(source = "../../../assets/textLayout.swc", mimeType = "application/octet-stream")] //working
@@ -51,8 +51,8 @@ package ro.minibuilder.asparser {
 		//[Embed(source = "../../../assets/Box2D_2_1a.swc", mimeType = "application/octet-stream")] //working
 		//private static var Box2D_2_1a:Class;
 		//
-		[Embed(source = "../../../assets/airglobal.swc", mimeType = "application/octet-stream")] 
-		private static var AirGlobal:Class;
+		//[Embed(source = "../../../assets/airglobal.swc", mimeType = "application/octet-stream")] 
+		//private static var AirGlobal:Class;
 		
 		private var parser:Parser;
 		private var t0:Number;
@@ -69,7 +69,7 @@ package ro.minibuilder.asparser {
 			if (!tc) {
 				tc = new ThreadsController(stage);
 				var db:TypeDB
-				db = SWCParser.parse(new AirGlobal);//PlayerglobalAsset);
+				db = SWCParser.parse(new PlayerglobalAsset);//AirGlobal);//
 				TypeDB.setDB('playerglobal', db);
 				//db = SWCParser.parse(new Away3DAsset);
 				//TypeDB.setDB('away', db);

@@ -28,8 +28,10 @@ package com.ideas.gui {
             } else if (_status == ERROR) {
                 color = 0xff0000
             }
+			this.graphics.clear();
+			this.graphics.lineStyle(1, 0xcccccc);
             this.graphics.beginFill(color);
-            this.graphics.drawRect(1, 1, 4, 4);
+            this.graphics.drawEllipse(0, 0, 6, 6);
             this.graphics.endFill();
         }
     }
