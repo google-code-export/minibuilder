@@ -6,6 +6,7 @@
 	import com.ideas.gui.scroller.BasicScrollerUnit;
 	import com.ideas.gui.scroller.ScrollerContainer;
 	import com.ideas.gui.scroller.ScrollerEvent;
+	import com.ideas.utils.HtmlTemplate;
 	
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -23,6 +24,7 @@
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	import flash.utils.getTimer;
+
 	public class FileManager extends Sprite {
 		private var topTitle:TextField= new TextField();
 		private var currentFile:File = File.documentsDirectory;
@@ -295,16 +297,30 @@
 			_codeString = value;
 		}
 		//Option for saving compiled swf files locally
-		public function writeSwfOnDisk():void {
+		public function writeSwfOnDisk():Boolean {
 			if (!DataHolder.swfData) {
-				return;
+				return false;
 			}
-			var swf:File = currentFile.isDirectory ? currentFile : currentFile.parent;
-			swf = swf.resolvePath(fileName + ".swf");
-			var fs:FileStream = new FileStream();
-			fs.open(swf, FileMode.WRITE);
-			fs.writeBytes(DataHolder.swfData);
-			fs.close();
+			try{
+				var swf:File = currentFile.isDirectory ? currentFile : currentFile.parent;
+				swf = swf.resolvePath(fileName + ".swf");
+				var fs:FileStream = new FileStream();
+				fs.open(swf, FileMode.WRITE);
+				fs.writeBytes(DataHolder.swfData);
+				fs.close();
+				//
+				var str:String=HtmlTemplate.CODE.split("{scale}").join(DataHolder.htmlStage).split("{name}").join(fileName).split("{width}").join(DataHolder.htmlWidth + DataHolder.htmlSizeType).split("{height}").join(DataHolder.htmlHeight + DataHolder.htmlSizeType);
+				var html:File = currentFile.isDirectory ? currentFile : currentFile.parent;
+				html = html.resolvePath(fileName + ".html");
+				fs= new FileStream();
+				fs.open(html, FileMode.WRITE);
+				fs.writeMultiByte(str, "utf-8");
+				fs.close();
+				
+			}catch(e:*){
+				return false;
+			}
+			return true;
 		}
 		public function get currentlyEditedFile():File {
 			return _currentlyEditedFile;

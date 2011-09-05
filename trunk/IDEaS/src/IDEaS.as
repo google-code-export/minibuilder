@@ -77,7 +77,7 @@ package {
 			serverHandler.stageReference = this.stage;
 			serverHandler.addEventListener(ServerHandler.COMPILE, onCompileDone);
 			serverHandler.addEventListener(IOErrorEvent.IO_ERROR, onCompileError);
-			serverHandler.addEventListener(ServerHandler.SAVE_SWF, onSaveSwf);
+			serverHandler.addEventListener(ServerHandler.PROGRESS,onCompileProgress);
 			serverHandler.addEventListener(ServerHandler.WELCOME_DONE, onWelcomeDone)
 			serverHandler.addEventListener(ServerHandler.WELCOME_ERROR, onWelcomeError);
 			serverHandler.addEventListener(ServerHandler.IN_WEB, onGoneInWeb);
@@ -220,6 +220,10 @@ package {
 			mainScreen.highlightError();
 			this.closeConsole();
 		}
+		
+		private function onCompileProgress(event:Event):void {
+			this.preloader.setPercent(this.serverHandler.percent);
+		}
 		private function onCompileDone(event:Event):void {
 			stage.removeChild(preloader);
 			DataHolder.debugArray = DebugAnalyzer.parse(serverHandler.message);
@@ -228,6 +232,11 @@ package {
 			if (!serverHandler.compile) {
 				ToastNotification.makeText("Compile Error");
 				openConsole();
+			}else{
+				fileManager.fileName = CodeUtil.getDefinitionLocalName(mainScreen.getCode());
+				if(fileManager.writeSwfOnDisk()){
+					serverHandler.loadFile(fileManager.getFolderName());
+				}
 			}
 		}
 		private function onFocusOut(event:Event):void {
@@ -238,7 +247,7 @@ package {
 			setTimeout(mainScreen.setSelection, 10);
 		}
 		private function openOverwriteScreen(e:Event):void {
-			overwriteConfirm.setLabel(this.fileManager.fileName + ".as");
+			overwriteConfirm.setLabel(fileManager.fileName + ".as");
 			stage.addChild(this.overwriteConfirm);
 		}
 		private function openCreateFoder(event:Event):void {
@@ -333,10 +342,6 @@ package {
 					return;
 				}
 				if (serverHandler.inWeb) {
-					if (serverHandler.inPlayer) {
-						serverHandler.setLabel(fileManager.getFolderName());
-						serverHandler.toggleMenu();
-					}
 					return;
 				}
 				if (menu.stage) {
@@ -364,7 +369,7 @@ package {
 			this.settingsScreen.resize(this.stage.stageWidth, this.stage.stageHeight);
 			exitConfirm.resize(this.stage.stageWidth, this.stage.stageHeight);
 			overwriteConfirm.resize(this.stage.stageWidth, this.stage.stageHeight);
-			preloader.resize(this.stage.stageWidth - 50 - 5, this.stage.stageHeight - this.stage.softKeyboardRect.height);
+			preloader.resize(this.stage.stageWidth , this.stage.stageHeight - this.stage.softKeyboardRect.height-60);
 			folderScreen.onResizeStage(e);
 			this.recentFilesScreen.resize(this.stage.stageWidth, this.stage.stageHeight);
 			serverLife.resize(9, this.stage.stageHeight - this.stage.softKeyboardRect.height - 55);
@@ -500,8 +505,6 @@ package {
 				this.stage.removeChild(fileManager);
 			}
 		}
-		private function onSaveSwf(e:Event):void {
-			this.fileManager.writeSwfOnDisk();
-		}
+		
 	}
 }
