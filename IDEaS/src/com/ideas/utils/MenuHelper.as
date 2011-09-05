@@ -58,11 +58,16 @@ package com.ideas.utils {
 			if (a.length == 0)
 				return false;
 			menu.setListData(a);
+			var rect:Rectangle = getCharPos(fld.caretIndex - 1)
+			menu.show(stage, rect.x + fld.x + rect.width, rect.y+ fld.y + rect.height);
+			/*
 			var rect:Rectangle = fld.getCharBoundaries(fld.caretIndex - 1);
 			if (!rect) {
 				rect = new Rectangle();
 			}
 			menu.show(stage, rect.x + fld.x + rect.width, rect.y);
+			*/
+			
 			//
 			return true;
 		}
@@ -223,6 +228,7 @@ package com.ideas.utils {
 				filterMenu();
 		}
 		private function getCharPos(index:int):Rectangle {
+			
 			var rect:Rectangle = fld.getCharBoundaries(index);
 			if (!rect) {
 				rect = new Rectangle();
@@ -248,11 +254,15 @@ package com.ideas.utils {
 		}
 		private function showMenu():void {
 			menu.setListData(vectorToArray(menuData));
+			var rect:Rectangle = getCharPos(fld.caretIndex - 1)
+			menu.show(stage, rect.x + fld.x + rect.width, rect.y+ fld.y + rect.height);
+			/*
 			var rect:Rectangle = fld.getCharBoundaries(fld.caretIndex - 1);
 			if (!rect) {
 				rect = new Rectangle();
 			}
 			menu.show(stage, rect.x + fld.x + rect.width, rect.y);
+			*/
 		}
 	}
 }

@@ -2,7 +2,6 @@ package com.ideas.gui {
 	import com.ideas.data.DataHolder;
 	import com.ideas.gui.buttons.GeneralButton;
 	import com.ideas.gui.scroller.ScrollerIndicator;
-	import com.ideas.text.DebugPanel;
 	import com.ideas.text.LineNumbers;
 	import com.ideas.text.ScriptArea;
 	import com.ideas.utils.DebugAnalyzer;
@@ -14,9 +13,7 @@ package com.ideas.gui {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.SoftKeyboardEvent;
-	import flash.filters.GlowFilter;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;
 	import ro.minibuilder.asparser.Controller;
 	public class MainScreen extends Sprite {
 		private var compileButton:GeneralButton = new GeneralButton(80, 54, "Run");

@@ -11,6 +11,7 @@ package com.ideas.utils {
 		private var scrollerContainer:ScrollerContainer = new ScrollerContainer();
 		public static const KEYBOARD_REFOCUS:String = "KEYBOARD_REFOCUS"
 		private var _xOffset:Number = 0;
+		private var _yOffset:Number = 0;
 		private var _isShowing:Boolean = false;
 		public function MenuBox() {
 			scrollerContainer.addEventListener(ScrollerEvent.LEAVE_STAGE_DOWN, onEmptyStageDown);
@@ -46,19 +47,85 @@ package com.ideas.utils {
 		}
 		public function resize():void {
 			if (scrollerContainer.stage) {
+				scrollerContainer.graphics.clear();
 				var hgt:Number = this.scrollerContainer.stage.stageHeight - this.scrollerContainer.stage.softKeyboardRect.height - 20;
-				scrollerContainer.onResize(-10 + this.scrollerContainer.stage.stageWidth / 2, hgt);
-				if (_xOffset > this.scrollerContainer.stage.stageWidth / 2) {
-					scrollerContainer.x = 0;
+				var maxWidth:int = Math.min(this.scrollerContainer.stage.stageWidth / 2, 300);
+				scrollerContainer.onResize(maxWidth - 30, hgt);
+				var flip:Boolean = false;
+				if (_xOffset > (this.scrollerContainer.stage.stageWidth - maxWidth)) {
+					scrollerContainer.x = _xOffset - maxWidth;
+					flip = true;
 				} else {
-					scrollerContainer.x = this.scrollerContainer.stage.stageWidth / 2;
+					scrollerContainer.x = _xOffset + 30;
 				}
-				scrollerContainer.y = 10;
+				if (scrollerContainer.containerHeight + _yOffset < hgt) {
+					scrollerContainer.y = _yOffset;
+					drawFrame(hgt, maxWidth, false, flip)
+				} else {
+					scrollerContainer.y = 10;
+					drawFrame(hgt, maxWidth, true, flip)
+				}
 			}
+		}
+		private function drawFrame(hgt:Number, wid:Number, indicator:Boolean, flip:Boolean):void {
+			
+			var scrollHeight:Number = Math.min(hgt, scrollerContainer.containerHeight);
+			scrollerContainer.graphics.lineStyle(2, 0x808080);
+			scrollerContainer.graphics.beginFill(0,0.2)
+			var vi:Vector.<int> = new Vector.<int>();
+			var vn:Vector.<Number> = new Vector.<Number>();
+			vi[0] = 1;
+			vn[0] = 0;
+			vn[1] = 0;
+			//
+			vi[1] = 2;
+			vn[2] = wid - 30;
+			vn[3] = 0;
+			//
+			if (indicator && flip) {
+				vi[2] = 2;
+				vn[4] = wid - 30;
+				vn[5] = _yOffset - 15 - 10;
+				//
+				vi[3] = 2;
+				vn[6] = wid - 30 + 10;
+				vn[7] = _yOffset - 15;
+				//
+				vi[4] = 2;
+				vn[8] = wid - 30;
+				vn[9] = _yOffset - 15 + 10;
+			}
+			vi[vi.length] = 2;
+			vn[vn.length] = wid - 30;
+			vn[vn.length] = scrollHeight;
+			//
+			vi[vi.length] = 2;
+			vn[vn.length] = 0;
+			vn[vn.length] = scrollHeight;
+			//
+			if (indicator && !flip) {
+				vi[4] = 2;
+				vn[8] = 0;
+				vn[9] = _yOffset - 15 + 10;
+				//
+				vi[5] = 2;
+				vn[10] = -10;
+				vn[11] = _yOffset - 15;
+				//
+				vi[6] = 2;
+				vn[12] = 0;
+				vn[13] = _yOffset - 15 - 10;
+			}
+			vi[vi.length] = 2;
+			vn[vn.length] = 0;
+			vn[vn.length] = 0;
+			scrollerContainer.graphics.drawPath(vi, vn);
+			scrollerContainer.graphics.endFill();
 		}
 		public function show(stage:Stage, xx:Number, yy:Number):void {
 			_isShowing = true;
 			_xOffset = xx;
+			_yOffset = yy;
 			stage.addChild(scrollerContainer);
 			resize();
 		}

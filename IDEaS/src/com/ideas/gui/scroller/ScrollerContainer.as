@@ -1,6 +1,5 @@
 package com.ideas.gui.scroller {
 	import com.ideas.gui.buttons.MotionText;
-	
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -8,7 +7,6 @@ package com.ideas.gui.scroller {
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
-
 	[Event(name = 'unitSelected', type = 'com.ideas.file.ScrollerEvent')]
 	[Event(name = 'leaveStageDown', type = 'com.ideas.file.ScrollerEvent')]
 	public class ScrollerContainer extends Sprite {
@@ -18,7 +16,7 @@ package com.ideas.gui.scroller {
 		private var containerMask:Shape = new Shape;
 		private var fingerPos:Point = new Point;
 		private var scrollDelta:Number = 0;
-		private var containerHeight:Number = 0;
+		private var _containerHeight:Number = 0;
 		private var indicator:ScrollerIndicator = new ScrollerIndicator();
 		private var hasScroller:Boolean = false;
 		private var containerPos:Point = new Point;
@@ -38,10 +36,12 @@ package com.ideas.gui.scroller {
 			this.addEventListener(Event.ADDED_TO_STAGE, onAdd);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
 		}
+		public function get containerHeight():Number {
+			return _containerHeight;
+		}
 		public function set selectedItem(value:BasicScrollerUnit):void {
 			_selectedItem = value;
 		}
-		
 		private function onAdd(e:Event):void {
 			this.stage.addEventListener(MouseEvent.MOUSE_DOWN, onStageClk);
 		}
@@ -54,25 +54,24 @@ package com.ideas.gui.scroller {
 		public function get selectedItem():BasicScrollerUnit {
 			return _selectedItem;
 		}
-		
 		public function clearContainer():void {
 			_selectedItem = null;
-			_overDisabled=false;
-			this.container.y=0;
+			_overDisabled = false;
+			this.container.y = 0;
 			positionCounter = 0;
-			containerHeight = 0;
+			_containerHeight = 0;
 			if (this.stage) {
 				this.stage.removeEventListener(MouseEvent.MOUSE_UP, onStageUp);
 				this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
 			}
-			itemData=[];
+			itemData = [];
 			updateData();
 		}
 		public function setListData(list:Array):void {
 			itemData = list
 			positionCounter = 0;
-			containerHeight = itemData.length * unitCont[0].height;
-			indicator.setHeight(this._height * (this._height / containerHeight));
+			_containerHeight = itemData.length * unitCont[0].height;
+			indicator.setHeight(this._height * (this._height / _containerHeight));
 			limits();
 			updateData();
 		}
@@ -83,10 +82,9 @@ package com.ideas.gui.scroller {
 			unit.addEventListener(MouseEvent.MOUSE_UP, onUnitUp, false, 0, true);
 			unit.addEventListener(MouseEvent.MOUSE_OVER, onUnitOver, false, 0, true);
 			unit.addEventListener(MouseEvent.MOUSE_OUT, onUnitOut, false, 0, true);
-			unit.visible=false;
+			unit.visible = false;
 			//
 			_selectedItem = container.getChildAt(0) as BasicScrollerUnit;
-			
 			limits();
 		}
 		public function onResize(width:Number, height:Number):void {
@@ -102,12 +100,12 @@ package com.ideas.gui.scroller {
 			//
 			this.graphics.clear();
 			this.graphics.beginFill(0);
-			this.graphics.drawRect(0, 0, _width,Math.min( this._height,containerHeight));
+			this.graphics.drawRect(0, 0, _width, Math.min(this._height, _containerHeight));
 			this.graphics.endFill();
 			//
-			indicator.setHeight(this._height * (this._height / containerHeight));
+			indicator.setHeight(this._height * (this._height / _containerHeight));
 			indicator.x = _width - ScrollerIndicator.WIDTH;
-			if (container.numChildren > 0) {		
+			if (container.numChildren > 0) {
 				for (var i:int = 0; i < container.numChildren; i++) {
 					BasicScrollerUnit(container.getChildAt(i)).setWidth(_width);
 				}
@@ -120,15 +118,13 @@ package com.ideas.gui.scroller {
 			e.currentTarget.over = false;
 		}
 		private function onUnitOver(e:MouseEvent):void {
-			if(_overDisabled){
-				
+			if (_overDisabled) {
 				return;
 			}
 			e.currentTarget.over = true;
 			//
 		}
 		private function onUnitDown(e:MouseEvent):void {
-			
 			e.stopImmediatePropagation();
 			this.removeEventListener(Event.ENTER_FRAME, onSlide);
 			setTimer = getTimer();
@@ -142,7 +138,7 @@ package com.ideas.gui.scroller {
 			this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
 		}
 		private function onStageUp(e:Event):void {
-			_overDisabled=false;
+			_overDisabled = false;
 			checkForSlide();
 			if (this.stage) {
 				this.stage.removeEventListener(MouseEvent.MOUSE_UP, onStageUp);
@@ -150,15 +146,12 @@ package com.ideas.gui.scroller {
 			}
 		}
 		private function onStageMouseMove(e:MouseEvent):void {
-			
-			if( Math.abs(fingerPos.y - e.stageY)>10){
-				_overDisabled=true;
+			if (Math.abs(fingerPos.y - e.stageY) > 10) {
+				_overDisabled = true;
 			}
-			
 			if (!hasScroller) {
 				return;
 			}
-			
 			scrollDelta = container.y;
 			container.y = containerPos.y - (fingerPos.y - e.stageY);
 			scrollDelta = scrollDelta - container.y;
@@ -175,22 +168,21 @@ package com.ideas.gui.scroller {
 				return;
 			}
 			/////////////////////////////////////
-			if(containerHeight<this._height){
+			if (_containerHeight < this._height) {
 				container.y = 0;
-			}else{
+			} else {
 				if (container.y > 0) {
 					container.y = 0;
 					scrollDelta = 0;
 				}
-				if (container.y<this._height-containerHeight ) {
-					container.y = this._height - containerHeight;
+				if (container.y < this._height - _containerHeight) {
+					container.y = this._height - _containerHeight;
 					scrollDelta = 0;
 				}
 			}
-			var perc:Number = container.y / (this._height - containerHeight);
+			var perc:Number = container.y / (this._height - _containerHeight);
 			/////////////////
 			var pos:int = int(-container.y / container.getChildAt(0).height);
-			
 			if (pos != positionCounter) {
 				positionCounter = pos;
 				updateData();
@@ -227,7 +219,7 @@ package com.ideas.gui.scroller {
 		}
 		private function checkScrollerHeight():void {
 			hasScroller = true;
-			if (_height >= containerHeight) {
+			if (_height >= _containerHeight) {
 				container.y = 0;
 				hasScroller = false;
 			}
@@ -236,16 +228,15 @@ package com.ideas.gui.scroller {
 			return unitCont[0];
 		}
 		private function updateData():void {
-			if(!unitCont || !itemData || !unitCont.length){
+			if (!unitCont || !itemData || !unitCont.length) {
 				return;
 			}
 			for (var i:int = 0; i < unitCont.length; i++) {
 				unitCont[i].y = (i + positionCounter) * unitCont[0].height;
-				
 				if (i + positionCounter < itemData.length) {
 					unitCont[i].data = itemData[i + positionCounter];
 					unitCont[i].visible = true;
-					unitCont[i].over=false;
+					unitCont[i].over = false;
 				} else {
 					unitCont[i].visible = false;
 				}
